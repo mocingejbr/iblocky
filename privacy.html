@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zásady ochrany osobných údajov — iBločky</title>
+<meta name="description" content="Zásady ochrany osobných údajov aplikácie iBločky / Privacy Policy for the iBločky app.">
+<link rel="icon" type="image/jpeg" href="favicon.jpg">
+<link rel="apple-touch-icon" href="favicon.jpg">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+/* ─── CSS Variables ─── */
+:root {
+  --primary: #637A9F;
+  --primary-rgb: 99,122,159;
+  --primary-light: #7d97bf;
+  --bg: #0F1117;
+  --bg-alt: #161B27;
+  --surface: rgba(255,255,255,0.04);
+  --surface-hover: rgba(255,255,255,0.07);
+  --border: rgba(255,255,255,0.08);
+  --text: #F0F2F5;
+  --text-muted: #8B9AB5;
+  --text-subtle: #5A6880;
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.5);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-xs: 6px;
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --nav-bg: rgba(15,17,23,0.85);
+  --glass-bg: rgba(255,255,255,0.04);
+  --glass-border: rgba(255,255,255,0.08);
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --primary: #C9A84C;
+    --primary-rgb: 201,168,76;
+    --primary-light: #E8C872;
+    --bg: #FAFAF8;
+    --bg-alt: #F0EDE6;
+    --surface: rgba(0,0,0,0.03);
+    --surface-hover: rgba(0,0,0,0.06);
+    --border: rgba(0,0,0,0.08);
+    --text: #1A1F2E;
+    --text-muted: #5C6478;
+    --text-subtle: #9AA0B0;
+    --shadow: 0 4px 24px rgba(0,0,0,0.08);
+    --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
+    --nav-bg: rgba(250,250,248,0.88);
+    --glass-bg: rgba(255,255,255,0.7);
+    --glass-border: rgba(0,0,0,0.06);
+  }
+}
+
+[data-theme="light"] {
+  --primary: #C9A84C;
+  --primary-rgb: 201,168,76;
+  --primary-light: #E8C872;
+  --bg: #FAFAF8;
+  --bg-alt: #F0EDE6;
+  --surface: rgba(0,0,0,0.03);
+  --surface-hover: rgba(0,0,0,0.06);
+  --border: rgba(0,0,0,0.08);
+  --text: #1A1F2E;
+  --text-muted: #5C6478;
+  --text-subtle: #9AA0B0;
+  --shadow: 0 4px 24px rgba(0,0,0,0.08);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
+  --nav-bg: rgba(250,250,248,0.88);
+  --glass-bg: rgba(255,255,255,0.7);
+  --glass-border: rgba(0,0,0,0.06);
+}
+
+[data-theme="dark"] {
+  --primary: #637A9F;
+  --primary-rgb: 99,122,159;
+  --primary-light: #7d97bf;
+  --bg: #0F1117;
+  --bg-alt: #161B27;
+  --surface: rgba(255,255,255,0.04);
+  --surface-hover: rgba(255,255,255,0.07);
+  --border: rgba(255,255,255,0.08);
+  --text: #F0F2F5;
+  --text-muted: #8B9AB5;
+  --text-subtle: #5A6880;
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.5);
+  --nav-bg: rgba(15,17,23,0.85);
+  --glass-bg: rgba(255,255,255,0.04);
+  --glass-border: rgba(255,255,255,0.08);
+}
+
+/* ─── Reset & Base ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+  transition: background 0.3s, color 0.3s;
+}
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: var(--nav-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.3s;
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+  gap: 12px;
+}
+.nav-logo {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  white-space: nowrap;
+}
+.nav-logo span { color: var(--primary); }
+.nav-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.nav-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  padding: 6px 12px;
+  border-radius: var(--radius-xs);
+  transition: color 0.2s, background 0.2s;
+}
+.nav-back:hover { color: var(--text); background: var(--surface); }
+.nav-back svg { width: 14px; height: 14px; }
+
+/* Language toggle */
+.lang-toggle {
+  display: flex;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 3px;
+  gap: 2px;
+}
+.lang-btn {
+  padding: 4px 14px;
+  border-radius: 99px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font);
+  transition: background 0.2s, color 0.2s;
+  line-height: 1.4;
+}
+.lang-btn.active {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* Theme toggle */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: background 0.2s, color 0.2s;
+}
+.theme-toggle:hover { background: var(--surface-hover); color: var(--text); }
+.icon-sun, .icon-moon { display: none; }
+[data-theme="dark"] .icon-moon,
+:root:not([data-theme]) .icon-moon { display: block; }
+[data-theme="light"] .icon-sun { display: block; }
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) .icon-moon { display: none; }
+  :root:not([data-theme]) .icon-sun { display: block; }
+}
+
+/* ─── PROSE ─── */
+main { min-height: 80vh; }
+.prose {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 108px 24px 80px;
+}
+.prose-header {
+  margin-bottom: 48px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+}
+.prose-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--primary);
+  background: rgba(var(--primary-rgb),0.1);
+  border: 1px solid rgba(var(--primary-rgb),0.25);
+  padding: 5px 14px;
+  border-radius: 99px;
+  margin-bottom: 20px;
+}
+.prose h1 {
+  font-size: clamp(26px, 4vw, 38px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+.prose-meta {
+  font-size: 14px;
+  color: var(--text-subtle);
+}
+.prose h2 {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 40px 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.prose h2::before {
+  content: '';
+  display: inline-block;
+  width: 3px;
+  height: 18px;
+  background: var(--primary);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.prose h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 24px 0 8px;
+}
+.prose p {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 14px;
+}
+.prose ul {
+  padding-left: 0;
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.prose ul li {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.prose ul li::before {
+  content: '';
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primary);
+  margin-top: 9px;
+}
+.prose a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.prose a:hover { color: var(--primary-light); }
+.prose strong { color: var(--text); font-weight: 600; }
+
+/* Section divider */
+.prose-section {
+  padding: 4px 0;
+}
+.prose hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 32px 0;
+}
+
+/* Table */
+.table-wrap {
+  overflow-x: auto;
+  margin: 16px 0 20px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  min-width: 480px;
+}
+.prose thead tr {
+  background: var(--surface);
+}
+.prose th {
+  text-align: left;
+  padding: 12px 16px;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  border-bottom: 1px solid var(--border);
+}
+.prose td {
+  padding: 12px 16px;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  line-height: 1.6;
+}
+.prose tr:last-child td { border-bottom: none; }
+.prose td a { font-size: 13px; }
+
+/* Contact box */
+.contact-box {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  padding: 20px 24px;
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.contact-box strong { font-size: 15px; color: var(--text); font-weight: 600; }
+.contact-box a { font-size: 14px; color: var(--primary); }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  padding: 48px 0 36px;
+}
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.footer-inner { display: flex; flex-direction: column; gap: 28px; }
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.footer-brand-name {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.footer-brand-name span { color: var(--primary); }
+.footer-tagline { font-size: 13px; color: var(--text-muted); font-style: italic; }
+.footer-links {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.footer-link {
+  font-size: 13px;
+  color: var(--text-muted);
+  padding: 5px 9px;
+  border-radius: var(--radius-xs);
+  transition: color 0.2s, background 0.2s;
+}
+.footer-link:hover { color: var(--text); background: var(--surface); }
+.footer-sep { color: var(--border); user-select: none; }
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.footer-copy { font-size: 13px; color: var(--text-subtle); }
+.footer-made { font-size: 13px; color: var(--text-subtle); }
+
+/* ─── Responsive ─── */
+@media (max-width: 600px) {
+  .nav-back span { display: none; }
+  .prose { padding-top: 96px; padding-left: 18px; padding-right: 18px; }
+  .footer-top { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">i<span>Bloč</span>ky</a>
+    <div class="nav-actions">
+      <a href="index.html" class="nav-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        <span>Domov</span>
+      </a>
+      <div class="lang-toggle">
+        <button class="lang-btn" id="btnSk" onclick="setLang('sk')">SK</button>
+        <button class="lang-btn" id="btnEn" onclick="setLang('en')">EN</button>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M18.66 5.34l-1.41 1.41"/>
+        </svg>
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <!-- ══════════════════════════════════════ SLOVAK ══════════════════════════════════════ -->
+  <div id="content-sk" class="lang-content">
+    <article class="prose">
+      <div class="prose-header">
+        <div class="prose-eyebrow">Právny dokument</div>
+        <h1>Zásady ochrany osobných údajov</h1>
+        <p class="prose-meta">Naposledy aktualizované: jún 2025</p>
+      </div>
+
+      <div class="prose-section">
+        <h2>1. Úvod</h2>
+        <p>iBločky („Aplikácia") je aplikácia pre iOS na správu účteniek, ktorú vyvíja a prevádzkuje Martin Gábor, podnikajúci pod názvom Ereska Apps („my", „nás", „naše"). Tieto zásady ochrany osobných údajov vysvetľujú, aké údaje Aplikácia zbiera, ako sa používajú a aké máte práva podľa platných právnych predpisov, vrátane nariadenia EÚ o ochrane osobných údajov (GDPR) a zákona č. 18/2018 Z. z. o ochrane osobných údajov.</p>
+        <p>Používaním Aplikácie súhlasíte s postupmi opísanými v týchto zásadách.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>2. Údaje, ktoré zbierame a prečo</h2>
+
+        <h3>2.1 Údaje z dokladov</h3>
+        <p>Keď naskenujete QR kód zo slovenského fiškálneho dokladu, Aplikácia odošle kód na oficiálne API Finančnej správy Slovenskej republiky (<strong>ekasa.financnasprava.sk</strong>). API vráti verejne dostupné údaje z dokladu — vrátane obchodných údajov predávajúceho, zakúpených položiek, množstiev, cien a výšky DPH. Tieto údaje sa ukladajú lokálne vo vašom zariadení a ak máte povolený iCloud, synchronizujú sa do vášho súkromného účtu iCloud prostredníctvom Apple CloudKit.</p>
+
+        <h3>2.2 Informácie o spoločnostiach</h3>
+        <p>Pri importe dokladu môže Aplikácia vyhľadať verejne dostupné údaje o firme (názov, adresa) prostredníctvom API obchodného registra ORSF (<strong>api.orsf.sk</strong>) na základe čísla IČO. V tejto požiadavke sa neodosielajú žiadne osobné údaje o používateľovi.</p>
+
+        <h3>2.3 Identifikátor zariadenia pre Windows sync</h3>
+        <p>Ak používate voliteľnú funkciu synchronizácie so systémom Windows/Pohoda (iBločky Pro Max), Aplikácia vygeneruje pri prvom spustení náhodný identifikátor (UUID) vášho zariadenia. Tento identifikátor — spolu s exportovanými XML účtovnými údajmi — sa odosiela do nášho backendového servera (Supabase) výlučne na účely synchronizácie. UUID neobsahuje žiadne osobné informácie a nemožno ho použiť na vašu identifikáciu.</p>
+
+        <h3>2.4 Kamera</h3>
+        <p>Aplikácia požaduje prístup ku kamere vášho zariadenia na skenovanie QR kódov a fotografovanie dokladov. Snímky z kamery sa spracúvajú lokálne na vašom zariadení a nikdy sa neodosielajú na žiadny server, pokiaľ ich explicitne nevyexportujete.</p>
+
+        <h3>2.5 Oznámenia</h3>
+        <p>Ak si aktivujete sledovanie záruky, Aplikácia požiada o povolenie na odosielanie lokálnych push oznámení (napr. „Záruka vyprší o mesiac"). Tieto oznámenia sú generované výlučne na vašom zariadení a žiadne údaje sa neodosielajú na žiadny server.</p>
+
+        <h3>2.6 Stav predplatného</h3>
+        <p>Nákupy predplatného sú spracovávané výlučne spoločnosťou Apple prostredníctvom App Store (StoreKit 2). Vaše platobné informácie, Apple ID ani fakturačná adresa sa k nám nedostávajú a ani ich neukladáme. Stav predplatného sa ukladá lokálne vo vašom zariadení.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>3. Údaje, ktoré nezbierame</h2>
+        <p>Nezbierame vaše meno, e-mailovú adresu, telefónne číslo, polohu, kontakty, históriu prehliadania ani žiadne iné osobné údaje nad rámec toho, čo je opísané vyššie. Nepoužívame analytické SDK, reklamné SDK ani služby na hlásenie pádov aplikácie.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>4. Služby tretích strán</h2>
+        <p>Aplikácia využíva nasledujúce externé služby:</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Služba</th>
+                <th>Účel</th>
+                <th>Zásady ochrany súkromia</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Apple iCloud (CloudKit)</strong></td>
+                <td>Voliteľná synchronizácia medzi zariadeniami</td>
+                <td><a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">apple.com/legal/privacy</a></td>
+              </tr>
+              <tr>
+                <td><strong>Apple App Store (StoreKit)</strong></td>
+                <td>Nákup predplatného</td>
+                <td><a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">apple.com/legal/privacy</a></td>
+              </tr>
+              <tr>
+                <td><strong>Finančná správa SR</strong><br><small>ekasa.financnasprava.sk</small></td>
+                <td>Načítanie dát z dokladov</td>
+                <td><a href="https://www.financnasprava.sk" target="_blank" rel="noopener">financnasprava.sk</a></td>
+              </tr>
+              <tr>
+                <td><strong>ORSF</strong><br><small>api.orsf.sk</small></td>
+                <td>Vyhľadávanie v obchodnom registri</td>
+                <td><a href="https://www.orsf.sk" target="_blank" rel="noopener">orsf.sk</a></td>
+              </tr>
+              <tr>
+                <td><strong>Supabase</strong></td>
+                <td>Fronta Windows sync (len Pro Max)</td>
+                <td><a href="https://supabase.com/privacy" target="_blank" rel="noopener">supabase.com/privacy</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Nezodpovedáme za postupy ochrany osobných údajov týchto služieb tretích strán.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>5. Ukladanie a bezpečnosť údajov</h2>
+        <p>Všetky údaje z dokladov sa ukladajú lokálne vo vašom zariadení v šifrovanej databáze CoreData. Ak máte povolený iCloud, údaje sa synchronizujú do vášho súkromného účtu iCloud a vzťahujú sa na ne bezpečnostné a súkromné postupy spoločnosti Apple. Neprevádzkujeme vlastné servery, ktoré by uchovávali vaše osobné účtenky, s výnimkou fronty Windows sync opísanej v časti 2.3, kde sú údaje uchovávané iba do ich úspešného doručenia do vášho počítača so systémom Windows a označenia ako stiahnuté.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>6. Vylúčenie zodpovednosti za importované údaje</h2>
+        <p>Aplikácia načítava údaje z dokladov z externých systémov vrátane API Finančnej správy Slovenskej republiky. Nezodpovedáme za presnosť, úplnosť ani správnosť akýchkoľvek údajov získaných z externých zdrojov. Údaje z dokladov vrátené slovenským daňovým API sú mimo našej kontroly. Akékoľvek chyby v importovaných dokladoch, výpočtoch DPH, celkových sumách alebo údajoch o spoločnostiach sú výsledkom dát poskytnutých externým API alebo pôvodným fiškálnym zariadením, nie Aplikáciou.</p>
+        <p>Aplikácia nie je účtovným systémom a neposkytuje daňové poradenstvo. Akékoľvek exporty (PDF, Pohoda XML) sú generované z údajov dostupných v Aplikácii a poskytujú sa výlučne na informačné a pohodlnostné účely. Výlučne vy zodpovedáte za overenie správnosti akýchkoľvek exportovaných údajov pred ich použitím na účtovné, daňové alebo právne účely. Nepreberáme žiadnu zodpovednosť za akékoľvek finančné, daňové ani právne dôsledky vyplývajúce z použitia exportovaných údajov.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>7. Uchovávanie údajov</h2>
+        <p>Údaje z dokladov zostávajú vo vašom zariadení, kým ich nevymažete. Údaje Windows sync na našom Supabase serveri sa uchovávajú do ich úspešného doručenia (označenia ako stiahnuté) a môžeme ich kedykoľvek následne vymazať. Pre sync dáta po bode doručenia neplatí žiadna automatická záruka doby uchovávania.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>8. Vaše práva (GDPR)</h2>
+        <p>Ako používateľ v Európskom hospodárskom priestore máte nasledujúce práva:</p>
+        <ul>
+          <li><strong>Právo na prístup</strong> — vyžiadať si kópiu údajov, ktoré o vás uchovávame</li>
+          <li><strong>Právo na vymazanie</strong> — vyžiadať si vymazanie vašich údajov</li>
+          <li><strong>Právo na obmedzenie spracúvania</strong> — vyžiadať si obmedzenie spracúvania vašich údajov</li>
+          <li><strong>Právo namietať</strong> — namietať voči spracúvaniu</li>
+          <li><strong>Právo na prenosnosť údajov</strong> — získať vaše údaje v strojovo čitateľnom formáte</li>
+        </ul>
+        <p>Na uplatnenie týchto práv nás kontaktujte na <a href="mailto:ereskaapps@gmail.com">ereskaapps@gmail.com</a>. Upozorňujeme, že väčšina údajov je uložená lokálne vo vašom zariadení — môžete ich kedykoľvek vymazať odinštalovaním Aplikácie.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>9. Deti</h2>
+        <p>Aplikácia nie je určená deťom mladším ako 16 rokov. Vedome nezbierame osobné údaje od detí.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>10. Zmeny týchto zásad</h2>
+        <p>Tieto zásady môžeme čas od času aktualizovať. O podstatných zmenách budeme informovať prostredníctvom aktualizácie Aplikácie. Dátum v hornej časti tejto stránky odráža najnovšiu revíziu.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>11. Kontakt</h2>
+        <div class="contact-box">
+          <strong>Martin Gábor — Ereska Apps</strong>
+          <a href="mailto:ereskaapps@gmail.com">ereskaapps@gmail.com</a>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <!-- ══════════════════════════════════════ ENGLISH ══════════════════════════════════════ -->
+  <div id="content-en" class="lang-content" style="display:none">
+    <article class="prose">
+      <div class="prose-header">
+        <div class="prose-eyebrow">Legal document</div>
+        <h1>Privacy Policy</h1>
+        <p class="prose-meta">Last updated: June 2025</p>
+      </div>
+
+      <div class="prose-section">
+        <h2>1. Introduction</h2>
+        <p>iBločky ("the App") is a receipt management application for iOS, developed and operated by Martin Gábor, trading as Ereska Apps ("we", "us", "our"). This Privacy Policy explains what data the App collects, how it is used, and your rights under applicable law, including the EU General Data Protection Regulation (GDPR) and Slovak Act No. 18/2018 Coll. on Personal Data Protection.</p>
+        <p>By using the App you agree to the practices described in this policy.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>2. Data We Collect and Why</h2>
+
+        <h3>2.1 Receipt data</h3>
+        <p>When you scan a QR code from a Slovak fiscal receipt, the App sends the code to the official Slovak Financial Administration API (<strong>ekasa.financnasprava.sk</strong>) operated by the Financial Administration of the Slovak Republic. The API returns publicly available receipt data — including the seller's business details, purchased items, quantities, prices, and VAT amounts. This data is stored locally on your device and, if iCloud is enabled, synchronised to your private iCloud account via Apple CloudKit.</p>
+
+        <h3>2.2 Company information</h3>
+        <p>When importing a receipt, the App may query the ORSF business register API (<strong>api.orsf.sk</strong>) to retrieve publicly available company data (name, address) using the company's ICO number. No personal data about the user is transmitted in this request.</p>
+
+        <h3>2.3 Device identifier for Windows sync</h3>
+        <p>If you use the optional Windows/Pohoda sync feature (iBločky Pro Max), the App generates a random identifier (UUID) for your device on first launch. This identifier — along with exported XML accounting data — is transmitted to our backend service (Supabase) solely for the purpose of delivering the sync functionality. The UUID contains no personal information and cannot be used to identify you.</p>
+
+        <h3>2.4 Camera</h3>
+        <p>The App requests access to your device camera to scan QR codes on fiscal receipts and to capture optional receipt photos. Camera images are processed locally on your device and are never transmitted to any server unless you explicitly export them.</p>
+
+        <h3>2.5 Notifications</h3>
+        <p>If you enable warranty tracking, the App requests permission to send local push notifications (e.g. "Warranty expires in 1 month"). These notifications are generated entirely on your device and no data is sent to any server.</p>
+
+        <h3>2.6 Subscription status</h3>
+        <p>Subscription purchases are processed entirely by Apple via the App Store (StoreKit 2). We do not receive or store your payment information, Apple ID, or billing address. Subscription status is stored locally on your device.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>3. Data We Do Not Collect</h2>
+        <p>We do not collect your name, email address, phone number, location, contacts, browsing history, or any other personal data beyond what is described above. We do not use analytics SDKs, advertising SDKs, or crash-reporting services.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>4. Third-Party Services</h2>
+        <p>The App uses the following external services:</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Service</th>
+                <th>Purpose</th>
+                <th>Privacy Policy</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Apple iCloud (CloudKit)</strong></td>
+                <td>Optional cross-device data sync</td>
+                <td><a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">apple.com/legal/privacy</a></td>
+              </tr>
+              <tr>
+                <td><strong>Apple App Store (StoreKit)</strong></td>
+                <td>Subscription purchases</td>
+                <td><a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">apple.com/legal/privacy</a></td>
+              </tr>
+              <tr>
+                <td><strong>Slovak Financial Administration</strong><br><small>ekasa.financnasprava.sk</small></td>
+                <td>Receipt data retrieval</td>
+                <td><a href="https://www.financnasprava.sk" target="_blank" rel="noopener">financnasprava.sk</a></td>
+              </tr>
+              <tr>
+                <td><strong>ORSF</strong><br><small>api.orsf.sk</small></td>
+                <td>Company register lookup</td>
+                <td><a href="https://www.orsf.sk" target="_blank" rel="noopener">orsf.sk</a></td>
+              </tr>
+              <tr>
+                <td><strong>Supabase</strong></td>
+                <td>Windows sync queue (Pro Max only)</td>
+                <td><a href="https://supabase.com/privacy" target="_blank" rel="noopener">supabase.com/privacy</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>We are not responsible for the data practices of these third-party services.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>5. Data Storage and Security</h2>
+        <p>All receipt data is stored locally on your device in an encrypted CoreData database. If you have iCloud enabled, data is synchronised to your private iCloud account and is subject to Apple's iCloud security and privacy practices. We do not operate our own servers that store your personal receipt data, except for the Windows sync queue described in Section 2.3, where data is retained only until successfully delivered to your Windows computer and marked as downloaded.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>6. Disclaimer of Liability for Imported Data</h2>
+        <p>The App retrieves receipt data from third-party systems, including the Slovak Financial Administration API. We are not responsible for the accuracy, completeness, or correctness of any data retrieved from external sources. Receipt data as returned by the Slovak tax API is beyond our control. Any errors in imported receipts, VAT calculations, totals, or company details are the result of data provided by the external API or the originating fiscal device, not the App.</p>
+        <p>The App is not an accounting system and does not constitute tax advice. Any exports (PDF, Pohoda XML) are generated from the data available in the App and are provided for informational and convenience purposes only. You are solely responsible for verifying the accuracy of any exported data before using it for accounting, tax, or legal purposes. We accept no liability for any financial, tax, or legal consequences arising from the use of exported data.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>7. Data Retention</h2>
+        <p>Receipt data remains on your device until you delete it. Windows sync data on our Supabase server is retained until successfully delivered (marked as downloaded) and may be deleted by us at any time thereafter. There is no automatic retention period guarantee for sync data beyond the point of delivery.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>8. Your Rights (GDPR)</h2>
+        <p>As a user in the European Economic Area, you have the following rights:</p>
+        <ul>
+          <li><strong>Right of access</strong> — request a copy of data we hold about you</li>
+          <li><strong>Right to erasure</strong> — request deletion of your data</li>
+          <li><strong>Right to restriction</strong> — request that we limit processing of your data</li>
+          <li><strong>Right to object</strong> — object to processing</li>
+          <li><strong>Right to data portability</strong> — receive your data in a machine-readable format</li>
+        </ul>
+        <p>To exercise these rights, contact us at <a href="mailto:ereskaapps@gmail.com">ereskaapps@gmail.com</a>. Note that the majority of data is stored locally on your device — you can delete it at any time by deleting the App.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>9. Children</h2>
+        <p>The App is not directed at children under the age of 16. We do not knowingly collect personal data from children.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>10. Changes to This Policy</h2>
+        <p>We may update this policy from time to time. Material changes will be communicated via an App update. The date at the top of this page reflects the most recent revision.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>11. Contact</h2>
+        <div class="contact-box">
+          <strong>Martin Gábor — Ereska Apps</strong>
+          <a href="mailto:ereskaapps@gmail.com">ereskaapps@gmail.com</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand-name">i<span>Bloč</span>ky</div>
+          <div class="footer-tagline">Vaše doklady. Vždy po ruke.</div>
+        </div>
+        <div class="footer-links">
+          <a href="index.html#app-store" class="footer-link">App Store</a>
+          <span class="footer-sep">·</span>
+          <a href="index.html#windows-download" class="footer-link">Windows App</a>
+          <span class="footer-sep">·</span>
+          <a href="privacy.html" class="footer-link" style="color:var(--primary)">Ochrana súkromia</a>
+          <span class="footer-sep">·</span>
+          <a href="https://sites.google.com/view/ereskaapps/ibločky/conditions" class="footer-link" target="_blank" rel="noopener">Podmienky použitia</a>
+          <span class="footer-sep">·</span>
+          <a href="mailto:ereskaapps@gmail.com" class="footer-link">ereskaapps@gmail.com</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2025 iBločky. Všetky práva vyhradené.</span>
+        <span class="footer-made">Vyrobené na Slovensku 🇸🇰</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const html = document.documentElement;
+
+  // ─── Theme ───
+  const stored = localStorage.getItem('iblocky-theme');
+  if (stored) html.setAttribute('data-theme', stored);
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    const cur = html.getAttribute('data-theme');
+    const sys = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    const next = (!cur ? (sys === 'dark' ? 'light' : 'dark') : (cur === 'dark' ? 'light' : 'dark'));
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('iblocky-theme', next);
+  });
+
+  // ─── Language ───
+  window.setLang = function(lang) {
+    document.getElementById('content-sk').style.display = lang === 'sk' ? 'block' : 'none';
+    document.getElementById('content-en').style.display = lang === 'en' ? 'block' : 'none';
+    document.getElementById('btnSk').classList.toggle('active', lang === 'sk');
+    document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+    html.setAttribute('lang', lang === 'sk' ? 'sk' : 'en');
+    localStorage.setItem('iblocky-lang', lang);
+  };
+
+  const savedLang = localStorage.getItem('iblocky-lang') || 'sk';
+  setLang(savedLang);
+})();
+</script>
+</body>
+</html>
