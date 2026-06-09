@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Podmienky použitia — iBločky</title>
+<meta name="description" content="Podmienky použitia aplikácie iBločky / Terms and Conditions for the iBločky app.">
+<link rel="icon" type="image/jpeg" href="favicon.jpg">
+<link rel="apple-touch-icon" href="favicon.jpg">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+/* ─── CSS Variables ─── */
+:root {
+  --primary: #637A9F;
+  --primary-rgb: 99,122,159;
+  --primary-light: #7d97bf;
+  --bg: #0F1117;
+  --bg-alt: #161B27;
+  --surface: rgba(255,255,255,0.04);
+  --surface-hover: rgba(255,255,255,0.07);
+  --border: rgba(255,255,255,0.08);
+  --text: #F0F2F5;
+  --text-muted: #8B9AB5;
+  --text-subtle: #5A6880;
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.5);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-xs: 6px;
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --nav-bg: rgba(15,17,23,0.85);
+  --glass-bg: rgba(255,255,255,0.04);
+  --glass-border: rgba(255,255,255,0.08);
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --primary: #C9A84C;
+    --primary-rgb: 201,168,76;
+    --primary-light: #E8C872;
+    --bg: #FAFAF8;
+    --bg-alt: #F0EDE6;
+    --surface: rgba(0,0,0,0.03);
+    --surface-hover: rgba(0,0,0,0.06);
+    --border: rgba(0,0,0,0.08);
+    --text: #1A1F2E;
+    --text-muted: #5C6478;
+    --text-subtle: #9AA0B0;
+    --shadow: 0 4px 24px rgba(0,0,0,0.08);
+    --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
+    --nav-bg: rgba(250,250,248,0.88);
+    --glass-bg: rgba(255,255,255,0.7);
+    --glass-border: rgba(0,0,0,0.06);
+  }
+}
+
+[data-theme="light"] {
+  --primary: #C9A84C;
+  --primary-rgb: 201,168,76;
+  --primary-light: #E8C872;
+  --bg: #FAFAF8;
+  --bg-alt: #F0EDE6;
+  --surface: rgba(0,0,0,0.03);
+  --surface-hover: rgba(0,0,0,0.06);
+  --border: rgba(0,0,0,0.08);
+  --text: #1A1F2E;
+  --text-muted: #5C6478;
+  --text-subtle: #9AA0B0;
+  --shadow: 0 4px 24px rgba(0,0,0,0.08);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
+  --nav-bg: rgba(250,250,248,0.88);
+  --glass-bg: rgba(255,255,255,0.7);
+  --glass-border: rgba(0,0,0,0.06);
+}
+
+[data-theme="dark"] {
+  --primary: #637A9F;
+  --primary-rgb: 99,122,159;
+  --primary-light: #7d97bf;
+  --bg: #0F1117;
+  --bg-alt: #161B27;
+  --surface: rgba(255,255,255,0.04);
+  --surface-hover: rgba(255,255,255,0.07);
+  --border: rgba(255,255,255,0.08);
+  --text: #F0F2F5;
+  --text-muted: #8B9AB5;
+  --text-subtle: #5A6880;
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.5);
+  --nav-bg: rgba(15,17,23,0.85);
+  --glass-bg: rgba(255,255,255,0.04);
+  --glass-border: rgba(255,255,255,0.08);
+}
+
+/* ─── Reset & Base ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+  transition: background 0.3s, color 0.3s;
+}
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: var(--nav-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.3s;
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+  gap: 12px;
+}
+.nav-logo {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  white-space: nowrap;
+}
+.nav-logo span { color: var(--primary); }
+.nav-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.nav-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  padding: 6px 12px;
+  border-radius: var(--radius-xs);
+  transition: color 0.2s, background 0.2s;
+}
+.nav-back:hover { color: var(--text); background: var(--surface); }
+.nav-back svg { width: 14px; height: 14px; }
+.lang-toggle {
+  display: flex;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 3px;
+  gap: 2px;
+}
+.lang-btn {
+  padding: 4px 14px;
+  border-radius: 99px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font);
+  transition: background 0.2s, color 0.2s;
+  line-height: 1.4;
+}
+.lang-btn.active { background: var(--primary); color: #fff; }
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: background 0.2s, color 0.2s;
+}
+.theme-toggle:hover { background: var(--surface-hover); color: var(--text); }
+.icon-sun, .icon-moon { display: none; }
+[data-theme="dark"] .icon-moon,
+:root:not([data-theme]) .icon-moon { display: block; }
+[data-theme="light"] .icon-sun { display: block; }
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) .icon-moon { display: none; }
+  :root:not([data-theme]) .icon-sun { display: block; }
+}
+
+/* ─── PROSE ─── */
+main { min-height: 80vh; }
+.prose {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 108px 24px 80px;
+}
+.prose-header {
+  margin-bottom: 48px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+}
+.prose-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--primary);
+  background: rgba(var(--primary-rgb),0.1);
+  border: 1px solid rgba(var(--primary-rgb),0.25);
+  padding: 5px 14px;
+  border-radius: 99px;
+  margin-bottom: 20px;
+}
+.prose h1 {
+  font-size: clamp(26px, 4vw, 38px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+.prose-meta { font-size: 14px; color: var(--text-subtle); }
+.prose h2 {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 40px 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.prose h2::before {
+  content: '';
+  display: inline-block;
+  width: 3px;
+  height: 18px;
+  background: var(--primary);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.prose h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 24px 0 8px;
+}
+.prose p {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 14px;
+}
+.prose ul {
+  padding-left: 0;
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.prose ul li {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.prose ul li::before {
+  content: '';
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primary);
+  margin-top: 9px;
+}
+.prose a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.prose a:hover { color: var(--primary-light); }
+.prose strong { color: var(--text); font-weight: 600; }
+.prose-section { padding: 4px 0; }
+.prose hr { border: none; border-top: 1px solid var(--border); margin: 32px 0; }
+.contact-box {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  padding: 20px 24px;
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.contact-box strong { font-size: 15px; color: var(--text); font-weight: 600; }
+.contact-box a { font-size: 14px; color: var(--primary); }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  padding: 48px 0 36px;
+}
+.container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+.footer-inner { display: flex; flex-direction: column; gap: 28px; }
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.footer-brand-name {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.footer-brand-name span { color: var(--primary); }
+.footer-tagline { font-size: 13px; color: var(--text-muted); font-style: italic; }
+.footer-links { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.footer-link {
+  font-size: 13px;
+  color: var(--text-muted);
+  padding: 5px 9px;
+  border-radius: var(--radius-xs);
+  transition: color 0.2s, background 0.2s;
+}
+.footer-link:hover { color: var(--text); background: var(--surface); }
+.footer-sep { color: var(--border); user-select: none; }
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.footer-copy { font-size: 13px; color: var(--text-subtle); }
+.footer-made { font-size: 13px; color: var(--text-subtle); }
+
+@media (max-width: 600px) {
+  .nav-back span { display: none; }
+  .prose { padding-top: 96px; padding-left: 18px; padding-right: 18px; }
+  .footer-top { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">i<span>Bloč</span>ky</a>
+    <div class="nav-actions">
+      <a href="index.html" class="nav-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        <span>Domov</span>
+      </a>
+      <div class="lang-toggle">
+        <button class="lang-btn" id="btnSk" onclick="setLang('sk')">SK</button>
+        <button class="lang-btn" id="btnEn" onclick="setLang('en')">EN</button>
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M18.66 5.34l-1.41 1.41"/>
+        </svg>
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <!-- ══════════════════════════════════════ SLOVAK ══════════════════════════════════════ -->
+  <div id="content-sk" class="lang-content">
+    <article class="prose">
+      <div class="prose-header">
+        <div class="prose-eyebrow">Právny dokument</div>
+        <h1>Obchodné podmienky</h1>
+        <p class="prose-meta">Naposledy aktualizované: jún 2025</p>
+      </div>
+
+      <div class="prose-section">
+        <h2>1. Prijatie podmienok</h2>
+        <p>Stiahnutím, inštaláciou alebo používaním aplikácie iBločky („Aplikácia") súhlasíte s týmito Obchodnými podmienkami („Podmienky"). Ak nesúhlasíte, Aplikáciu nepoužívajte. Tieto Podmienky sa vzťahujú na všetky verzie Aplikácie, vrátane bezplatnej a platených úrovní.</p>
+        <p>Aplikáciu vyvíja a prevádzkuje Martin Gábor, podnikajúci pod názvom Ereska Apps („my", „nás", „naše"), registrovaný v Slovenskej republike.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>2. Popis Aplikácie</h2>
+        <p>iBločky je iOS aplikácia, ktorá umožňuje používateľom:</p>
+        <ul>
+          <li>Skenovať QR kódy na slovenských fiškálnych dokladoch a načítavať verejne dostupné údaje z dokladov prostredníctvom API Finančnej správy SR</li>
+          <li>Ukladať, organizovať a spravovať záznamy o dokladoch na zariadení</li>
+          <li>Sledovať záruky na produkty s lokálnymi upozorneniami</li>
+          <li>Generovať a exportovať doklady ako PDF dokumenty</li>
+          <li>Generovať a exportovať účtovné dáta vo formáte kompatibilnom s Pohodou (XML)</li>
+          <li>Synchronizovať dáta medzi zariadeniami cez Apple iCloud</li>
+          <li>(Pro Max) Synchronizovať Pohoda XML exporty do počítača so systémom Windows cez náš cloudový front</li>
+        </ul>
+        <p>Aplikácia je určená na pohodlné vedenie osobnej a podnikovej evidencie. Nie je certifikovaným účtovným systémom, elektronickou registračnou pokladnicou ani službou na podávanie daňových priznaní.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>3. Predplatné a platby</h2>
+
+        <h3>3.1 Dostupné úrovne</h3>
+        <ul>
+          <li><strong>Bezplatná</strong> — základné skenovanie a ukladanie dokladov</li>
+          <li><strong>iBločky Pro</strong> — rozšírené funkcie vrátane hromadného skenovania, grafov, pokročilého filtrovania a exportu do PDF</li>
+          <li><strong>iBločky Pro Max</strong> — všetky funkcie Pro plus synchronizácia Windows/Pohoda XML</li>
+        </ul>
+
+        <h3>3.2 Nákupy</h3>
+        <p>Všetky nákupy spracúva spoločnosť Apple Inc. prostredníctvom App Store. Nákupom zároveň súhlasíte s podmienkami používania App Store od Apple. Vaše platobné informácie nespracúvame priamo.</p>
+
+        <h3>3.3 Automatické obnovovanie</h3>
+        <p>Predplatné sa automaticky obnovuje, pokiaľ ho nezrušíte aspoň 24 hodín pred koncom aktuálneho zúčtovacieho obdobia. Predplatné môžete kedykoľvek spravovať alebo zrušiť cez nastavenia vášho Apple ID.</p>
+
+        <h3>3.4 Vrátenie peňazí</h3>
+        <p>Všetky žiadosti o vrátenie peňazí vybavuje výlučne Apple v súlade so zásadami vrátenia peňazí App Store. Nemáme možnosť vydávať vrátenia priamo. So žiadosťami o vrátenie peňazí kontaktujte podporu Apple.</p>
+
+        <h3>3.5 Zmeny cien</h3>
+        <p>Vyhradzujeme si právo zmeniť ceny predplatného. O zmenách cien budeme vopred informovať prostredníctvom aktualizácií ponuky v App Store a, pokiaľ to bude možné, aj prostredníctvom oznámení v Aplikácii.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>4. Presnosť údajov — vylúčenie zodpovednosti</h2>
+
+        <h3>4.1 Údaje z dokladov od tretích strán</h3>
+        <p>Údaje z dokladov zobrazené v Aplikácii sa načítavajú v reálnom čase z API Finančnej správy Slovenskej republiky (<strong>ekasa.financnasprava.sk</strong>), ktoré prevádzkuje Finančná správa SR. Nemáme kontrolu nad dátami, ktoré toto API vracia. Nepotvrdzujeme, neopravujeme ani nezaručujeme presnosť, úplnosť ani aktuálnosť žiadnych údajov z dokladov.</p>
+        <p>Nezodpovedáme za žiadne chyby, opomenutia ani nepresnosti v údajoch z dokladov vrátených API Finančnej správy Slovenskej republiky ani žiadnym iným externým zdrojom dát používaným Aplikáciou.</p>
+
+        <h3>4.2 Firemné údaje</h3>
+        <p>Údaje o spoločnostiach získané z API obchodného registra ORSF sú verejne dostupné údaje. Nezaručujeme ich presnosť ani aktuálnosť.</p>
+
+        <h3>4.3 Výpočty DPH</h3>
+        <p>Rozpisy DPH zobrazené v Aplikácii sú odvodené od dát vrátených API Finančnej správy SR. Tieto hodnoty nezávisle neoverujeme ani neprepočítavame. Nepreberáme žiadnu zodpovednosť za prípadné nesprávne zobrazenie výšky DPH.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>5. Exporty — vylúčenie zodpovednosti</h2>
+
+        <h3>5.1 Exporty do PDF</h3>
+        <p>PDF dokumenty generované Aplikáciou sú odvodené od dát získaných z externých API a uložených vo vašom zariadení. Poskytujú sa výlučne na informačné a archivačné účely. Nezaručujeme, že exportované PDF súbory presne odrážajú pôvodný fiškálny doklad alebo spĺňajú akékoľvek zákonné požiadavky na účtovnú dokumentáciu.</p>
+
+        <h3>5.2 Exporty do Pohoda XML</h3>
+        <p>Aplikácia môže generovať XML súbory vo formáte Stormware Pohoda na import do účtovného softvéru. Výslovne sa zriekame akejkoľvek zodpovednosti za:</p>
+        <ul>
+          <li>akékoľvek chyby, nesprávne hodnoty alebo chýbajúce údaje v generovaných XML súboroch;</li>
+          <li>akékoľvek následky importu XML súborov do Pohody alebo akéhokoľvek iného účtovného softvéru, vrátane nesprávnych účtovných zápisov, daňových nezrovnalostí alebo zistení pri audite;</li>
+          <li>akýkoľvek nesúlad medzi dátami v Aplikácii a dátami vo vašom účtovnom softvéri po importe;</li>
+          <li>akúkoľvek škodu, finančnú stratu alebo právnu zodpovednosť vyplývajúcu z použitia exportovaných účtovných dát.</li>
+        </ul>
+        <p>Výlučne vy nesiete plnú zodpovednosť za kontrolu, overenie a schválenie všetkých exportovaných dát pred ich importom do akéhokoľvek účtovného alebo daňového systému. Aplikácia je pomocný nástroj a nenahrádza služby kvalifikovaného účtovníka alebo daňového poradcu.</p>
+
+        <h3>5.3 Žiadne účtovné ani daňové poradenstvo</h3>
+        <p>Nič v Aplikácii ani v jej výstupoch nepredstavuje účtovné, daňové, právne ani finančné poradenstvo. V záležitostiach týkajúcich sa vašich daňových povinností a účtovných záznamov vždy konzultujte s kvalifikovaným odborníkom.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>6. Windows sync (Pro Max)</h2>
+        <p>Funkcia Windows sync prenáša Pohoda XML dáta a anonymný identifikátor zariadenia do nášho cloudového backendu (Supabase) na doručenie do vášho počítača so systémom Windows. Používaním tejto funkcie beriete na vedomie, že:</p>
+        <ul>
+          <li>Doručenie synchronizácie nie je zaručené a závisí od dostupnosti siete a služieb tretích strán</li>
+          <li>Nezodpovedáme za neúspešné, oneskorené ani duplicitné doručenia</li>
+          <li>Dáta vo fronte synchronizácie sa uchovávajú do ich označenia ako stiahnuté a môžeme ich kedykoľvek po doručení podľa vlastného uváženia vymazať</li>
+          <li>Rovnaké vylúčenia zodpovednosti za exporty v časti 5.2 sa vzťahujú na všetky synchronizované XML súbory</li>
+        </ul>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>7. Synchronizácia iCloud</h2>
+        <p>Ak povolíte iCloud, vaše dáta z dokladov sa synchronizujú cez Apple CloudKit do vášho súkromného účtu iCloud. Synchronizácia iCloud podlieha podmienkam a dostupnosti služieb Apple. Nezodpovedáme za stratu dát, konflikty pri synchronizácii ani nedostupnosť služieb iCloud.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>8. Prípustné použitie</h2>
+        <p>Zaväzujete sa, že nebudete:</p>
+        <ul>
+          <li>Používať Aplikáciu na akékoľvek protiprávne účely</li>
+          <li>Pokúšať sa o spätné inžinierstvo, dekompiláciu alebo extrahovanie zdrojového kódu Aplikácie</li>
+          <li>Používať Aplikáciu na spracúvanie dát tretích strán bez ich súhlasu</li>
+          <li>Pokúšať sa obísť obmedzenia predplatného alebo manipulovať s overovaním nárokov</li>
+          <li>Používať Aplikáciu spôsobom, ktorý by mohol poškodiť, deaktivovať alebo znehodnotiť naše služby</li>
+        </ul>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>9. Duševné vlastníctvo</h2>
+        <p>Všetok obsah, dizajn, kód a branding v Aplikácii sú výhradným vlastníctvom Martina Gábora / Ereska Apps a sú chránené platnými zákonmi o duševnom vlastníctve. Je vám udelená obmedzená, nevýhradná a neprenosná licencia na používanie Aplikácie na vašich zariadeniach Apple na osobné alebo interné obchodné účely. Táto licencia nezahŕňa žiadne právo na ďalšie šírenie, udeľovanie sublicencií ani vytváranie odvodených diel.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>10. Dostupnosť a aktualizácie</h2>
+        <p>Vyhradzujeme si právo kedykoľvek bez upozornenia upraviť, pozastaviť alebo ukončiť prevádzku Aplikácie alebo akejkoľvek jej funkcie. Nezodpovedáme vám za akékoľvek úpravy, pozastavenie ani ukončenie prevádzky Aplikácie. Môžeme vydávať aktualizácie, ktoré menia funkčnosť. Ďalšie používanie Aplikácie po aktualizácii predstavuje súhlas s prípadnými zmenami.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>11. Obmedzenie zodpovednosti</h2>
+        <p>V maximálnom rozsahu povolenom platným právom:</p>
+        <ul>
+          <li>Aplikácia sa poskytuje „tak, ako je" a „podľa dostupnosti" bez akýchkoľvek záruk, výslovných ani implicitných.</li>
+          <li>Nezaručujeme, že Aplikácia bude fungovať bez prerušenia, bez chýb alebo bez vírusov či iných škodlivých komponentov.</li>
+          <li>Martin Gábor / Ereska Apps v žiadnom prípade nezodpovedá za žiadne nepriame, náhodné, zvláštne, následné ani represívne škody, vrátane straty zisku, straty dát, nesprávnych účtovných zápisov, daňových sankcií ani akejkoľvek finančnej alebo právnej zodpovednosti vyplývajúcej z používania Aplikácie alebo jej exportovaných dát.</li>
+          <li>Naša celková kumulatívna zodpovednosť voči vám za akýkoľvek nárok vyplývajúci z týchto Podmienok alebo Aplikácie neprekročí sumu, ktorú ste za Aplikáciu zaplatili v priebehu 12 mesiacov predchádzajúcich vzniku nároku.</li>
+        </ul>
+        <p>Niektoré jurisdikcie nepovoľujú vylúčenie alebo obmedzenie určitých záruk alebo zodpovedností. V takýchto jurisdikciách je naša zodpovednosť obmedzená v maximálnom rozsahu povolenom zákonom.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>12. Rozhodné právo a riešenie sporov</h2>
+        <p>Tieto Podmienky sa riadia právom Slovenskej republiky a, kde je to relevantné, predpismi EÚ. Akékoľvek spory vyplývajúce z týchto Podmienok alebo z vášho používania Aplikácie podliehajú výlučnej právomoci príslušných súdov Slovenskej republiky.</p>
+        <p>Ak ste spotrebiteľom v EÚ, môžete tiež využiť platformu Európskej komisie na riešenie sporov online na adrese <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">ec.europa.eu/consumers/odr</a>.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>13. Zmeny týchto Podmienok</h2>
+        <p>Tieto Podmienky môžeme kedykoľvek aktualizovať. Ďalšie používanie Aplikácie po zverejnení zmien predstavuje súhlas s revidovanými Podmienkami. Dátum v hornej časti tejto stránky odráža najnovšiu revíziu.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>14. Kontakt</h2>
+        <div class="contact-box">
+          <strong>Martin Gábor — Ereska Apps</strong>
+          <a href="mailto:ereskaapps@gmail.com">ereskaapps@gmail.com</a>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <!-- ══════════════════════════════════════ ENGLISH ══════════════════════════════════════ -->
+  <div id="content-en" class="lang-content" style="display:none">
+    <article class="prose">
+      <div class="prose-header">
+        <div class="prose-eyebrow">Legal document</div>
+        <h1>Terms and Conditions</h1>
+        <p class="prose-meta">Last updated: June 2025</p>
+      </div>
+
+      <div class="prose-section">
+        <h2>1. Acceptance of Terms</h2>
+        <p>By downloading, installing, or using the iBločky application ("the App"), you agree to be bound by these Terms and Conditions ("Terms"). If you do not agree, do not use the App. These Terms apply to all versions of the App, including free and paid tiers.</p>
+        <p>The App is developed and operated by Martin Gábor, trading as Ereska Apps ("we", "us", "our"), registered in the Slovak Republic.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>2. Description of the App</h2>
+        <p>iBločky is an iOS application that enables users to:</p>
+        <ul>
+          <li>Scan QR codes on Slovak fiscal receipts and retrieve publicly available receipt data from the Slovak Financial Administration API</li>
+          <li>Store, organise, and manage receipt records on their device</li>
+          <li>Track product warranty expiration dates with local notifications</li>
+          <li>Generate and export receipts as PDF documents</li>
+          <li>Generate and export accounting data in Pohoda-compatible XML format</li>
+          <li>Synchronise data across devices via Apple iCloud</li>
+          <li>(Pro Max) Synchronise Pohoda XML exports to a Windows computer via our cloud queue</li>
+        </ul>
+        <p>The App is designed for personal and small-business record-keeping convenience. It is not a certified accounting system, electronic cash register, or tax-filing service.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>3. Subscription Plans and Payments</h2>
+
+        <h3>3.1 Available tiers</h3>
+        <ul>
+          <li><strong>Free</strong> — basic receipt scanning and storage</li>
+          <li><strong>iBločky Pro</strong> — expanded features including bulk scanning, charts, advanced filtering, and PDF export</li>
+          <li><strong>iBločky Pro Max</strong> — all Pro features plus Windows/Pohoda XML sync</li>
+        </ul>
+
+        <h3>3.2 Purchases</h3>
+        <p>All purchases are processed by Apple Inc. via the App Store. By making a purchase you also agree to Apple's App Store Terms of Service. We do not handle your payment information directly.</p>
+
+        <h3>3.3 Auto-renewal</h3>
+        <p>Subscriptions renew automatically unless cancelled at least 24 hours before the end of the current billing period. You can manage or cancel your subscription at any time through your Apple ID settings.</p>
+
+        <h3>3.4 Refunds</h3>
+        <p>All refund requests are handled exclusively by Apple in accordance with their App Store refund policy. We have no ability to issue refunds directly. Contact Apple Support for refund requests.</p>
+
+        <h3>3.5 Price changes</h3>
+        <p>We reserve the right to change subscription pricing. Price changes will be communicated in advance via App Store listing updates and, where possible, in-app notifications.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>4. Accuracy of Data — Disclaimer</h2>
+
+        <h3>4.1 Third-party receipt data</h3>
+        <p>Receipt data displayed in the App is retrieved in real time from the Slovak Financial Administration API (<strong>ekasa.financnasprava.sk</strong>), operated by the Financial Administration of the Slovak Republic. We have no control over the data returned by this API. We do not verify, correct, or guarantee the accuracy, completeness, or currency of any receipt data.</p>
+        <p>We are not responsible for any errors, omissions, or inaccuracies in receipt data returned by the Slovak Financial Administration API or any other external data source used by the App.</p>
+
+        <h3>4.2 Company data</h3>
+        <p>Company details retrieved from the ORSF business register API are publicly available data. We do not guarantee their accuracy or up-to-date status.</p>
+
+        <h3>4.3 VAT calculations</h3>
+        <p>VAT breakdowns displayed in the App are derived from data returned by the Slovak Financial Administration API. We do not independently verify or recalculate these figures. We accept no liability for any VAT amount displayed being incorrect.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>5. Exports — Disclaimer of Liability</h2>
+
+        <h3>5.1 PDF exports</h3>
+        <p>PDF documents generated by the App are derived from data retrieved from external APIs and stored on your device. They are provided for informational and archival convenience only. We do not guarantee that exported PDFs accurately reflect the original fiscal receipt or meet any legal requirements for accounting documentation.</p>
+
+        <h3>5.2 Pohoda XML exports</h3>
+        <p>The App can generate XML files in Stormware Pohoda accounting format for import into accounting software. We expressly disclaim all liability for:</p>
+        <ul>
+          <li>any errors, incorrect values, or missing data in generated XML files;</li>
+          <li>any consequences of importing XML files into Pohoda or any other accounting software, including but not limited to incorrect accounting entries, tax discrepancies, or audit findings;</li>
+          <li>any mismatch between data in the App and data in your accounting software after import;</li>
+          <li>any damage, financial loss, or legal liability arising from use of exported accounting data.</li>
+        </ul>
+        <p>You are solely and entirely responsible for reviewing, verifying, and approving all exported data before importing it into any accounting or tax system. The App is a convenience tool and does not replace the services of a qualified accountant or tax advisor.</p>
+
+        <h3>5.3 No accounting or tax advice</h3>
+        <p>Nothing in the App or its outputs constitutes accounting, tax, legal, or financial advice. Always consult a qualified professional for matters relating to your tax obligations and accounting records.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>6. Windows Sync (Pro Max)</h2>
+        <p>The Windows sync feature transmits Pohoda XML data and a device-specific anonymous identifier to our cloud backend (Supabase) for delivery to your Windows computer. By using this feature you acknowledge:</p>
+        <ul>
+          <li>Sync delivery is not guaranteed and depends on network connectivity and third-party service availability</li>
+          <li>We are not responsible for failed, delayed, or duplicate deliveries</li>
+          <li>Data in the sync queue is retained until marked as downloaded and may be deleted at our discretion at any time after delivery</li>
+          <li>The same export disclaimers in Section 5.2 apply to all synced XML files</li>
+        </ul>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>7. iCloud Sync</h2>
+        <p>If you enable iCloud, your receipt data is synchronised via Apple CloudKit to your private iCloud account. iCloud sync is subject to Apple's terms and availability. We are not responsible for data loss, sync conflicts, or unavailability of iCloud services.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>8. Acceptable Use</h2>
+        <p>You agree not to:</p>
+        <ul>
+          <li>Use the App for any unlawful purpose</li>
+          <li>Attempt to reverse-engineer, decompile, or extract source code from the App</li>
+          <li>Use the App to process data belonging to third parties without their consent</li>
+          <li>Attempt to circumvent subscription restrictions or tamper with entitlement validation</li>
+          <li>Use the App in any manner that could damage, disable, or impair our services</li>
+        </ul>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>9. Intellectual Property</h2>
+        <p>All content, design, code, and branding in the App are the exclusive property of Martin Gábor / Ereska Apps and are protected by applicable intellectual property laws. You are granted a limited, non-exclusive, non-transferable licence to use the App on your Apple devices for personal or internal business purposes. This licence does not include any right to redistribute, sublicence, or create derivative works.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>10. Availability and Updates</h2>
+        <p>We reserve the right to modify, suspend, or discontinue the App or any feature at any time without notice. We are not liable to you for any modification, suspension, or discontinuation of the App. We may release updates that change functionality. Continued use of the App after an update constitutes acceptance of any changes.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>11. Limitation of Liability</h2>
+        <p>To the fullest extent permitted by applicable law:</p>
+        <ul>
+          <li>The App is provided "as is" and "as available" without warranties of any kind, express or implied.</li>
+          <li>We do not warrant that the App will be uninterrupted, error-free, or free of viruses or other harmful components.</li>
+          <li>In no event shall Martin Gábor / Ereska Apps be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of profits, loss of data, incorrect accounting records, tax penalties, or any financial or legal liability arising from use of the App or its exported data.</li>
+          <li>Our total cumulative liability to you for any claim arising out of or relating to these Terms or the App shall not exceed the amount you paid for the App in the 12 months preceding the claim.</li>
+        </ul>
+        <p>Some jurisdictions do not allow the exclusion or limitation of certain warranties or liabilities. In such jurisdictions, our liability is limited to the greatest extent permitted by law.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>12. Governing Law and Disputes</h2>
+        <p>These Terms are governed by the laws of the Slovak Republic and, where applicable, EU regulations. Any disputes arising from these Terms or your use of the App shall be subject to the exclusive jurisdiction of the competent courts of the Slovak Republic.</p>
+        <p>If you are a consumer in the EU, you may also use the European Commission's online dispute resolution platform at <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">ec.europa.eu/consumers/odr</a>.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>13. Changes to These Terms</h2>
+        <p>We may update these Terms at any time. Continued use of the App after changes are posted constitutes acceptance of the revised Terms. The date at the top of this page reflects the most recent revision.</p>
+      </div>
+
+      <hr>
+
+      <div class="prose-section">
+        <h2>14. Contact</h2>
+        <div class="contact-box">
+          <strong>Martin Gábor — Ereska Apps</strong>
+          <a href="mailto:ereskaapps@gmail.com">ereskaapps@gmail.com</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand-name">i<span>Bloč</span>ky</div>
+          <div class="footer-tagline">Vaše doklady. Vždy po ruke.</div>
+        </div>
+        <div class="footer-links">
+          <a href="index.html#app-store" class="footer-link">App Store</a>
+          <span class="footer-sep">·</span>
+          <a href="index.html#windows-download" class="footer-link">Windows App</a>
+          <span class="footer-sep">·</span>
+          <a href="privacy.html" class="footer-link">Ochrana súkromia</a>
+          <span class="footer-sep">·</span>
+          <a href="terms.html" class="footer-link" style="color:var(--primary)">Podmienky použitia</a>
+          <span class="footer-sep">·</span>
+          <a href="mailto:ereskaapps@gmail.com" class="footer-link">ereskaapps@gmail.com</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2025 iBločky. Všetky práva vyhradené.</span>
+        <span class="footer-made">Vyrobené na Slovensku 🇸🇰</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const html = document.documentElement;
+
+  // ─── Theme ───
+  const stored = localStorage.getItem('iblocky-theme');
+  if (stored) html.setAttribute('data-theme', stored);
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    const cur = html.getAttribute('data-theme');
+    const sys = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    const next = (!cur ? (sys === 'dark' ? 'light' : 'dark') : (cur === 'dark' ? 'light' : 'dark'));
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('iblocky-theme', next);
+  });
+
+  // ─── Language ───
+  window.setLang = function(lang) {
+    document.getElementById('content-sk').style.display = lang === 'sk' ? 'block' : 'none';
+    document.getElementById('content-en').style.display = lang === 'en' ? 'block' : 'none';
+    document.getElementById('btnSk').classList.toggle('active', lang === 'sk');
+    document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+    html.setAttribute('lang', lang === 'sk' ? 'sk' : 'en');
+    localStorage.setItem('iblocky-lang', lang);
+  };
+
+  const savedLang = localStorage.getItem('iblocky-lang') || 'sk';
+  setLang(savedLang);
+})();
+</script>
+</body>
+</html>
