@@ -804,23 +804,6 @@ nav {
   border: 1px solid var(--border);
   color: var(--text-muted);
 }
-.btn-copy-key {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 12px;
-  padding: 9px 18px;
-  background: rgba(var(--primary-rgb),0.1);
-  border: 1px solid rgba(var(--primary-rgb),0.25);
-  border-radius: var(--radius-xs);
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--primary);
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.btn-copy-key:hover { background: rgba(var(--primary-rgb),0.18); }
-.btn-copy-key svg { width: 15px; height: 15px; }
 .step-final .wizard-step-num {
   background: rgba(var(--primary-rgb),0.15);
   border-color: var(--primary);
@@ -1011,6 +994,104 @@ footer {
 .pricing-mobile-row { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text-muted); }
 .pricing-mobile-row .check-yes { font-size: 15px; }
 .pricing-mobile-row .check-no { font-size: 15px; }
+
+/* ─── SYNC FLOW DIAGRAM ─── */
+.sync-diagram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 64px;
+  max-width: 760px;
+}
+.sync-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 22px 18px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  min-width: 128px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: default;
+}
+.sync-node:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.18);
+}
+.sync-node-icon {
+  width: 64px;
+  height: 64px;
+  color: var(--primary);
+}
+.sync-node-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-subtle);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.5;
+}
+.sync-arrow-wrap {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  width: 88px;
+  padding-bottom: 28px;
+}
+.sync-arrow-svg { width: 100%; overflow: visible; }
+.sync-arrow-line {
+  stroke: var(--primary);
+  stroke-width: 2;
+  stroke-dasharray: 5 4;
+  fill: none;
+  animation: sync-arrow-flow 1.2s linear infinite;
+}
+.sync-arrow-head {
+  stroke: var(--primary);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+@keyframes sync-arrow-flow {
+  from { stroke-dashoffset: 9; }
+  to   { stroke-dashoffset: 0; }
+}
+.sync-gear {
+  animation: sync-gear-spin 5s linear infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+@keyframes sync-gear-spin {
+  to { transform: rotate(360deg); }
+}
+.sync-screen-fill {
+  fill: rgba(var(--primary-rgb), 0.08);
+  stroke: rgba(var(--primary-rgb), 0.2);
+  stroke-width: 0.5;
+}
+.sync-cloud-path {
+  fill: rgba(var(--primary-rgb), 0.06);
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+@media (max-width: 640px) {
+  .sync-diagram { flex-direction: column; max-width: 200px; }
+  .sync-arrow-wrap {
+    width: 2px;
+    height: 44px;
+    padding-bottom: 0;
+    background: linear-gradient(to bottom, rgba(var(--primary-rgb),0.5), rgba(var(--primary-rgb),0.1));
+    border-radius: 1px;
+  }
+  .sync-arrow-svg { display: none; }
+}
 </style>
 </head>
 <body>
@@ -1292,6 +1373,78 @@ footer {
 <!-- WINDOWS SYNC -->
 <section id="windows">
   <div class="container">
+    <!-- SYNC FLOW DIAGRAM -->
+    <div class="sync-diagram fade-up">
+
+      <!-- Node 1: iPhone / iBločky -->
+      <div class="sync-node">
+        <svg viewBox="0 0 36 62" class="sync-node-icon" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- phone body -->
+          <rect x="2" y="1" width="32" height="60" rx="5" stroke="currentColor" stroke-width="2"/>
+          <!-- screen placeholder -->
+          <rect x="5.5" y="9.5" width="25" height="41" rx="1.5" class="sync-screen-fill"/>
+          <!-- home indicator -->
+          <rect x="13" y="54.5" width="10" height="2.5" rx="1.25" fill="currentColor" opacity="0.3"/>
+          <!-- front camera -->
+          <circle cx="18" cy="5.5" r="1.5" fill="currentColor" opacity="0.35"/>
+        </svg>
+        <span class="sync-node-label">iBločky</span>
+      </div>
+
+      <!-- Arrow 1 (animated dashes + arrowhead) -->
+      <div class="sync-arrow-wrap">
+        <svg class="sync-arrow-svg" viewBox="0 0 64 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="0" y1="10" x2="50" y2="10" class="sync-arrow-line"/>
+          <polyline points="44,3 58,10 44,17" class="sync-arrow-head"/>
+        </svg>
+      </div>
+
+      <!-- Node 2: Cloud + rotating gear -->
+      <div class="sync-node">
+        <svg viewBox="0 0 64 52" class="sync-node-icon" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- cloud: union of 3 circles — C_L(17,34)r12, C_T(32,20)r16, C_R(47,34)r12        -->
+          <!-- right bump: CCW small arc (sweep=0, large=0); top dome: CCW large arc (sweep=0, large=1) -->
+          <path class="sync-cloud-path" d="M 10.4 44 L 53.6 44 A 12 12 0 0 0 48 22 A 16 16 0 1 0 16 22 A 12 12 0 0 0 10.4 44 Z"/>
+          <!-- gear centered at (32,26) — vertically centered in cloud body -->
+          <g transform="translate(32,26)">
+            <g class="sync-gear">
+              <path transform="translate(-12,-12)" fill="currentColor" d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"/>
+            </g>
+          </g>
+        </svg>
+        <span class="sync-node-label">Cloud<br>API</span>
+      </div>
+
+      <!-- Arrow 2 -->
+      <div class="sync-arrow-wrap">
+        <svg class="sync-arrow-svg" viewBox="0 0 64 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="0" y1="10" x2="50" y2="10" class="sync-arrow-line"/>
+          <polyline points="44,3 58,10 44,17" class="sync-arrow-head"/>
+        </svg>
+      </div>
+
+      <!-- Node 3: Windows PC + Pohoda -->
+      <div class="sync-node">
+        <svg viewBox="0 0 64 56" class="sync-node-icon" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- monitor frame -->
+          <rect x="2" y="2" width="60" height="40" rx="3" stroke="currentColor" stroke-width="2"/>
+          <!-- screen -->
+          <rect x="6" y="6" width="52" height="32" rx="1.5" class="sync-screen-fill"/>
+          <!-- Windows 4-square logo centered on screen -->
+          <rect x="24" y="14" width="6.5" height="6.5" rx="0.5" fill="currentColor" opacity="0.7"/>
+          <rect x="33" y="14" width="6.5" height="6.5" rx="0.5" fill="currentColor" opacity="0.7"/>
+          <rect x="24" y="22.5" width="6.5" height="6.5" rx="0.5" fill="currentColor" opacity="0.7"/>
+          <rect x="33" y="22.5" width="6.5" height="6.5" rx="0.5" fill="currentColor" opacity="0.7"/>
+          <!-- stand stem -->
+          <line x1="32" y1="42" x2="32" y2="50" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <!-- stand base -->
+          <line x1="20" y1="50" x2="44" y2="50" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <span class="sync-node-label">Pohoda<br>Windows</span>
+      </div>
+
+    </div><!-- /sync-diagram -->
+
     <div class="windows-inner">
       <div>
         <div class="windows-badge fade-up">
@@ -1422,10 +1575,6 @@ footer {
         <div class="wizard-step-body">
           <div class="wizard-step-title">Váš API kľúč</div>
           <p class="wizard-step-desc">Skopírujte kľúč z <strong>iBločky → Nastavenia → Synchronizácia</strong> a vložte ho do nastavení Windows aplikácie iBlockySync.</p>
-          <button class="btn-copy-key" id="copyKeyBtn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            <span id="copyKeyLabel">Kopírovať API kľúč (ukážka)</span>
-          </button>
         </div>
       </div>
       <div class="wizard-step fade-up">
@@ -1640,28 +1789,7 @@ footer {
     });
   });
 
-  // ─── Copy API key ───
-  const copyBtn = document.getElementById('copyKeyBtn');
-  const copyLabel = document.getElementById('copyKeyLabel');
-  copyBtn.addEventListener('click', () => {
-    const demoKey = 'ibk_demo_xxxxxxxxxxxxxxxxxxxx';
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(demoKey).then(() => {
-        copyLabel.textContent = 'Skopírované!';
-        copyBtn.style.background = 'rgba(74,222,128,0.12)';
-        copyBtn.style.borderColor = 'rgba(74,222,128,0.3)';
-        copyBtn.style.color = '#4ADE80';
-        setTimeout(() => {
-          copyLabel.textContent = 'Kopírovať API kľúč (ukážka)';
-          copyBtn.style.background = '';
-          copyBtn.style.borderColor = '';
-          copyBtn.style.color = '';
-        }, 2200);
-      });
-    }
-  });
-
-  // ─── Trigger visible for above-fold elements ───
+// ─── Trigger visible for above-fold elements ───
   window.addEventListener('load', () => {
     document.querySelectorAll('.fade-up').forEach(el => {
       const rect = el.getBoundingClientRect();

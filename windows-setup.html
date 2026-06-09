@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iBločky — Sprievodca nastavením Windows Sync</title>
+<link rel="icon" type="image/jpeg" href="favicon.jpg">
+<link rel="apple-touch-icon" href="favicon.jpg">
+<meta name="description" content="Krok za krokom sprievodca nastavením synchronizácie iBločky s Pohodou cez Windows aplikáciu.">
+<meta name="robots" content="noindex">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+/* ─── CSS Variables ─── */
+:root {
+  --primary: #637A9F;
+  --primary-rgb: 99,122,159;
+  --primary-light: #7d97bf;
+  --bg: #0F1117;
+  --bg-alt: #161B27;
+  --surface: rgba(255,255,255,0.04);
+  --surface-hover: rgba(255,255,255,0.07);
+  --border: rgba(255,255,255,0.08);
+  --text: #F0F2F5;
+  --text-muted: #8B9AB5;
+  --text-subtle: #5A6880;
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.5);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-xs: 6px;
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --nav-bg: rgba(15,17,23,0.85);
+  --glass-bg: rgba(255,255,255,0.04);
+  --glass-border: rgba(255,255,255,0.08);
+  --warn-rgb: 217,119,6;
+  --warn: #D97706;
+  --warn-light: #F59E0B;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --primary: #C9A84C;
+    --primary-rgb: 201,168,76;
+    --primary-light: #E8C872;
+    --bg: #FAFAF8;
+    --bg-alt: #F0EDE6;
+    --surface: rgba(0,0,0,0.03);
+    --surface-hover: rgba(0,0,0,0.06);
+    --border: rgba(0,0,0,0.08);
+    --text: #1A1F2E;
+    --text-muted: #5C6478;
+    --text-subtle: #9AA0B0;
+    --shadow: 0 4px 24px rgba(0,0,0,0.08);
+    --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
+    --nav-bg: rgba(250,250,248,0.88);
+    --glass-bg: rgba(255,255,255,0.7);
+    --glass-border: rgba(0,0,0,0.06);
+    --warn-rgb: 180,83,9;
+    --warn: #B45309;
+    --warn-light: #D97706;
+  }
+}
+
+[data-theme="light"] {
+  --primary: #C9A84C;
+  --primary-rgb: 201,168,76;
+  --primary-light: #E8C872;
+  --bg: #FAFAF8;
+  --bg-alt: #F0EDE6;
+  --surface: rgba(0,0,0,0.03);
+  --surface-hover: rgba(0,0,0,0.06);
+  --border: rgba(0,0,0,0.08);
+  --text: #1A1F2E;
+  --text-muted: #5C6478;
+  --text-subtle: #9AA0B0;
+  --shadow: 0 4px 24px rgba(0,0,0,0.08);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
+  --nav-bg: rgba(250,250,248,0.88);
+  --glass-bg: rgba(255,255,255,0.7);
+  --glass-border: rgba(0,0,0,0.06);
+  --warn-rgb: 180,83,9;
+  --warn: #B45309;
+  --warn-light: #D97706;
+}
+
+[data-theme="dark"] {
+  --primary: #637A9F;
+  --primary-rgb: 99,122,159;
+  --primary-light: #7d97bf;
+  --bg: #0F1117;
+  --bg-alt: #161B27;
+  --surface: rgba(255,255,255,0.04);
+  --surface-hover: rgba(255,255,255,0.07);
+  --border: rgba(255,255,255,0.08);
+  --text: #F0F2F5;
+  --text-muted: #8B9AB5;
+  --text-subtle: #5A6880;
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.5);
+  --nav-bg: rgba(15,17,23,0.85);
+  --glass-bg: rgba(255,255,255,0.04);
+  --glass-border: rgba(255,255,255,0.08);
+  --warn-rgb: 217,119,6;
+  --warn: #D97706;
+  --warn-light: #F59E0B;
+}
+
+/* ─── Reset & Base ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+  transition: background 0.3s, color 0.3s;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+/* ─── Scroll Animations ─── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.fade-up:nth-child(2) { transition-delay: 0.08s; }
+.fade-up:nth-child(3) { transition-delay: 0.16s; }
+.fade-up:nth-child(4) { transition-delay: 0.24s; }
+.fade-up:nth-child(5) { transition-delay: 0.32s; }
+.fade-up:nth-child(6) { transition-delay: 0.4s; }
+.fade-up:nth-child(7) { transition-delay: 0.48s; }
+.fade-up:nth-child(8) { transition-delay: 0.56s; }
+.fade-up:nth-child(9) { transition-delay: 0.64s; }
+
+/* ─── Layout ─── */
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+section { padding: 96px 0; }
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary);
+  background: rgba(var(--primary-rgb),0.1);
+  border: 1px solid rgba(var(--primary-rgb),0.25);
+  padding: 6px 14px;
+  border-radius: 99px;
+  margin-bottom: 20px;
+}
+.section-title {
+  font-size: clamp(26px, 4vw, 40px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+.section-subtitle {
+  font-size: 17px;
+  color: var(--text-muted);
+  max-width: 560px;
+  line-height: 1.65;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: var(--nav-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.3s;
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.nav-logo {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text);
+}
+.nav-logo .brand-i { color: #000; }
+.nav-logo span { color: var(--primary); }
+[data-theme="dark"] .nav-logo .brand-i { color: #fff; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .nav-logo .brand-i { color: #fff; }
+}
+.nav-back {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  padding: 6px 12px;
+  border-radius: var(--radius-xs);
+  transition: color 0.2s, background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav-back:hover { color: var(--text); background: var(--surface); }
+.nav-actions { display: flex; align-items: center; gap: 12px; }
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.theme-toggle:hover { background: var(--surface-hover); color: var(--text); }
+.icon-sun, .icon-moon { display: none; }
+[data-theme="dark"] .icon-moon,
+:root:not([data-theme]) .icon-moon { display: block; }
+[data-theme="light"] .icon-sun { display: block; }
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) .icon-moon { display: none; }
+  :root:not([data-theme]) .icon-sun { display: block; }
+}
+
+/* ─── HERO MINI ─── */
+#hero-mini {
+  padding-top: 148px;
+  padding-bottom: 0;
+  position: relative;
+  overflow: hidden;
+}
+#hero-mini::before {
+  content: '';
+  position: absolute;
+  top: -100px; right: -200px;
+  width: 600px; height: 500px;
+  background: radial-gradient(ellipse, rgba(var(--primary-rgb),0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-mini-inner { text-align: center; max-width: 680px; margin: 0 auto; }
+.hero-mini-inner .section-subtitle { margin: 0 auto; }
+
+/* ─── WIZARD ─── */
+#wizard { padding-top: 64px; padding-bottom: 96px; }
+.wizard-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.wizard-timeline::before {
+  content: '';
+  position: absolute;
+  left: 27px; top: 40px; bottom: 40px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--primary), rgba(var(--primary-rgb),0.1));
+}
+.wizard-step {
+  display: flex;
+  gap: 28px;
+  padding: 20px 0;
+  position: relative;
+}
+.wizard-step-num {
+  flex-shrink: 0;
+  width: 54px; height: 54px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid rgba(var(--primary-rgb),0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--primary);
+  position: relative;
+  z-index: 1;
+  transition: background 0.2s, border-color 0.2s;
+}
+.wizard-step:hover .wizard-step-num {
+  background: rgba(var(--primary-rgb),0.1);
+  border-color: var(--primary);
+}
+.wizard-step-body {
+  flex: 1;
+  padding-top: 12px;
+  padding-bottom: 20px;
+}
+.wizard-step-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.wizard-step-desc {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+.wizard-req {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+.wizard-req-tag {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 99px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+}
+
+/* Step category tags */
+.step-tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--primary);
+  background: rgba(var(--primary-rgb),0.1);
+  border: 1px solid rgba(var(--primary-rgb),0.2);
+  padding: 2px 9px;
+  border-radius: 99px;
+  margin-bottom: 8px;
+}
+
+/* Final / success step */
+.step-final .wizard-step-num {
+  background: rgba(var(--primary-rgb),0.15);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+.step-final .wizard-step-title { color: var(--primary); }
+
+/* Warning step (IČO) */
+.step-warning .wizard-step-num {
+  background: rgba(var(--warn-rgb),0.1);
+  border-color: rgba(var(--warn-rgb),0.5);
+  color: var(--warn);
+}
+.step-warning:hover .wizard-step-num {
+  background: rgba(var(--warn-rgb),0.15);
+  border-color: var(--warn);
+}
+.step-warning .wizard-step-body {
+  background: rgba(var(--warn-rgb),0.06);
+  border: 1px solid rgba(var(--warn-rgb),0.2);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px 18px;
+}
+.step-warning .wizard-step-title { color: var(--warn); }
+.step-warning .step-tag {
+  color: var(--warn);
+  background: rgba(var(--warn-rgb),0.1);
+  border-color: rgba(var(--warn-rgb),0.25);
+}
+
+/* ─── CTA SECTION ─── */
+#cta-section {
+  background: var(--bg-alt);
+  padding: 80px 0;
+  text-align: center;
+}
+.cta-inner { max-width: 520px; margin: 0 auto; }
+.cta-inner .section-title { font-size: clamp(22px, 3vw, 32px); margin-bottom: 12px; }
+.cta-inner .section-subtitle { margin: 0 auto 32px; max-width: 420px; }
+.cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(var(--primary-rgb),0.35);
+}
+.btn-primary:hover {
+  background: var(--primary-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(var(--primary-rgb),0.45);
+}
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-secondary:hover { background: var(--surface-hover); transform: translateY(-2px); }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  padding: 56px 0 40px;
+}
+.footer-inner { display: flex; flex-direction: column; gap: 32px; }
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.footer-brand-name {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.footer-brand-name .brand-i { color: #000; }
+.footer-brand-name span { color: var(--primary); }
+[data-theme="dark"] .footer-brand-name .brand-i { color: #fff; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .footer-brand-name .brand-i { color: #fff; }
+}
+.footer-tagline { font-size: 14px; color: var(--text-muted); font-style: italic; }
+.footer-links { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.footer-link {
+  font-size: 14px;
+  color: var(--text-muted);
+  padding: 6px 10px;
+  border-radius: var(--radius-xs);
+  transition: color 0.2s, background 0.2s;
+}
+.footer-link:hover { color: var(--text); background: var(--surface); }
+.footer-sep { color: var(--border); user-select: none; }
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.footer-copy { font-size: 13px; color: var(--text-subtle); }
+.footer-made { font-size: 13px; color: var(--text-subtle); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 640px) {
+  section { padding: 72px 0; }
+  #hero-mini { padding-top: 120px; }
+  #wizard { padding-top: 48px; padding-bottom: 72px; }
+  .wizard-step-title { font-size: 16px; }
+  .cta-buttons { flex-direction: column; align-items: center; }
+  .cta-buttons .btn-primary,
+  .cta-buttons .btn-secondary { text-align: center; justify-content: center; width: 100%; max-width: 320px; }
+  .footer-top { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><span class="brand-i">i</span><span>Bločky</span></a>
+    <div class="nav-actions">
+      <a href="index.html" class="nav-back">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Späť na hlavnú
+      </a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Prepnúť tému">
+        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO MINI -->
+<section id="hero-mini">
+  <div class="container">
+    <div class="hero-mini-inner fade-up">
+      <div class="section-label">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><polyline points="8 21 12 17 16 21"/></svg>
+        Windows Sync
+      </div>
+      <h1 class="section-title">Sprievodca nastavením<br>Windows Sync</h1>
+      <p class="section-subtitle">Prepojte iBločky s účtovným softvérom Pohoda v niekoľkých krokoch. Celé nastavenie vám zaberie menej ako 10 minút.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WIZARD STEPS -->
+<section id="wizard">
+  <div class="container">
+    <div class="wizard-timeline">
+
+      <!-- STEP 1 -->
+      <div class="wizard-step fade-up">
+        <div class="wizard-step-num">1</div>
+        <div class="wizard-step-body">
+          <div class="step-tag">Predplatné</div>
+          <div class="wizard-step-title">Aktivujte predplatné Max</div>
+          <p class="wizard-step-desc">Windows Sync je dostupný výhradne v rámci predplatného <strong>Max</strong>. Aktivujte ho priamo v aplikácii iBločky v sekcii <strong>Nastavenia → Predplatné</strong>.</p>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="wizard-step fade-up">
+        <div class="wizard-step-num">2</div>
+        <div class="wizard-step-body">
+          <div class="step-tag">Inštalácia</div>
+          <div class="wizard-step-title">Stiahnite aplikáciu pre Windows</div>
+          <p class="wizard-step-desc">Stiahnite si inštalátor <strong>iBločky Windows Connector</strong> z odkazu v aplikácii alebo z našej webovej stránky. Aplikácia je dostupná ako 64-bitový balíček pre Windows 10 a novší.</p>
+          <div class="wizard-req">
+            <span class="wizard-req-tag">Windows 10 / 11</span>
+            <span class="wizard-req-tag">.NET 8.0 (zahrnuté)</span>
+            <span class="wizard-req-tag">64-bit</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="wizard-step fade-up">
+        <div class="wizard-step-num">3</div>
+        <div class="wizard-step-body">
+          <div class="step-tag">Inštalácia</div>
+          <div class="wizard-step-title">Nainštalujte aplikáciu</div>
+          <p class="wizard-step-desc">Spustite stiahnutý inštalátor a dokončite inštaláciu podľa pokynov sprievodcu. Po inštalácii spustite <strong>iBločky Windows Connector</strong> — ikona sa zobrazí v systémovej lište.</p>
+        </div>
+      </div>
+
+      <!-- STEP 4 -->
+      <div class="wizard-step fade-up">
+        <div class="wizard-step-num">4</div>
+        <div class="wizard-step-body">
+          <div class="step-tag">Konfigurácia</div>
+          <div class="wizard-step-title">Skopírujte API kľúč</div>
+          <p class="wizard-step-desc">V mobilnej aplikácii iBločky prejdite do <strong>Nastavenia → Windows Sync</strong> a skopírujte zobrazený API kľúč. Tento kľúč slúži na bezpečné overenie identity vášho zariadenia.</p>
+        </div>
+      </div>
+
+      <!-- STEP 5 -->
+      <div class="wizard-step fade-up">
+        <div class="wizard-step-num">5</div>
+        <div class="wizard-step-body">
+          <div class="step-tag">Konfigurácia</div>
+          <div class="wizard-step-title">Zadajte API kľúč do Windows aplikácie</div>
+          <p class="wizard-step-desc">V aplikácii <strong>iBločky Windows Connector</strong> otvorte <strong>Nastavenia</strong> a vložte skopírovaný API kľúč do príslušného poľa. Kľúč uložte tlačidlom <strong>Potvrdiť</strong>.</p>
+        </div>
+      </div>
+
+      <!-- STEP 6 -->
+      <div class="wizard-step fade-up">
+        <div class="wizard-step-num">6</div>
+        <div class="wizard-step-body">
+          <div class="step-tag">Konfigurácia</div>
+          <div class="wizard-step-title">Zadajte prihlasovacie údaje Pohody</div>
+          <p class="wizard-step-desc">Zadajte <strong>používateľské meno a heslo</strong> pre vašu inštaláciu Pohody. Odporúčame použiť administrátorský účet alebo účet s prístupom ku všetkým firmám, s ktorými plánujete pracovať.</p>
+        </div>
+      </div>
+
+      <!-- STEP 7 -->
+      <div class="wizard-step fade-up">
+        <div class="wizard-step-num">7</div>
+        <div class="wizard-step-body">
+          <div class="step-tag">Overenie</div>
+          <div class="wizard-step-title">Otestujte pripojenie</div>
+          <p class="wizard-step-desc">V aplikácii iBločky klepnite na <strong>Otestovať pripojenie</strong>. Aplikácia overí komunikáciu so Windows Connectorom aj prihlasovacie údaje do Pohody. Po úspešnom teste sa zobrazí stav <strong>"Windows pripojený"</strong>.</p>
+        </div>
+      </div>
+
+      <!-- STEP 8 -->
+      <div class="wizard-step step-final fade-up">
+        <div class="wizard-step-num">✓</div>
+        <div class="wizard-step-body">
+          <div class="step-tag">Export</div>
+          <div class="wizard-step-title">Exportujte prvý doklad</div>
+          <p class="wizard-step-desc">Nastavenie je dokončené. Otvorte ľubovoľný doklad v iBločky a použite funkciu <strong>Exportovať do Pohody</strong>. Doklad sa automaticky odošle do vašej inštalácie Pohody na počítači.</p>
+        </div>
+      </div>
+
+      <!-- STEP 9 — WARNING -->
+      <div class="wizard-step step-warning fade-up">
+        <div class="wizard-step-num">&#9888;</div>
+        <div class="wizard-step-body">
+          <div class="step-tag">Dôležité</div>
+          <div class="wizard-step-title">Správne IČO firmy je povinné</div>
+          <p class="wizard-step-desc">Doklady do Pohody je možné exportovať <strong>iba z priečinka firmy, ktorá má v iBločky správne zadané IČO</strong>. Pohoda používa IČO na priradenie dokladu ku konkrétnej účtovnej jednotke. Pred prvým exportom skontrolujte nastavenia firmy v iBločky (<strong>Firma → Upraviť → IČO</strong>).</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta-section">
+  <div class="container">
+    <div class="cta-inner fade-up">
+      <div class="section-label">Všetko nastavené</div>
+      <h2 class="section-title">Pripravení na export</h2>
+      <p class="section-subtitle">Ak ste úspešne dokončili všetky kroky, môžete sa vrátiť do aplikácie a začať exportovať doklady do Pohody.</p>
+      <div class="cta-buttons">
+        <a href="iblocky://windows-sync" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Otvoriť iBločky
+        </a>
+        <a href="index.html#windows" class="btn-secondary">Viac o Windows Sync</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand-name"><span class="brand-i">i</span><span>Bločky</span></div>
+          <div class="footer-tagline">Vaše doklady. Vždy po ruke.</div>
+        </div>
+        <div class="footer-links">
+          <a href="index.html" class="footer-link">Domov</a>
+          <span class="footer-sep">·</span>
+          <a href="index.html#windows" class="footer-link">Windows App</a>
+          <span class="footer-sep">·</span>
+          <a href="privacy.html" class="footer-link">Ochrana súkromia</a>
+          <span class="footer-sep">·</span>
+          <a href="terms.html" class="footer-link">Podmienky použitia</a>
+          <span class="footer-sep">·</span>
+          <a href="mailto:ereskaapps@gmail.com" class="footer-link">ereskaapps@gmail.com</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2025 iBločky. Všetky práva vyhradené.</span>
+        <span class="footer-made">Vyrobené na Slovensku 🇸🇰</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const html = document.documentElement;
+  const btn = document.getElementById('themeToggle');
+  const stored = localStorage.getItem('iblocky-theme');
+  if (stored) html.setAttribute('data-theme', stored);
+
+  btn.addEventListener('click', () => {
+    const current = html.getAttribute('data-theme');
+    const sys = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    let next;
+    if (!current) {
+      next = sys === 'dark' ? 'light' : 'dark';
+    } else {
+      next = current === 'dark' ? 'light' : 'dark';
+    }
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('iblocky-theme', next);
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.fade-up').forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight) {
+        el.classList.add('visible');
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
