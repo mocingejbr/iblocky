@@ -202,7 +202,16 @@ nav {
   letter-spacing: -0.03em;
   color: var(--text);
 }
-.nav-logo span { color: var(--primary); }
+.nav-logo .brand-i { color: #000; }
+.nav-logo span { color: #C9A84C; }
+[data-theme="dark"] .nav-logo .brand-i,
+[data-theme="dark"] .hero-title .brand-i,
+[data-theme="dark"] .footer-brand-name .brand-i { color: #fff; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .nav-logo .brand-i,
+  :root:not([data-theme="light"]) .hero-title .brand-i,
+  :root:not([data-theme="light"]) .footer-brand-name .brand-i { color: #fff; }
+}
 .nav-actions { display: flex; align-items: center; gap: 12px; }
 .nav-link {
   font-size: 14px;
@@ -286,7 +295,8 @@ nav {
   line-height: 1.05;
   margin-bottom: 20px;
 }
-.hero-title .brand { color: var(--primary); }
+.hero-title .brand-i { color: #000; }
+.hero-title .brand { color: #C9A84C; }
 .hero-tagline {
   font-size: clamp(18px, 2.5vw, 24px);
   font-weight: 500;
@@ -929,7 +939,8 @@ footer {
   color: var(--text);
   margin-bottom: 4px;
 }
-.footer-brand-name span { color: var(--primary); }
+.footer-brand-name .brand-i { color: #000; }
+.footer-brand-name span { color: #C9A84C; }
 .footer-tagline { font-size: 14px; color: var(--text-muted); font-style: italic; }
 .footer-links {
   display: flex;
@@ -1007,7 +1018,7 @@ footer {
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <a href="#" class="nav-logo">i<span>Bloč</span>ky</a>
+    <a href="#" class="nav-logo"><span class="brand-i">i</span><span>Bločky</span></a>
     <div class="nav-actions">
       <a href="#features" class="nav-link">Funkcie</a>
       <a href="#pricing" class="nav-link">Ceny</a>
@@ -1036,7 +1047,7 @@ footer {
           Pre iPhone &amp; Windows
         </div>
         <h1 class="hero-title fade-up">
-          i<span class="brand">Bloč</span>ky
+          <span class="brand-i">i</span><span class="brand">Bločky</span>
         </h1>
         <p class="hero-tagline fade-up">Vaše doklady. Vždy po ruke.</p>
         <p class="hero-subtitle fade-up">
@@ -1555,7 +1566,7 @@ footer {
     <div class="footer-inner">
       <div class="footer-top">
         <div>
-          <div class="footer-brand-name">i<span>Bloč</span>ky</div>
+          <div class="footer-brand-name"><span class="brand-i">i</span><span>Bločky</span></div>
           <div class="footer-tagline">Vaše doklady. Vždy po ruke.</div>
         </div>
         <div class="footer-links">
