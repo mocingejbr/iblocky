@@ -108,6 +108,7 @@ a { color: inherit; text-decoration: none; }
 ul { list-style: none; }
 
 /* ─── NAV ─── */
+/* UI Polish: nav scroll shadow for depth feedback */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -116,7 +117,11 @@ nav {
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 1px solid var(--border);
-  transition: background 0.3s;
+  transition: background 0.3s, box-shadow 0.3s;
+  box-shadow: 0 1px 0 var(--border);
+}
+nav.scrolled {
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18), 0 1px 0 var(--border);
 }
 .nav-inner {
   display: flex;
@@ -210,12 +215,29 @@ nav {
 }
 
 /* ─── PROSE ─── */
-main { min-height: 80vh; }
+/* UI Polish: main gets a subtle top ambient glow to give the page more presence */
+main {
+  min-height: 80vh;
+  position: relative;
+  overflow: hidden;
+}
+main::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -100px;
+  width: 500px; height: 400px;
+  background: radial-gradient(ellipse, rgba(var(--primary-rgb),0.08) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
 .prose {
   max-width: 720px;
   margin: 0 auto;
   padding: 108px 24px 80px;
+  position: relative;
+  z-index: 1;
 }
+/* UI Polish: slightly stronger prose header bottom border */
 .prose-header {
   margin-bottom: 48px;
   padding-bottom: 32px;
@@ -257,12 +279,13 @@ main { min-height: 80vh; }
   align-items: center;
   gap: 10px;
 }
+/* UI Polish: slightly wider and taller h2 accent bar for more authoritativeness */
 .prose h2::before {
   content: '';
   display: inline-block;
   width: 3px;
-  height: 18px;
-  background: var(--primary);
+  height: 20px;
+  background: linear-gradient(to bottom, var(--primary), rgba(var(--primary-rgb),0.4));
   border-radius: 2px;
   flex-shrink: 0;
 }
@@ -355,19 +378,28 @@ main { min-height: 80vh; }
 .prose tr:last-child td { border-bottom: none; }
 .prose td a { font-size: 13px; }
 
-/* Contact box */
+/* Contact box — UI Polish: added icon prefix to email link and stronger border */
 .contact-box {
   background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
+  border: 1px solid rgba(var(--primary-rgb),0.2);
   border-radius: var(--radius-sm);
   padding: 20px 24px;
   margin-top: 12px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
 }
 .contact-box strong { font-size: 15px; color: var(--text); font-weight: 600; }
-.contact-box a { font-size: 14px; color: var(--primary); }
+.contact-box a {
+  font-size: 14px;
+  color: var(--primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s;
+}
+.contact-box a:hover { color: var(--primary-light); }
+.contact-box a svg { width: 14px; height: 14px; flex-shrink: 0; }
 
 /* ─── FOOTER ─── */
 footer {
@@ -411,7 +443,8 @@ footer {
   transition: color 0.2s, background 0.2s;
 }
 .footer-link:hover { color: var(--text); background: var(--surface); }
-.footer-sep { color: var(--border); user-select: none; }
+/* UI Polish: footer separators fixed from near-invisible var(--border) to var(--text-subtle) */
+.footer-sep { color: var(--text-subtle); user-select: none; opacity: 0.6; }
 .footer-bottom {
   display: flex;
   justify-content: space-between;
@@ -606,9 +639,13 @@ footer {
 
       <div class="prose-section">
         <h2>11. Kontakt</h2>
+        <!-- UI Polish: mail icon added to contact email link -->
         <div class="contact-box">
           <strong>Martin Gábor — Ereska Apps</strong>
-          <a href="mailto:ereskaapps@gmail.com">ereskaapps@gmail.com</a>
+          <a href="mailto:ereskaapps@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            ereskaapps@gmail.com
+          </a>
         </div>
       </div>
     </article>
@@ -761,9 +798,13 @@ footer {
 
       <div class="prose-section">
         <h2>11. Contact</h2>
+        <!-- UI Polish: mail icon added to contact email link -->
         <div class="contact-box">
           <strong>Martin Gábor — Ereska Apps</strong>
-          <a href="mailto:ereskaapps@gmail.com">ereskaapps@gmail.com</a>
+          <a href="mailto:ereskaapps@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            ereskaapps@gmail.com
+          </a>
         </div>
       </div>
     </article>
@@ -800,6 +841,12 @@ footer {
 
 <script>
 (function(){
+  // ─── Nav scroll shadow ───
+  const navEl = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    navEl.classList.toggle('scrolled', window.scrollY > 16);
+  }, { passive: true });
+
   const html = document.documentElement;
 
   // ─── Theme ───

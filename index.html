@@ -129,10 +129,12 @@ img { max-width: 100%; display: block; }
 ul { list-style: none; }
 
 /* ─── Scroll Animations ─── */
+/* UI Polish: added will-change for GPU hint on animated elements */
 .fade-up {
   opacity: 0;
   transform: translateY(28px);
   transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1);
+  will-change: opacity, transform;
 }
 .fade-up.visible { opacity: 1; transform: translateY(0); }
 .fade-up:nth-child(2) { transition-delay: 0.1s; }
@@ -147,6 +149,7 @@ ul { list-style: none; }
   padding: 0 24px;
 }
 section { padding: 96px 0; }
+/* UI Polish: section-label gets subtle transition for hover states */
 .section-label {
   display: inline-flex;
   align-items: center;
@@ -161,13 +164,16 @@ section { padding: 96px 0; }
   padding: 6px 14px;
   border-radius: 99px;
   margin-bottom: 20px;
+  transition: background 0.25s, border-color 0.25s;
 }
+/* UI Polish: text-wrap balance for more premium heading line breaks */
 .section-title {
   font-size: clamp(28px, 4vw, 44px);
   font-weight: 800;
   letter-spacing: -0.02em;
   line-height: 1.15;
   margin-bottom: 16px;
+  text-wrap: balance;
 }
 .section-subtitle {
   font-size: 17px;
@@ -177,6 +183,7 @@ section { padding: 96px 0; }
 }
 
 /* ─── NAV ─── */
+/* UI Polish: added subtle box-shadow to nav for depth when page scrolled */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -185,7 +192,11 @@ nav {
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 1px solid var(--border);
-  transition: background 0.3s;
+  transition: background 0.3s, box-shadow 0.3s;
+  box-shadow: 0 1px 0 var(--border);
+}
+nav.scrolled {
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18), 0 1px 0 var(--border);
 }
 .nav-inner {
   display: flex;
@@ -245,6 +256,7 @@ nav {
 }
 
 /* ─── HERO ─── */
+/* UI Polish: strengthened ambient glow with two radial gradients for depth */
 #hero {
   padding-top: 160px;
   padding-bottom: 96px;
@@ -255,15 +267,28 @@ nav {
   content: '';
   position: absolute;
   top: -200px; right: -200px;
-  width: 700px; height: 700px;
-  background: radial-gradient(ellipse, rgba(var(--primary-rgb),0.12) 0%, transparent 70%);
+  width: 800px; height: 800px;
+  background: radial-gradient(ellipse, rgba(var(--primary-rgb),0.14) 0%, transparent 68%);
   pointer-events: none;
+  z-index: 0;
 }
+#hero::after {
+  content: '';
+  position: absolute;
+  bottom: -100px; left: -200px;
+  width: 600px; height: 600px;
+  background: radial-gradient(ellipse, rgba(var(--primary-rgb),0.07) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+/* UI Polish: ensure hero content sits above background glows */
 .hero-inner {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 64px;
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
 .hero-eyebrow {
   display: inline-flex;
@@ -288,21 +313,24 @@ nav {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.6; transform: scale(0.8); }
 }
+/* UI Polish: text-wrap balance on hero title */
 .hero-title {
   font-size: clamp(40px, 6vw, 68px);
   font-weight: 900;
   letter-spacing: -0.04em;
   line-height: 1.05;
   margin-bottom: 20px;
+  text-wrap: balance;
 }
 .hero-title .brand-i { color: #000; }
 .hero-title .brand { color: var(--primary); }
+/* UI Polish: removed italic — feels more premium and modern as a light-weight tagline */
 .hero-tagline {
-  font-size: clamp(18px, 2.5vw, 24px);
-  font-weight: 500;
+  font-size: clamp(17px, 2.2vw, 22px);
+  font-weight: 400;
   color: var(--text-muted);
   margin-bottom: 12px;
-  font-style: italic;
+  letter-spacing: 0.01em;
 }
 .hero-subtitle {
   font-size: 17px;
@@ -312,38 +340,45 @@ nav {
   max-width: 460px;
 }
 .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+/* UI Polish: increased horizontal padding for more generous CTA hit area; added border-color transition */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 14px 28px;
+  padding: 14px 32px;
   background: var(--primary);
   color: #fff;
   font-size: 15px;
   font-weight: 600;
   border-radius: var(--radius-sm);
-  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  transition: background 0.25s, transform 0.18s, box-shadow 0.25s;
   box-shadow: 0 4px 20px rgba(var(--primary-rgb),0.35);
+  letter-spacing: 0.01em;
 }
 .btn-primary:hover {
   background: var(--primary-light);
   transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(var(--primary-rgb),0.45);
+  box-shadow: 0 10px 32px rgba(var(--primary-rgb),0.48);
 }
 .btn-secondary {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 14px 28px;
+  padding: 14px 32px;
   background: var(--surface);
   color: var(--text);
   font-size: 15px;
   font-weight: 600;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
-  transition: background 0.2s, transform 0.15s;
+  transition: background 0.25s, transform 0.18s, border-color 0.25s;
+  letter-spacing: 0.01em;
 }
-.btn-secondary:hover { background: var(--surface-hover); transform: translateY(-2px); }
+.btn-secondary:hover {
+  background: var(--surface-hover);
+  transform: translateY(-2px);
+  border-color: rgba(var(--primary-rgb),0.25);
+}
 .hero-visual {
   display: flex;
   justify-content: center;
@@ -351,13 +386,17 @@ nav {
   position: relative;
 }
 /* Phone mockup */
+/* UI Polish: slightly stronger phone frame shadow and inner glow for premium look */
 .phone-frame {
   width: 260px;
   height: 530px;
   background: var(--bg-alt);
   border-radius: 46px;
-  border: 2px solid var(--border);
-  box-shadow: var(--shadow-lg), inset 0 0 0 1px rgba(255,255,255,0.06);
+  border: 2px solid rgba(255,255,255,0.12);
+  box-shadow:
+    0 24px 64px rgba(0,0,0,0.5),
+    0 8px 24px rgba(0,0,0,0.3),
+    inset 0 0 0 1px rgba(255,255,255,0.07);
   position: relative;
   overflow: hidden;
 }
@@ -436,24 +475,35 @@ nav {
   margin-top: 4px;
 }
 .phone-bottom { width: 90px; height: 4px; background: var(--border); border-radius: 2px; margin: auto auto 0; }
+/* UI Polish: strengthened phone glow for more vivid ambient effect */
 .phone-glow {
   position: absolute;
-  bottom: -100px; left: 50%;
+  bottom: -120px; left: 50%;
   transform: translateX(-50%);
-  width: 300px; height: 300px;
-  background: radial-gradient(ellipse, rgba(var(--primary-rgb),0.2) 0%, transparent 70%);
+  width: 360px; height: 360px;
+  background: radial-gradient(ellipse, rgba(var(--primary-rgb),0.24) 0%, transparent 68%);
   pointer-events: none;
   z-index: -1;
 }
 
 /* ─── FEATURES ─── */
-#features { background: var(--bg); }
+/* UI Polish: features on bg-alt to create visual break from hero; pattern: bg > bg-alt > bg > bg-alt > bg > bg-alt */
+#features { background: var(--bg-alt); }
 .features-header { text-align: center; margin-bottom: 56px; }
 .features-header .section-subtitle { margin: 0 auto; }
+
+/* UI Polish: centered last row, improved card hover transitions including border-color */
 .features-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+}
+/* Center the 4th and 5th cards when they form a partial last row */
+.features-grid .feature-card:nth-child(4) {
+  grid-column: 1 / 2;
+}
+.features-grid .feature-card:nth-child(5) {
+  grid-column: 2 / 3;
 }
 .feature-card {
   background: var(--glass-bg);
@@ -464,29 +514,41 @@ nav {
   overflow: hidden;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  transition: background 0.25s, transform 0.22s, box-shadow 0.25s, border-color 0.25s;
 }
 .feature-card::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(var(--primary-rgb),0.4), transparent);
+  background: linear-gradient(90deg, transparent, rgba(var(--primary-rgb),0.5), transparent);
   opacity: 0;
   transition: opacity 0.3s;
 }
-.feature-card:hover { background: var(--surface-hover); transform: translateY(-4px); box-shadow: var(--shadow); }
+.feature-card:hover {
+  background: var(--surface-hover);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.28), 0 2px 8px rgba(0,0,0,0.16);
+  border-color: rgba(var(--primary-rgb),0.2);
+}
 .feature-card:hover::before { opacity: 1; }
+
+/* UI Polish: slightly stronger icon background for better visibility */
 .feature-icon {
   width: 48px; height: 48px;
-  background: rgba(var(--primary-rgb),0.12);
-  border: 1px solid rgba(var(--primary-rgb),0.2);
+  background: rgba(var(--primary-rgb),0.14);
+  border: 1px solid rgba(var(--primary-rgb),0.22);
   border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 20px;
   color: var(--primary);
+  transition: background 0.25s, border-color 0.25s;
+}
+.feature-card:hover .feature-icon {
+  background: rgba(var(--primary-rgb),0.18);
+  border-color: rgba(var(--primary-rgb),0.32);
 }
 .feature-icon svg { width: 22px; height: 22px; }
 .feature-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
@@ -503,17 +565,27 @@ nav {
   border: 1px solid rgba(var(--primary-rgb),0.25);
 }
 .feature-desc { font-size: 14px; color: var(--text-muted); line-height: 1.65; }
-/* 5th card spans 2 cols on last row */
-.features-grid .feature-card:nth-child(4) { grid-column: span 1; }
 
 /* ─── PRICING ─── */
-#pricing { background: var(--bg-alt); }
+/* UI Polish: pricing uses bg (not bg-alt) to alternate properly with adjacent bg-alt sections */
+#pricing { background: var(--bg); }
 .pricing-header { text-align: center; margin-bottom: 48px; }
 .pricing-header .section-subtitle { margin: 0 auto; }
-.pricing-table-wrap { overflow-x: auto; }
+
+/* UI Polish: wrapping table in a glass card container for premium look */
+.pricing-table-wrap {
+  overflow-x: auto;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+/* UI Polish: table uses separate border-collapse for rounded corners inside glass card */
 .pricing-table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   min-width: 600px;
 }
 .pricing-table th {
@@ -522,6 +594,9 @@ nav {
   font-size: 15px;
   font-weight: 700;
 }
+/* UI Polish: first header row gets rounded top corners to match glass card container */
+.pricing-table thead tr th:first-child { border-radius: var(--radius) 0 0 0; }
+.pricing-table thead tr th:last-child { border-radius: 0 var(--radius) 0 0; }
 .pricing-table td {
   padding: 14px 20px;
   text-align: center;
@@ -541,8 +616,9 @@ nav {
   border-left: 1px solid rgba(var(--primary-rgb),0.3);
   border-right: 1px solid rgba(var(--primary-rgb),0.3);
 }
+/* UI Polish: Pro Max column header gets a stronger highlight background */
 .col-promax th {
-  background: rgba(var(--primary-rgb),0.1);
+  background: rgba(var(--primary-rgb),0.12);
   border-top: 2px solid var(--pro-max-border);
   border-left: 1px solid rgba(var(--primary-rgb),0.3);
   border-right: 1px solid rgba(var(--primary-rgb),0.3);
@@ -605,14 +681,36 @@ nav {
   box-shadow: 0 4px 16px rgba(var(--primary-rgb),0.35);
 }
 .btn-tier-promax:hover { background: var(--primary-light); transform: translateY(-1px); }
+/* UI Polish: pricing trust line elevated with icon treatment and flex layout */
 .pricing-trust {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
   text-align: center;
-  margin-top: 24px;
+  margin-top: 28px;
   font-size: 13px;
+  color: var(--text-muted);
+}
+.pricing-trust-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.pricing-trust-item svg {
+  width: 14px;
+  height: 14px;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+.pricing-trust-sep {
   color: var(--text-subtle);
+  opacity: 0.4;
 }
 
 /* ─── WINDOWS SYNC ─── */
+/* UI Polish: Windows section stays on bg-alt, borders provide clear section demarcation */
 #windows {
   background: var(--bg-alt);
   border-top: 1px solid var(--border);
@@ -688,11 +786,13 @@ nav {
   gap: 14px;
   align-items: flex-start;
 }
+/* UI Polish: increased benefit icon background opacity for better visibility */
 .win-benefit-icon {
   flex-shrink: 0;
-  width: 32px; height: 32px;
+  width: 34px; height: 34px;
   border-radius: 10px;
-  background: rgba(var(--primary-rgb),0.1);
+  background: rgba(var(--primary-rgb),0.14);
+  border: 1px solid rgba(var(--primary-rgb),0.18);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -702,6 +802,14 @@ nav {
 .win-benefit-icon svg { width: 16px; height: 16px; }
 .win-benefit-text strong { display: block; font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
 .win-benefit-text span { font-size: 13px; color: var(--text-muted); }
+/* UI Polish: added win-section-title class to replace inline style; improved download card */
+.win-section-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
 .win-download-card {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
@@ -712,18 +820,25 @@ nav {
   justify-content: space-between;
   gap: 16px;
   flex-wrap: wrap;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.win-download-card:hover {
+  border-color: rgba(var(--primary-rgb),0.25);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.16);
 }
 .win-app-info { display: flex; align-items: center; gap: 14px; }
 .win-app-icon {
   width: 44px; height: 44px;
   border-radius: 12px;
-  background: var(--primary);
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
   display: flex;
   align-items: center;
   justify-content: center;
   color: #fff;
   font-weight: 800;
   font-size: 13px;
+  box-shadow: 0 4px 12px rgba(var(--primary-rgb),0.3);
+  letter-spacing: 0.02em;
 }
 .win-app-name { font-size: 15px; font-weight: 700; color: var(--text); }
 .win-app-meta { font-size: 12px; color: var(--text-muted); }
@@ -745,7 +860,7 @@ nav {
   position: absolute;
   left: 27px; top: 40px; bottom: 40px;
   width: 2px;
-  background: linear-gradient(to bottom, var(--primary), rgba(var(--primary-rgb),0.1));
+  background: linear-gradient(to bottom, var(--primary), rgba(var(--primary-rgb),0.08));
 }
 .wizard-step {
   display: flex;
@@ -767,16 +882,26 @@ nav {
   color: var(--primary);
   position: relative;
   z-index: 1;
-  transition: background 0.2s, border-color 0.2s;
+  transition: background 0.25s, border-color 0.25s, box-shadow 0.25s;
 }
 .wizard-step:hover .wizard-step-num {
   background: rgba(var(--primary-rgb),0.1);
   border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(var(--primary-rgb),0.08);
 }
+
+/* UI Polish: added glass card treatment to wizard step bodies */
 .wizard-step-body {
   flex: 1;
-  padding-top: 12px;
-  padding-bottom: 20px;
+  padding: 16px 20px 18px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  transition: border-color 0.25s, background 0.25s;
+}
+.wizard-step:hover .wizard-step-body {
+  border-color: rgba(var(--primary-rgb),0.18);
+  background: var(--surface-hover);
 }
 .wizard-step-title {
   font-size: 17px;
@@ -809,8 +934,14 @@ nav {
   border-color: var(--primary);
   color: var(--primary);
 }
+/* UI Polish: final step body gets a highlighted glass treatment */
+.step-final .wizard-step-body {
+  border-color: rgba(var(--primary-rgb),0.2);
+  background: rgba(var(--primary-rgb),0.04);
+}
 
 /* ─── FAQ ─── */
+/* UI Polish: FAQ stays on bg-alt, alternating with setup (bg) above it */
 #faq { background: var(--bg-alt); }
 .faq-header { text-align: center; margin-bottom: 48px; }
 .faq-header .section-subtitle { margin: 0 auto; }
@@ -821,12 +952,17 @@ nav {
   flex-direction: column;
   gap: 12px;
 }
+/* UI Polish: added border-color transition on accordion items for smoother interaction */
 .accordion-item {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius);
   overflow: hidden;
   backdrop-filter: blur(8px);
+  transition: border-color 0.25s;
+}
+.accordion-item.open {
+  border-color: rgba(var(--primary-rgb),0.2);
 }
 .accordion-trigger {
   width: 100%;
@@ -939,7 +1075,8 @@ footer {
   transition: color 0.2s, background 0.2s;
 }
 .footer-link:hover { color: var(--text); background: var(--surface); }
-.footer-sep { color: var(--border); user-select: none; }
+/* UI Polish: footer separators were near-invisible in dark mode using var(--border); fixed to text-subtle */
+.footer-sep { color: var(--text-subtle); user-select: none; opacity: 0.6; }
 .footer-bottom {
   display: flex;
   justify-content: space-between;
@@ -957,18 +1094,25 @@ footer {
   .hero-inner { grid-template-columns: 1fr; gap: 48px; }
   .hero-visual { order: -1; }
   .phone-frame { width: 220px; height: 440px; }
+  /* UI Polish: on tablet the 2-col features grid should show all 5 cards cleanly */
   .features-grid { grid-template-columns: repeat(2, 1fr); }
+  .features-grid .feature-card:nth-child(4) { grid-column: auto; }
+  .features-grid .feature-card:nth-child(5) { grid-column: auto; }
   .windows-inner { grid-template-columns: 1fr; gap: 48px; }
 }
 @media (max-width: 640px) {
   section { padding: 72px 0; }
   .features-grid { grid-template-columns: 1fr; }
+  .features-grid .feature-card:nth-child(4),
+  .features-grid .feature-card:nth-child(5) { grid-column: auto; }
   .nav-link { display: none; }
   .hero-ctas { flex-direction: column; }
   .hero-ctas .btn-primary, .hero-ctas .btn-secondary { text-align: center; justify-content: center; }
   .pricing-table-wrap { font-size: 13px; }
   .footer-top { flex-direction: column; }
   .hero-title { font-size: 38px; }
+  /* UI Polish: tighter wizard steps on mobile */
+  .wizard-step-body { padding: 12px 16px 14px; }
 }
 /* Mobile pricing cards (hide table, show cards) */
 @media (max-width: 560px) {
@@ -978,15 +1122,18 @@ footer {
 @media (min-width: 561px) {
   .pricing-mobile { display: none; }
 }
+/* UI Polish: mobile pricing cards with transitions and highlighted card stronger glow */
 .pricing-mobile-card {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius);
   padding: 24px;
+  transition: border-color 0.25s, box-shadow 0.25s;
 }
 .pricing-mobile-card.highlighted {
   border-color: var(--pro-max-border);
   background: rgba(var(--primary-rgb),0.06);
+  box-shadow: 0 0 0 1px rgba(var(--primary-rgb),0.12), 0 8px 32px rgba(var(--primary-rgb),0.12);
 }
 .pricing-mobile-tier { font-size: 20px; font-weight: 800; margin-bottom: 4px; }
 .pricing-mobile-price { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; }
@@ -1003,6 +1150,7 @@ footer {
   margin: 0 auto 64px;
   max-width: 760px;
 }
+/* UI Polish: sync nodes get subtle primary border glow and improved hover shadow */
 .sync-node {
   display: flex;
   flex-direction: column;
@@ -1010,17 +1158,19 @@ footer {
   gap: 12px;
   padding: 24px 22px 18px;
   background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
+  border: 1px solid rgba(var(--primary-rgb),0.15);
   border-radius: var(--radius);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   min-width: 128px;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
   cursor: default;
+  box-shadow: 0 0 0 1px rgba(var(--primary-rgb),0.06), 0 4px 16px rgba(0,0,0,0.12);
 }
 .sync-node:hover {
   transform: translateY(-4px);
-  box-shadow: 0 16px 40px rgba(0,0,0,0.18);
+  box-shadow: 0 0 0 1px rgba(var(--primary-rgb),0.12), 0 16px 40px rgba(0,0,0,0.22);
+  border-color: rgba(var(--primary-rgb),0.28);
 }
 .sync-node-icon {
   width: 64px;
@@ -1366,7 +1516,18 @@ footer {
       </div>
     </div>
 
-    <p class="pricing-trust fade-up">Zruš kedykoľvek · Súkromie chránené</p>
+    <!-- UI Polish: trust line upgraded to icon+text flex row with appropriate icons -->
+    <div class="pricing-trust fade-up">
+      <span class="pricing-trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+        Zruš kedykoľvek
+      </span>
+      <span class="pricing-trust-sep">·</span>
+      <span class="pricing-trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Súkromie chránené
+      </span>
+    </div>
   </div>
 </section>
 
@@ -1481,7 +1642,7 @@ footer {
       </div>
       <div class="win-right fade-up">
         <div>
-          <h3 style="font-size:18px;font-weight:700;margin-bottom:20px;color:var(--text)">Prečo iBlockySync?</h3>
+          <h3 class="win-section-title">Prečo iBlockySync?</h3>
           <div class="win-benefits">
             <div class="win-benefit">
               <div class="win-benefit-icon">
@@ -1740,6 +1901,12 @@ footer {
 
 <script>
 (function(){
+  // ─── Nav scroll shadow ───
+  const navEl = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    navEl.classList.toggle('scrolled', window.scrollY > 16);
+  }, { passive: true });
+
   // ─── Theme toggle ───
   const html = document.documentElement;
   const btn = document.getElementById('themeToggle');

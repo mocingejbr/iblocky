@@ -159,12 +159,14 @@ section { padding: 96px 0; }
   border-radius: 99px;
   margin-bottom: 20px;
 }
+/* UI Polish: text-wrap balance for more natural heading line breaks */
 .section-title {
   font-size: clamp(26px, 4vw, 40px);
   font-weight: 800;
   letter-spacing: -0.02em;
   line-height: 1.15;
   margin-bottom: 16px;
+  text-wrap: balance;
 }
 .section-subtitle {
   font-size: 17px;
@@ -174,6 +176,7 @@ section { padding: 96px 0; }
 }
 
 /* ─── NAV ─── */
+/* UI Polish: nav gets scroll shadow class for depth feedback */
 nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -182,7 +185,11 @@ nav {
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 1px solid var(--border);
-  transition: background 0.3s;
+  transition: background 0.3s, box-shadow 0.3s;
+  box-shadow: 0 1px 0 var(--border);
+}
+nav.scrolled {
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18), 0 1px 0 var(--border);
 }
 .nav-inner {
   display: flex;
@@ -241,6 +248,7 @@ nav {
 }
 
 /* ─── HERO MINI ─── */
+/* UI Polish: strengthened ambient glows with secondary bottom-left glow for depth */
 #hero-mini {
   padding-top: 148px;
   padding-bottom: 0;
@@ -251,11 +259,27 @@ nav {
   content: '';
   position: absolute;
   top: -100px; right: -200px;
-  width: 600px; height: 500px;
-  background: radial-gradient(ellipse, rgba(var(--primary-rgb),0.1) 0%, transparent 70%);
+  width: 700px; height: 600px;
+  background: radial-gradient(ellipse, rgba(var(--primary-rgb),0.12) 0%, transparent 68%);
   pointer-events: none;
+  z-index: 0;
 }
-.hero-mini-inner { text-align: center; max-width: 680px; margin: 0 auto; }
+#hero-mini::after {
+  content: '';
+  position: absolute;
+  bottom: -80px; left: -150px;
+  width: 500px; height: 400px;
+  background: radial-gradient(ellipse, rgba(var(--primary-rgb),0.06) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-mini-inner {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
 .hero-mini-inner .section-subtitle { margin: 0 auto; }
 
 /* ─── WIZARD ─── */
@@ -300,11 +324,21 @@ nav {
 .wizard-step:hover .wizard-step-num {
   background: rgba(var(--primary-rgb),0.1);
   border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(var(--primary-rgb),0.08);
 }
+
+/* UI Polish: glass card treatment for wizard step bodies */
 .wizard-step-body {
   flex: 1;
-  padding-top: 12px;
-  padding-bottom: 20px;
+  padding: 16px 20px 18px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  transition: border-color 0.25s, background 0.25s;
+}
+.wizard-step:hover .wizard-step-body {
+  border-color: rgba(var(--primary-rgb),0.18);
+  background: var(--surface-hover);
 }
 .wizard-step-title {
   font-size: 17px;
@@ -357,9 +391,10 @@ nav {
 .step-final .wizard-step-title { color: var(--primary); }
 
 /* Warning step (IČO) */
+/* UI Polish: softened warning background, using left border accent for a less alarming treatment */
 .step-warning .wizard-step-num {
   background: rgba(var(--warn-rgb),0.1);
-  border-color: rgba(var(--warn-rgb),0.5);
+  border-color: rgba(var(--warn-rgb),0.45);
   color: var(--warn);
 }
 .step-warning:hover .wizard-step-num {
@@ -367,8 +402,9 @@ nav {
   border-color: var(--warn);
 }
 .step-warning .wizard-step-body {
-  background: rgba(var(--warn-rgb),0.06);
-  border: 1px solid rgba(var(--warn-rgb),0.2);
+  background: rgba(var(--warn-rgb),0.04);
+  border: 1px solid rgba(var(--warn-rgb),0.18);
+  border-left: 3px solid rgba(var(--warn-rgb),0.55);
   border-radius: var(--radius-sm);
   padding: 14px 18px 18px;
 }
@@ -459,7 +495,8 @@ footer {
   transition: color 0.2s, background 0.2s;
 }
 .footer-link:hover { color: var(--text); background: var(--surface); }
-.footer-sep { color: var(--border); user-select: none; }
+/* UI Polish: footer separators fixed to text-subtle for visibility */
+.footer-sep { color: var(--text-subtle); user-select: none; opacity: 0.6; }
 .footer-bottom {
   display: flex;
   justify-content: space-between;
@@ -626,7 +663,11 @@ footer {
 <section id="cta-section">
   <div class="container">
     <div class="cta-inner fade-up">
-      <div class="section-label">Všetko nastavené</div>
+      <!-- UI Polish: added checkmark icon to CTA section label -->
+      <div class="section-label">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        Všetko nastavené
+      </div>
       <h2 class="section-title">Pripravení na export</h2>
       <p class="section-subtitle">Ak ste úspešne dokončili všetky kroky, môžete sa vrátiť do aplikácie a začať exportovať doklady do Pohody.</p>
       <div class="cta-buttons">
@@ -671,6 +712,12 @@ footer {
 
 <script>
 (function(){
+  // ─── Nav scroll shadow ───
+  const navEl = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    navEl.classList.toggle('scrolled', window.scrollY > 16);
+  }, { passive: true });
+
   const html = document.documentElement;
   const btn = document.getElementById('themeToggle');
   const stored = localStorage.getItem('iblocky-theme');
