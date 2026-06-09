@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iBločky — Vaše doklady. Vždy po ruke.</title>
+<meta name="description" content="Skenujte bločky, sledujte záruky, exportujte do Pohody — všetko z jednej aplikácie pre iPhone.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+/* ─── CSS Variables ─── */
+:root {
+  --primary: #637A9F;
+  --primary-rgb: 99,122,159;
+  --primary-light: #7d97bf;
+  --bg: #0F1117;
+  --bg-alt: #161B27;
+  --surface: rgba(255,255,255,0.04);
+  --surface-hover: rgba(255,255,255,0.07);
+  --border: rgba(255,255,255,0.08);
+  --text: #F0F2F5;
+  --text-muted: #8B9AB5;
+  --text-subtle: #5A6880;
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.5);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-xs: 6px;
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --nav-bg: rgba(15,17,23,0.85);
+  --pro-max-border: #637A9F;
+  --check: #4ADE80;
+  --cross: #6B7280;
+  --badge-promax-bg: rgba(99,122,159,0.2);
+  --badge-promax-color: #93B4E0;
+  --glass-bg: rgba(255,255,255,0.04);
+  --glass-border: rgba(255,255,255,0.08);
+}
+
+[data-theme="light"],
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) {
+  --primary: #C9A84C;
+  --primary-rgb: 201,168,76;
+  --primary-light: #E8C872;
+  --bg: #FAFAF8;
+  --bg-alt: #F0EDE6;
+  --surface: rgba(0,0,0,0.03);
+  --surface-hover: rgba(0,0,0,0.06);
+  --border: rgba(0,0,0,0.08);
+  --text: #1A1F2E;
+  --text-muted: #5C6478;
+  --text-subtle: #9AA0B0;
+  --shadow: 0 4px 24px rgba(0,0,0,0.08);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
+  --nav-bg: rgba(250,250,248,0.88);
+  --pro-max-border: #C9A84C;
+  --check: #16A34A;
+  --cross: #9CA3AF;
+  --badge-promax-bg: rgba(201,168,76,0.15);
+  --badge-promax-color: #92650A;
+  --glass-bg: rgba(255,255,255,0.7);
+  --glass-border: rgba(0,0,0,0.06);
+}}
+
+[data-theme="light"] {
+  --primary: #C9A84C;
+  --primary-rgb: 201,168,76;
+  --primary-light: #E8C872;
+  --bg: #FAFAF8;
+  --bg-alt: #F0EDE6;
+  --surface: rgba(0,0,0,0.03);
+  --surface-hover: rgba(0,0,0,0.06);
+  --border: rgba(0,0,0,0.08);
+  --text: #1A1F2E;
+  --text-muted: #5C6478;
+  --text-subtle: #9AA0B0;
+  --shadow: 0 4px 24px rgba(0,0,0,0.08);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
+  --nav-bg: rgba(250,250,248,0.88);
+  --pro-max-border: #C9A84C;
+  --check: #16A34A;
+  --cross: #9CA3AF;
+  --badge-promax-bg: rgba(201,168,76,0.15);
+  --badge-promax-color: #92650A;
+  --glass-bg: rgba(255,255,255,0.7);
+  --glass-border: rgba(0,0,0,0.06);
+}
+
+[data-theme="dark"] {
+  --primary: #637A9F;
+  --primary-rgb: 99,122,159;
+  --primary-light: #7d97bf;
+  --bg: #0F1117;
+  --bg-alt: #161B27;
+  --surface: rgba(255,255,255,0.04);
+  --surface-hover: rgba(255,255,255,0.07);
+  --border: rgba(255,255,255,0.08);
+  --text: #F0F2F5;
+  --text-muted: #8B9AB5;
+  --text-subtle: #5A6880;
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.5);
+  --nav-bg: rgba(15,17,23,0.85);
+  --pro-max-border: #637A9F;
+  --check: #4ADE80;
+  --cross: #6B7280;
+  --badge-promax-bg: rgba(99,122,159,0.2);
+  --badge-promax-color: #93B4E0;
+  --glass-bg: rgba(255,255,255,0.04);
+  --glass-border: rgba(255,255,255,0.08);
+}
+
+/* ─── Reset & Base ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+  transition: background 0.3s, color 0.3s;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+ul { list-style: none; }
+
+/* ─── Scroll Animations ─── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.fade-up:nth-child(2) { transition-delay: 0.1s; }
+.fade-up:nth-child(3) { transition-delay: 0.2s; }
+.fade-up:nth-child(4) { transition-delay: 0.3s; }
+.fade-up:nth-child(5) { transition-delay: 0.4s; }
+
+/* ─── Layout Helpers ─── */
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+section { padding: 96px 0; }
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary);
+  background: rgba(var(--primary-rgb),0.1);
+  border: 1px solid rgba(var(--primary-rgb),0.25);
+  padding: 6px 14px;
+  border-radius: 99px;
+  margin-bottom: 20px;
+}
+.section-title {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+.section-subtitle {
+  font-size: 17px;
+  color: var(--text-muted);
+  max-width: 520px;
+  line-height: 1.65;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: var(--nav-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.3s;
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.nav-logo {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text);
+}
+.nav-logo span { color: var(--primary); }
+.nav-actions { display: flex; align-items: center; gap: 12px; }
+.nav-link {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  padding: 6px 12px;
+  border-radius: var(--radius-xs);
+  transition: color 0.2s, background 0.2s;
+}
+.nav-link:hover { color: var(--text); background: var(--surface); }
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.theme-toggle:hover { background: var(--surface-hover); color: var(--text); }
+.icon-sun, .icon-moon { display: none; }
+[data-theme="dark"] .icon-moon,
+:root:not([data-theme]) .icon-moon { display: block; }
+[data-theme="light"] .icon-sun { display: block; }
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) .icon-moon { display: none; }
+  :root:not([data-theme]) .icon-sun { display: block; }
+}
+
+/* ─── HERO ─── */
+#hero {
+  padding-top: 160px;
+  padding-bottom: 96px;
+  overflow: hidden;
+  position: relative;
+}
+#hero::before {
+  content: '';
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 700px; height: 700px;
+  background: radial-gradient(ellipse, rgba(var(--primary-rgb),0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+  background: rgba(var(--primary-rgb),0.1);
+  border: 1px solid rgba(var(--primary-rgb),0.25);
+  padding: 5px 14px;
+  border-radius: 99px;
+  margin-bottom: 24px;
+}
+.hero-eyebrow-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--primary);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.8); }
+}
+.hero-title {
+  font-size: clamp(40px, 6vw, 68px);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  margin-bottom: 20px;
+}
+.hero-title .brand { color: var(--primary); }
+.hero-tagline {
+  font-size: clamp(18px, 2.5vw, 24px);
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  font-style: italic;
+}
+.hero-subtitle {
+  font-size: 17px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 40px;
+  max-width: 460px;
+}
+.hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(var(--primary-rgb),0.35);
+}
+.btn-primary:hover {
+  background: var(--primary-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(var(--primary-rgb),0.45);
+}
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-secondary:hover { background: var(--surface-hover); transform: translateY(-2px); }
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+/* Phone mockup */
+.phone-frame {
+  width: 260px;
+  height: 530px;
+  background: var(--bg-alt);
+  border-radius: 46px;
+  border: 2px solid var(--border);
+  box-shadow: var(--shadow-lg), inset 0 0 0 1px rgba(255,255,255,0.06);
+  position: relative;
+  overflow: hidden;
+}
+.phone-notch {
+  position: absolute;
+  top: 14px; left: 50%;
+  transform: translateX(-50%);
+  width: 90px; height: 26px;
+  background: var(--bg);
+  border-radius: 13px;
+  z-index: 2;
+}
+.phone-screen {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(var(--primary-rgb),0.15) 0%, transparent 50%),
+              linear-gradient(to bottom, var(--bg-alt), var(--bg));
+  display: flex;
+  flex-direction: column;
+  padding: 60px 16px 24px;
+  gap: 10px;
+}
+.phone-ui-bar {
+  height: 36px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 8px;
+}
+.phone-ui-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--primary); opacity: 0.6; }
+.phone-ui-line { height: 8px; border-radius: 4px; background: var(--border); flex: 1; }
+.phone-ui-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 14px;
+  backdrop-filter: blur(8px);
+}
+.phone-ui-card-title {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.phone-ui-receipt {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.phone-ui-receipt-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.phone-ui-receipt-label { font-size: 9px; color: var(--text-muted); }
+.phone-ui-receipt-val { font-size: 9px; font-weight: 600; color: var(--text); }
+.phone-ui-receipt-amount {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--primary);
+  margin-top: 4px;
+}
+.phone-ui-tag {
+  display: inline-block;
+  font-size: 8px;
+  font-weight: 600;
+  background: rgba(var(--primary-rgb),0.15);
+  color: var(--primary);
+  padding: 2px 8px;
+  border-radius: 99px;
+  margin-top: 4px;
+}
+.phone-bottom { width: 90px; height: 4px; background: var(--border); border-radius: 2px; margin: auto auto 0; }
+.phone-glow {
+  position: absolute;
+  bottom: -100px; left: 50%;
+  transform: translateX(-50%);
+  width: 300px; height: 300px;
+  background: radial-gradient(ellipse, rgba(var(--primary-rgb),0.2) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ─── FEATURES ─── */
+#features { background: var(--bg); }
+.features-header { text-align: center; margin-bottom: 56px; }
+.features-header .section-subtitle { margin: 0 auto; }
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.feature-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(var(--primary-rgb),0.4), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.feature-card:hover { background: var(--surface-hover); transform: translateY(-4px); box-shadow: var(--shadow); }
+.feature-card:hover::before { opacity: 1; }
+.feature-icon {
+  width: 48px; height: 48px;
+  background: rgba(var(--primary-rgb),0.12);
+  border: 1px solid rgba(var(--primary-rgb),0.2);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  color: var(--primary);
+}
+.feature-icon svg { width: 22px; height: 22px; }
+.feature-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.feature-title { font-size: 16px; font-weight: 700; color: var(--text); }
+.badge-pro {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 99px;
+  background: rgba(var(--primary-rgb),0.15);
+  color: var(--primary);
+  border: 1px solid rgba(var(--primary-rgb),0.25);
+}
+.feature-desc { font-size: 14px; color: var(--text-muted); line-height: 1.65; }
+/* 5th card spans 2 cols on last row */
+.features-grid .feature-card:nth-child(4) { grid-column: span 1; }
+
+/* ─── PRICING ─── */
+#pricing { background: var(--bg-alt); }
+.pricing-header { text-align: center; margin-bottom: 48px; }
+.pricing-header .section-subtitle { margin: 0 auto; }
+.pricing-table-wrap { overflow-x: auto; }
+.pricing-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+.pricing-table th {
+  padding: 24px 20px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+}
+.pricing-table td {
+  padding: 14px 20px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  font-size: 14px;
+  color: var(--text-muted);
+}
+.pricing-table td:first-child {
+  text-align: left;
+  font-weight: 500;
+  color: var(--text);
+}
+.col-free th { color: var(--text-muted); }
+.col-pro th { color: var(--text); }
+.col-promax {
+  background: rgba(var(--primary-rgb),0.06);
+  border-left: 1px solid rgba(var(--primary-rgb),0.3);
+  border-right: 1px solid rgba(var(--primary-rgb),0.3);
+}
+.col-promax th {
+  background: rgba(var(--primary-rgb),0.1);
+  border-top: 2px solid var(--pro-max-border);
+  border-left: 1px solid rgba(var(--primary-rgb),0.3);
+  border-right: 1px solid rgba(var(--primary-rgb),0.3);
+  border-radius: 0;
+  color: var(--text);
+}
+.col-promax td {
+  border-left: 1px solid rgba(var(--primary-rgb),0.15);
+  border-right: 1px solid rgba(var(--primary-rgb),0.15);
+}
+.tier-name { display: block; font-size: 18px; font-weight: 800; margin-bottom: 4px; }
+.tier-price { display: block; font-size: 13px; font-weight: 400; color: var(--text-muted); }
+.badge-excl {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 99px;
+  background: var(--badge-promax-bg);
+  color: var(--badge-promax-color);
+  border: 1px solid rgba(var(--primary-rgb),0.3);
+  margin-top: 6px;
+}
+.check-yes { color: var(--check); font-size: 18px; font-weight: 700; }
+.check-no { color: var(--cross); font-size: 18px; }
+.pricing-table tr.cta-row td {
+  padding-top: 20px;
+  padding-bottom: 24px;
+  border-top: 1px solid var(--border);
+}
+.pricing-table tr:last-child td:last-child {
+  border-bottom-right-radius: var(--radius);
+}
+.btn-tier {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.15s;
+  white-space: nowrap;
+}
+.btn-tier-muted {
+  background: var(--surface);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+.btn-tier-muted:hover { background: var(--surface-hover); transform: translateY(-1px); }
+.btn-tier-pro {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.btn-tier-pro:hover { background: var(--surface-hover); transform: translateY(-1px); }
+.btn-tier-promax {
+  background: var(--primary);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(var(--primary-rgb),0.35);
+}
+.btn-tier-promax:hover { background: var(--primary-light); transform: translateY(-1px); }
+.pricing-trust {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 13px;
+  color: var(--text-subtle);
+}
+
+/* ─── WINDOWS SYNC ─── */
+#windows {
+  background: var(--bg-alt);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.windows-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  border-radius: 99px;
+  background: rgba(var(--primary-rgb),0.1);
+  border: 1px solid rgba(var(--primary-rgb),0.25);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 20px;
+}
+.windows-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: center;
+}
+.win-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 40px;
+  position: relative;
+}
+.win-steps::before {
+  content: '';
+  position: absolute;
+  left: 23px; top: 28px; bottom: 28px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--primary), rgba(var(--primary-rgb),0.1));
+}
+.win-step {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 12px 0;
+}
+.win-step-num {
+  flex-shrink: 0;
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  background: rgba(var(--primary-rgb),0.12);
+  border: 2px solid rgba(var(--primary-rgb),0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--primary);
+  position: relative;
+  z-index: 1;
+}
+.win-step-text strong { display: block; font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.win-step-text span { font-size: 13px; color: var(--text-muted); }
+.win-right { display: flex; flex-direction: column; gap: 24px; }
+.win-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 8px;
+}
+.win-benefit {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.win-benefit-icon {
+  flex-shrink: 0;
+  width: 32px; height: 32px;
+  border-radius: 10px;
+  background: rgba(var(--primary-rgb),0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  margin-top: 2px;
+}
+.win-benefit-icon svg { width: 16px; height: 16px; }
+.win-benefit-text strong { display: block; font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+.win-benefit-text span { font-size: 13px; color: var(--text-muted); }
+.win-download-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.win-app-info { display: flex; align-items: center; gap: 14px; }
+.win-app-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  background: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 800;
+  font-size: 13px;
+}
+.win-app-name { font-size: 15px; font-weight: 700; color: var(--text); }
+.win-app-meta { font-size: 12px; color: var(--text-muted); }
+
+/* ─── SETUP WIZARD ─── */
+#setup { background: var(--bg); }
+.setup-header { text-align: center; margin-bottom: 64px; }
+.setup-header .section-subtitle { margin: 0 auto; }
+.wizard-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.wizard-timeline::before {
+  content: '';
+  position: absolute;
+  left: 27px; top: 40px; bottom: 40px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--primary), rgba(var(--primary-rgb),0.1));
+}
+.wizard-step {
+  display: flex;
+  gap: 28px;
+  padding: 20px 0;
+  position: relative;
+}
+.wizard-step-num {
+  flex-shrink: 0;
+  width: 54px; height: 54px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid rgba(var(--primary-rgb),0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--primary);
+  position: relative;
+  z-index: 1;
+  transition: background 0.2s, border-color 0.2s;
+}
+.wizard-step:hover .wizard-step-num {
+  background: rgba(var(--primary-rgb),0.1);
+  border-color: var(--primary);
+}
+.wizard-step-body {
+  flex: 1;
+  padding-top: 12px;
+  padding-bottom: 20px;
+}
+.wizard-step-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.wizard-step-desc {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+.wizard-req {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+.wizard-req-tag {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 99px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+}
+.btn-copy-key {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 9px 18px;
+  background: rgba(var(--primary-rgb),0.1);
+  border: 1px solid rgba(var(--primary-rgb),0.25);
+  border-radius: var(--radius-xs);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-copy-key:hover { background: rgba(var(--primary-rgb),0.18); }
+.btn-copy-key svg { width: 15px; height: 15px; }
+.step-final .wizard-step-num {
+  background: rgba(var(--primary-rgb),0.15);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* ─── FAQ ─── */
+#faq { background: var(--bg-alt); }
+.faq-header { text-align: center; margin-bottom: 48px; }
+.faq-header .section-subtitle { margin: 0 auto; }
+.accordion {
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.accordion-item {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+}
+.accordion-trigger {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  gap: 16px;
+  transition: background 0.2s;
+}
+.accordion-trigger:hover { background: var(--surface-hover); }
+.accordion-icon {
+  flex-shrink: 0;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transition: transform 0.3s;
+}
+.accordion-item.open .accordion-icon { transform: rotate(45deg); }
+.accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+.accordion-item.open .accordion-body { max-height: 600px; }
+.accordion-content {
+  padding: 4px 24px 24px;
+}
+.faq-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  counter-reset: faq-step;
+}
+.faq-step {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  counter-increment: faq-step;
+}
+.faq-step-num {
+  flex-shrink: 0;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: rgba(var(--primary-rgb),0.12);
+  border: 1px solid rgba(var(--primary-rgb),0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-top: 1px;
+}
+.faq-step-text { font-size: 14px; color: var(--text-muted); line-height: 1.6; padding-top: 4px; }
+.faq-step-text strong { color: var(--text); }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  padding: 56px 0 40px;
+}
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.footer-brand-name {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.footer-brand-name span { color: var(--primary); }
+.footer-tagline { font-size: 14px; color: var(--text-muted); font-style: italic; }
+.footer-links {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.footer-link {
+  font-size: 14px;
+  color: var(--text-muted);
+  padding: 6px 10px;
+  border-radius: var(--radius-xs);
+  transition: color 0.2s, background 0.2s;
+}
+.footer-link:hover { color: var(--text); background: var(--surface); }
+.footer-sep { color: var(--border); user-select: none; }
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.footer-copy { font-size: 13px; color: var(--text-subtle); }
+.footer-made { font-size: 13px; color: var(--text-subtle); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+  .hero-visual { order: -1; }
+  .phone-frame { width: 220px; height: 440px; }
+  .features-grid { grid-template-columns: repeat(2, 1fr); }
+  .windows-inner { grid-template-columns: 1fr; gap: 48px; }
+}
+@media (max-width: 640px) {
+  section { padding: 72px 0; }
+  .features-grid { grid-template-columns: 1fr; }
+  .nav-link { display: none; }
+  .hero-ctas { flex-direction: column; }
+  .hero-ctas .btn-primary, .hero-ctas .btn-secondary { text-align: center; justify-content: center; }
+  .pricing-table-wrap { font-size: 13px; }
+  .footer-top { flex-direction: column; }
+  .hero-title { font-size: 38px; }
+}
+/* Mobile pricing cards (hide table, show cards) */
+@media (max-width: 560px) {
+  .pricing-table-wrap { display: none; }
+  .pricing-mobile { display: flex; flex-direction: column; gap: 16px; }
+}
+@media (min-width: 561px) {
+  .pricing-mobile { display: none; }
+}
+.pricing-mobile-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+.pricing-mobile-card.highlighted {
+  border-color: var(--pro-max-border);
+  background: rgba(var(--primary-rgb),0.06);
+}
+.pricing-mobile-tier { font-size: 20px; font-weight: 800; margin-bottom: 4px; }
+.pricing-mobile-price { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; }
+.pricing-mobile-features { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+.pricing-mobile-row { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text-muted); }
+.pricing-mobile-row .check-yes { font-size: 15px; }
+.pricing-mobile-row .check-no { font-size: 15px; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">i<span>Bloč</span>ky</a>
+    <div class="nav-actions">
+      <a href="#features" class="nav-link">Funkcie</a>
+      <a href="#pricing" class="nav-link">Ceny</a>
+      <a href="#windows" class="nav-link">Windows</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <!-- Sun -->
+        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M18.66 5.34l-1.41 1.41"/>
+        </svg>
+        <!-- Moon -->
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow fade-up">
+          <span class="hero-eyebrow-dot"></span>
+          Pre iPhone &amp; Windows
+        </div>
+        <h1 class="hero-title fade-up">
+          i<span class="brand">Bloč</span>ky
+        </h1>
+        <p class="hero-tagline fade-up">Vaše doklady. Vždy po ruke.</p>
+        <p class="hero-subtitle fade-up">
+          Skenujte bloček, sledujte záruky, exportujte do Pohody — všetko z jednej aplikácie.
+        </p>
+        <div class="hero-ctas fade-up">
+          <a href="#app-store" class="btn-primary">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+            </svg>
+            Stiahnuť na App Store
+          </a>
+          <a href="#windows-download" class="btn-secondary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3 5.557L9.938 4.56v6.81H3V5.557zm0 12.886L9.938 19.44v-6.624H3v5.627zm7.188-12.56L21 4v7.37H10.188V5.883zm0 6.737H21V20l-10.813-1.82v-5.56z"/>
+            </svg>
+            Stiahnuť pre Windows
+          </a>
+        </div>
+      </div>
+      <div class="hero-visual fade-up">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="phone-ui-bar">
+              <div class="phone-ui-dot"></div>
+              <div class="phone-ui-line"></div>
+              <div class="phone-ui-dot" style="opacity:0.3"></div>
+            </div>
+            <div class="phone-ui-card">
+              <div class="phone-ui-card-title">Posledný bloček</div>
+              <div class="phone-ui-receipt">
+                <div class="phone-ui-receipt-row">
+                  <span class="phone-ui-receipt-label">Obchodník</span>
+                  <span class="phone-ui-receipt-val">Tesco Bratislava</span>
+                </div>
+                <div class="phone-ui-receipt-row">
+                  <span class="phone-ui-receipt-label">Dátum</span>
+                  <span class="phone-ui-receipt-val">09.06.2026</span>
+                </div>
+                <div class="phone-ui-receipt-amount">38,74 €</div>
+                <span class="phone-ui-tag">Potraviny</span>
+              </div>
+            </div>
+            <div class="phone-ui-card">
+              <div class="phone-ui-card-title">Záruka aktívna</div>
+              <div class="phone-ui-receipt">
+                <div class="phone-ui-receipt-row">
+                  <span class="phone-ui-receipt-label">Samsung TV</span>
+                  <span class="phone-ui-receipt-val" style="color:var(--check)">●&nbsp;24 mes.</span>
+                </div>
+                <div class="phone-ui-receipt-row">
+                  <span class="phone-ui-receipt-label">Vyprší</span>
+                  <span class="phone-ui-receipt-val">máj 2027</span>
+                </div>
+              </div>
+            </div>
+            <div class="phone-ui-bar" style="margin-top:auto">
+              <div class="phone-ui-dot" style="opacity:0.4"></div>
+              <div class="phone-ui-line" style="background:rgba(var(--primary-rgb),0.3)"></div>
+              <div class="phone-ui-dot" style="background:var(--check);opacity:0.6"></div>
+            </div>
+          </div>
+          <div class="phone-bottom"></div>
+        </div>
+        <div class="phone-glow"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="container">
+    <div class="features-header">
+      <div class="section-label fade-up">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        Funkcie iOS aplikácie
+      </div>
+      <h2 class="section-title fade-up">Všetko čo potrebujete<br>na jednom mieste</h2>
+      <p class="section-subtitle fade-up">Od skenovania po export — kompletná správa dokladov priamo v iPhone.</p>
+    </div>
+    <div class="features-grid">
+      <!-- 1 -->
+      <div class="feature-card fade-up">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="5" width="20" height="15" rx="2"/><circle cx="12" cy="12" r="4"/><path d="M7 5V3m10 2V3"/>
+          </svg>
+        </div>
+        <div class="feature-header"><span class="feature-title">QR skenovanie</span></div>
+        <p class="feature-desc">Nasmerujte fotoaparát na bloček. Dáta sa uložia okamžite priamo z daňového portálu eDane.</p>
+      </div>
+      <!-- 2 -->
+      <div class="feature-card fade-up">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <div class="feature-header"><span class="feature-title">Záručné karty</span></div>
+        <p class="feature-desc">Automatické sledovanie záruky s upozorneniami pred vypršaním. Podpora 12/24 mesiacov alebo vlastnej doby.</p>
+      </div>
+      <!-- 3 -->
+      <div class="feature-card fade-up">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+          </svg>
+        </div>
+        <div class="feature-header"><span class="feature-title">Priečinky</span></div>
+        <p class="feature-desc">Organizujte doklady podľa firmy, kategórie alebo projektu. Prehľad výdavkov v grafoch.</p>
+      </div>
+      <!-- 4 -->
+      <div class="feature-card fade-up">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6m-4 5H8m8 4H8m2-8H8"/>
+          </svg>
+        </div>
+        <div class="feature-header">
+          <span class="feature-title">PDF export</span>
+          <span class="badge-pro">Pro</span>
+        </div>
+        <p class="feature-desc">Zdieľajte doklady ako prehľadné PDF jedným klepnutím. Hromadný export viacerých bločkov naraz.</p>
+      </div>
+      <!-- 5 -->
+      <div class="feature-card fade-up">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+          </svg>
+        </div>
+        <div class="feature-header">
+          <span class="feature-title">XML do Pohody</span>
+          <span class="badge-pro">Pro</span>
+        </div>
+        <p class="feature-desc">Exportujte priamo do účtovného softvéru Pohoda. Manuálne aj automaticky cez Windows companion app.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="container">
+    <div class="pricing-header">
+      <div class="section-label fade-up">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+        Predplatné
+      </div>
+      <h2 class="section-title fade-up">Vyber si plán<br>pre seba</h2>
+      <p class="section-subtitle fade-up">Začnite zadarmo. Preinvestujte keď ste pripravení.</p>
+    </div>
+
+    <!-- Desktop table -->
+    <div class="pricing-table-wrap fade-up">
+      <table class="pricing-table">
+        <thead>
+          <tr>
+            <th style="text-align:left;width:34%">Funkcia</th>
+            <th class="col-free">
+              <span class="tier-name">Zadarmo</span>
+              <span class="tier-price">Navždy bezplatné</span>
+            </th>
+            <th class="col-pro">
+              <span class="tier-name">Pro</span>
+              <span class="tier-price">[APP STORE PRICE]</span>
+            </th>
+            <th class="col-promax">
+              <span class="tier-name">Pro Max</span>
+              <span class="tier-price">[APP STORE PRICE]</span>
+              <div><span class="badge-excl">Exkluzívne</span></div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>QR skenovanie bločkov</td><td class="col-free"><span class="check-yes">✓</span></td><td class="col-pro"><span class="check-yes">✓</span></td><td class="col-promax"><span class="check-yes">✓</span></td></tr>
+          <tr><td>Ukladanie &amp; organizácia dokladov</td><td class="col-free"><span class="check-yes">✓</span></td><td class="col-pro"><span class="check-yes">✓</span></td><td class="col-promax"><span class="check-yes">✓</span></td></tr>
+          <tr><td>Správa priečinkov</td><td class="col-free"><span class="check-yes">✓</span></td><td class="col-pro"><span class="check-yes">✓</span></td><td class="col-promax"><span class="check-yes">✓</span></td></tr>
+          <tr><td>Sledovanie záruky</td><td class="col-free"><span class="check-yes">✓</span></td><td class="col-pro"><span class="check-yes">✓</span></td><td class="col-promax"><span class="check-yes">✓</span></td></tr>
+          <tr><td>Grafy &amp; prehľad výdavkov</td><td class="col-free"><span class="check-yes">✓</span></td><td class="col-pro"><span class="check-yes">✓</span></td><td class="col-promax"><span class="check-yes">✓</span></td></tr>
+          <tr><td>PDF export &amp; zdieľanie</td><td class="col-free"><span class="check-no">—</span></td><td class="col-pro"><span class="check-yes">✓</span></td><td class="col-promax"><span class="check-yes">✓</span></td></tr>
+          <tr><td>Hromadné skenovanie</td><td class="col-free"><span class="check-no">—</span></td><td class="col-pro"><span class="check-yes">✓</span></td><td class="col-promax"><span class="check-yes">✓</span></td></tr>
+          <tr><td>Manuálny XML export do Pohody</td><td class="col-free"><span class="check-no">—</span></td><td class="col-pro"><span class="check-yes">✓</span></td><td class="col-promax"><span class="check-yes">✓</span></td></tr>
+          <tr><td>Rozšírená správa priečinkov</td><td class="col-free"><span class="check-no">—</span></td><td class="col-pro"><span class="check-yes">✓</span></td><td class="col-promax"><span class="check-yes">✓</span></td></tr>
+          <tr><td>Automatická synchronizácia s Pohodou (Windows)</td><td class="col-free"><span class="check-no">—</span></td><td class="col-pro"><span class="check-no">—</span></td><td class="col-promax"><span class="check-yes">✓</span></td></tr>
+          <tr class="cta-row">
+            <td></td>
+            <td class="col-free"><a href="#app-store" class="btn-tier btn-tier-muted">Stiahnuť zadarmo</a></td>
+            <td class="col-pro"><a href="#app-store" class="btn-tier btn-tier-pro">Odomkni plnú verziu</a></td>
+            <td class="col-promax"><a href="#app-store" class="btn-tier btn-tier-promax">Upgraduj na Pro Max</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Mobile cards -->
+    <div class="pricing-mobile fade-up">
+      <div class="pricing-mobile-card">
+        <div class="pricing-mobile-tier">Zadarmo</div>
+        <div class="pricing-mobile-price">Navždy bezplatné</div>
+        <div class="pricing-mobile-features">
+          <div class="pricing-mobile-row"><span class="check-yes">✓</span> QR skenovanie</div>
+          <div class="pricing-mobile-row"><span class="check-yes">✓</span> Ukladanie dokladov</div>
+          <div class="pricing-mobile-row"><span class="check-yes">✓</span> Záručné karty</div>
+          <div class="pricing-mobile-row"><span class="check-yes">✓</span> Grafy výdavkov</div>
+          <div class="pricing-mobile-row"><span class="check-no">—</span> PDF export</div>
+          <div class="pricing-mobile-row"><span class="check-no">—</span> XML do Pohody</div>
+        </div>
+        <a href="#app-store" class="btn-tier btn-tier-muted" style="display:block;text-align:center">Stiahnuť zadarmo</a>
+      </div>
+      <div class="pricing-mobile-card">
+        <div class="pricing-mobile-tier">Pro</div>
+        <div class="pricing-mobile-price">[APP STORE PRICE]</div>
+        <div class="pricing-mobile-features">
+          <div class="pricing-mobile-row"><span class="check-yes">✓</span> Všetko z Zadarmo</div>
+          <div class="pricing-mobile-row"><span class="check-yes">✓</span> PDF export &amp; zdieľanie</div>
+          <div class="pricing-mobile-row"><span class="check-yes">✓</span> Hromadné skenovanie</div>
+          <div class="pricing-mobile-row"><span class="check-yes">✓</span> XML export do Pohody</div>
+          <div class="pricing-mobile-row"><span class="check-no">—</span> Auto sync s Pohodou</div>
+        </div>
+        <a href="#app-store" class="btn-tier btn-tier-pro" style="display:block;text-align:center">Odomkni plnú verziu</a>
+      </div>
+      <div class="pricing-mobile-card highlighted">
+        <div class="pricing-mobile-tier">Pro Max <span class="badge-excl">Exkluzívne</span></div>
+        <div class="pricing-mobile-price">[APP STORE PRICE]</div>
+        <div class="pricing-mobile-features">
+          <div class="pricing-mobile-row"><span class="check-yes">✓</span> Všetko z Pro</div>
+          <div class="pricing-mobile-row"><span class="check-yes">✓</span> Auto sync s Pohodou</div>
+          <div class="pricing-mobile-row"><span class="check-yes">✓</span> Windows companion app</div>
+          <div class="pricing-mobile-row"><span class="check-yes">✓</span> Live "Windows pripojený" stav</div>
+        </div>
+        <a href="#app-store" class="btn-tier btn-tier-promax" style="display:block;text-align:center">Upgraduj na Pro Max</a>
+      </div>
+    </div>
+
+    <p class="pricing-trust fade-up">Zruš kedykoľvek · Súkromie chránené</p>
+  </div>
+</section>
+
+<!-- WINDOWS SYNC -->
+<section id="windows">
+  <div class="container">
+    <div class="windows-inner">
+      <div>
+        <div class="windows-badge fade-up">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M3 5.557L9.938 4.56v6.81H3V5.557zm0 12.886L9.938 19.44v-6.624H3v5.627zm7.188-12.56L21 4v7.37H10.188V5.883zm0 6.737H21V20l-10.813-1.82v-5.56z"/></svg>
+          Automatizácia pre Pro Max
+        </div>
+        <h2 class="section-title fade-up">Pohoda importuje<br>sama od seba</h2>
+        <p class="section-subtitle fade-up">
+          iBlockySync beží potichu na pozadí vo Windows. Každých 30 sekúnd skontroluje nové doklady a importuje ich priamo do Pohody — bez akéhokoľvek zásahu.
+        </p>
+        <div class="win-steps fade-up">
+          <div class="win-step">
+            <div class="win-step-num">1</div>
+            <div class="win-step-text">
+              <strong>Stiahnite Windows aplikáciu</strong>
+              <span>Nainštalujte iBlockySync na počítač s Windows 10+</span>
+            </div>
+          </div>
+          <div class="win-step">
+            <div class="win-step-num">2</div>
+            <div class="win-step-text">
+              <strong>Vložte API kľúč</strong>
+              <span>Skopírujte kľúč z iBločky → Nastavenia → Synchronizácia</span>
+            </div>
+          </div>
+          <div class="win-step">
+            <div class="win-step-num">3</div>
+            <div class="win-step-text">
+              <strong>Pohoda importuje automaticky</strong>
+              <span>Každý naskenovaný bloček sa objaví v Pohode do 30 sekúnd</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="win-right fade-up">
+        <div>
+          <h3 style="font-size:18px;font-weight:700;margin-bottom:20px;color:var(--text)">Prečo iBlockySync?</h3>
+          <div class="win-benefits">
+            <div class="win-benefit">
+              <div class="win-benefit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48 2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48 2.83-2.83"/></svg>
+              </div>
+              <div class="win-benefit-text">
+                <strong>Automatické importy každých 30 sekúnd</strong>
+                <span>Žiadne čakanie, žiadna manuálna práca. Beží na pozadí bez viditeľného okna.</span>
+              </div>
+            </div>
+            <div class="win-benefit">
+              <div class="win-benefit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              </div>
+              <div class="win-benefit-text">
+                <strong>Jedno kliknutie — žiadne USB, žiadne súbory</strong>
+                <span>Bezdrôtové prepojenie cez šifrované cloudové queue. Žiadna fyzická práca.</span>
+              </div>
+            </div>
+            <div class="win-benefit">
+              <div class="win-benefit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <div class="win-benefit-text">
+                <strong>Šifrované, lokálne, bez cloudu</strong>
+                <span>XML súbory sa ukladajú lokálne v %APPDATA%\iBlockySync. Vaše dáta zostávajú u vás.</span>
+              </div>
+            </div>
+            <div class="win-benefit">
+              <div class="win-benefit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>
+              </div>
+              <div class="win-benefit-text">
+                <strong>Funguje s viacerými firmami naraz</strong>
+                <span>Automaticky mapuje každé IČO na správnu databázu Pohody.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="win-download-card">
+          <div class="win-app-info">
+            <div class="win-app-icon">iB</div>
+            <div>
+              <div class="win-app-name">iBlockySync</div>
+              <div class="win-app-meta">v1.0.0 · Windows 10+ · 64-bit</div>
+            </div>
+          </div>
+          <a href="#windows-download" class="btn-primary" style="font-size:14px;padding:10px 20px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Stiahnuť .exe
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SETUP WIZARD -->
+<section id="setup">
+  <div class="container">
+    <div class="setup-header">
+      <div class="section-label fade-up">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+        Sprievodca nastavením
+      </div>
+      <h2 class="section-title fade-up">Nastavenie za 5 krokov</h2>
+      <p class="section-subtitle fade-up">Pohoda automaticky importuje doklady z vašej iOS aplikácie cez Windows.</p>
+    </div>
+    <div class="wizard-timeline">
+      <div class="wizard-step fade-up">
+        <div class="wizard-step-num">1</div>
+        <div class="wizard-step-body">
+          <div class="wizard-step-title">Nastavenie synchronizácie</div>
+          <p class="wizard-step-desc">Pohoda automaticky importuje doklady z vašej iOS aplikácie cez Windows. Aktivujte funkciu v nastaveniach iBločky.</p>
+        </div>
+      </div>
+      <div class="wizard-step fade-up">
+        <div class="wizard-step-num">2</div>
+        <div class="wizard-step-body">
+          <div class="wizard-step-title">Stiahnite Windows aplikáciu</div>
+          <p class="wizard-step-desc">Aplikácia beží na pozadí a automaticky importuje doklady do Pohody. Inštalátor obsahuje všetky potrebné závislosti.</p>
+          <div class="wizard-req">
+            <span class="wizard-req-tag">Windows 10+</span>
+            <span class="wizard-req-tag">.NET 8.0 (zahrnuté)</span>
+            <span class="wizard-req-tag">64-bit</span>
+          </div>
+        </div>
+      </div>
+      <div class="wizard-step fade-up">
+        <div class="wizard-step-num">3</div>
+        <div class="wizard-step-body">
+          <div class="wizard-step-title">Váš API kľúč</div>
+          <p class="wizard-step-desc">Skopírujte kľúč z <strong>iBločky → Nastavenia → Synchronizácia</strong> a vložte ho do nastavení Windows aplikácie iBlockySync.</p>
+          <button class="btn-copy-key" id="copyKeyBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span id="copyKeyLabel">Kopírovať API kľúč (ukážka)</span>
+          </button>
+        </div>
+      </div>
+      <div class="wizard-step fade-up">
+        <div class="wizard-step-num">4</div>
+        <div class="wizard-step-body">
+          <div class="wizard-step-title">Overenie spojenia</div>
+          <p class="wizard-step-desc">Overíme, že Windows aplikácia beží a kľúč je správne zadaný. V iBločky uvidíte živý stav <strong>"Windows pripojený"</strong>.</p>
+        </div>
+      </div>
+      <div class="wizard-step step-final fade-up">
+        <div class="wizard-step-num">✓</div>
+        <div class="wizard-step-body">
+          <div class="wizard-step-title">Všetko je nastavené!</div>
+          <p class="wizard-step-desc">Pohoda bude automaticky importovať doklady hneď ako ich odošlete z iPhonu. Žiadna ďalšia akcia nie je potrebná.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="faq-header">
+      <div class="section-label fade-up">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3m.08 4h.01"/></svg>
+        Návod
+      </div>
+      <h2 class="section-title fade-up">Ako exportovať XML do Pohody</h2>
+      <p class="section-subtitle fade-up">Krok za krokom — od skenovania až po import do Pohody.</p>
+    </div>
+    <div class="accordion fade-up">
+      <div class="accordion-item open" id="faq-xml">
+        <button class="accordion-trigger" aria-expanded="true" aria-controls="faq-xml-body">
+          <span>Postup exportu XML do Pohody</span>
+          <span class="accordion-icon">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="accordion-body" id="faq-xml-body">
+          <div class="accordion-content">
+            <div class="faq-steps">
+              <div class="faq-step">
+                <div class="faq-step-num">1</div>
+                <div class="faq-step-text">Vytvorte priečinok s <strong>názvom a IČO firmy</strong> — iBločky použije toto IČO pri generovaní XML.</div>
+              </div>
+              <div class="faq-step">
+                <div class="faq-step-num">2</div>
+                <div class="faq-step-text">V priečinku kliknite na <strong>tlačidlo Skenovať</strong>.</div>
+              </div>
+              <div class="faq-step">
+                <div class="faq-step-num">3</div>
+                <div class="faq-step-text"><strong>Nasmerujte fotoaparát</strong> na QR kód bločku.</div>
+              </div>
+              <div class="faq-step">
+                <div class="faq-step-num">4</div>
+                <div class="faq-step-text"><strong>Hromadné skenovanie (Pro):</strong> bloček sa uloží automaticky. <strong>Klasické:</strong> potvrďte tlačidlom <em>Uložiť</em> vpravo hore.</div>
+              </div>
+              <div class="faq-step">
+                <div class="faq-step-num">5</div>
+                <div class="faq-step-text">V priečinku kliknite vpravo hore na <strong>ikonku fajky v krúžku</strong>.</div>
+              </div>
+              <div class="faq-step">
+                <div class="faq-step-num">6</div>
+                <div class="faq-step-text"><strong>Označte bločky</strong> na export.</div>
+              </div>
+              <div class="faq-step">
+                <div class="faq-step-num">7</div>
+                <div class="faq-step-text">Kliknite <strong>Export</strong> na spodnej lište.</div>
+              </div>
+              <div class="faq-step">
+                <div class="faq-step-num">8</div>
+                <div class="faq-step-text">Vyberte <strong>spôsob odoslania</strong> — mail, správa, AirDrop a iné.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item" id="faq-pohoda">
+        <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-pohoda-body">
+          <span>Kde nájdem Pohoda.exe pre iBlockySync?</span>
+          <span class="accordion-icon">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="accordion-body" id="faq-pohoda-body">
+          <div class="accordion-content">
+            <div class="faq-steps">
+              <div class="faq-step">
+                <div class="faq-step-num">1</div>
+                <div class="faq-step-text">iBlockySync <strong>automaticky deteguje</strong> cestu k Pohoda.exe pri prvom spustení.</div>
+              </div>
+              <div class="faq-step">
+                <div class="faq-step-num">2</div>
+                <div class="faq-step-text">Ak auto-detekcia zlyhá, v Settings okne kliknite na <strong>Browse</strong> vedľa poľa Pohoda.exe a manuálne vyberte súbor.</div>
+              </div>
+              <div class="faq-step">
+                <div class="faq-step-num">3</div>
+                <div class="faq-step-text">Pohoda.exe sa štandardne nachádza v <strong>C:\Program Files\STORMWARE\POHODA\</strong> alebo podobnom priečinku.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item" id="faq-multicompany">
+        <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-multicompany-body">
+          <span>Funguje iBlockySync s viacerými firmami?</span>
+          <span class="accordion-icon">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="accordion-body" id="faq-multicompany-body">
+          <div class="accordion-content">
+            <div class="faq-steps">
+              <div class="faq-step">
+                <div class="faq-step-num">1</div>
+                <div class="faq-step-text">Áno. iBlockySync <strong>automaticky mapuje IČO</strong> z každého bločku na správnu Pohoda databázu.</div>
+              </div>
+              <div class="faq-step">
+                <div class="faq-step-num">2</div>
+                <div class="faq-step-text">Zoznam firiem aktualizujete cez <strong>Aktualizovať zoznam firiem</strong> v tray menu.</div>
+              </div>
+              <div class="faq-step">
+                <div class="faq-step-num">3</div>
+                <div class="faq-step-text">Každý priečinok v iBločky musí mať v názve správne <strong>IČO firmy</strong> aby mapovanie fungovalo.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand-name">i<span>Bloč</span>ky</div>
+          <div class="footer-tagline">Vaše doklady. Vždy po ruke.</div>
+        </div>
+        <div class="footer-links">
+          <a href="#app-store" class="footer-link">App Store</a>
+          <span class="footer-sep">·</span>
+          <a href="#windows-download" class="footer-link">Windows App</a>
+          <span class="footer-sep">·</span>
+          <a href="https://sites.google.com/view/ereskaapps/ibločky/policy" class="footer-link" target="_blank" rel="noopener">Ochrana súkromia</a>
+          <span class="footer-sep">·</span>
+          <a href="https://sites.google.com/view/ereskaapps/ibločky/conditions" class="footer-link" target="_blank" rel="noopener">Podmienky použitia</a>
+          <span class="footer-sep">·</span>
+          <a href="mailto:ereskaapps@gmail.com" class="footer-link">ereskaapps@gmail.com</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2025 iBločky. Všetky práva vyhradené.</span>
+        <span class="footer-made">Vyrobené na Slovensku 🇸🇰</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // ─── Theme toggle ───
+  const html = document.documentElement;
+  const btn = document.getElementById('themeToggle');
+  const stored = localStorage.getItem('iblocky-theme');
+  if (stored) html.setAttribute('data-theme', stored);
+
+  btn.addEventListener('click', () => {
+    const current = html.getAttribute('data-theme');
+    const sys = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    let next;
+    if (!current) {
+      next = sys === 'dark' ? 'light' : 'dark';
+    } else {
+      next = current === 'dark' ? 'light' : 'dark';
+    }
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('iblocky-theme', next);
+  });
+
+  // ─── Scroll fade-up ───
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // ─── Accordion ───
+  document.querySelectorAll('.accordion-trigger').forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const item = trigger.closest('.accordion-item');
+      const isOpen = item.classList.contains('open');
+      // close all
+      document.querySelectorAll('.accordion-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
+      });
+      // open clicked if it was closed
+      if (!isOpen) {
+        item.classList.add('open');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  // ─── Copy API key ───
+  const copyBtn = document.getElementById('copyKeyBtn');
+  const copyLabel = document.getElementById('copyKeyLabel');
+  copyBtn.addEventListener('click', () => {
+    const demoKey = 'ibk_demo_xxxxxxxxxxxxxxxxxxxx';
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(demoKey).then(() => {
+        copyLabel.textContent = 'Skopírované!';
+        copyBtn.style.background = 'rgba(74,222,128,0.12)';
+        copyBtn.style.borderColor = 'rgba(74,222,128,0.3)';
+        copyBtn.style.color = '#4ADE80';
+        setTimeout(() => {
+          copyLabel.textContent = 'Kopírovať API kľúč (ukážka)';
+          copyBtn.style.background = '';
+          copyBtn.style.borderColor = '';
+          copyBtn.style.color = '';
+        }, 2200);
+      });
+    }
+  });
+
+  // ─── Trigger visible for above-fold elements ───
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.fade-up').forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight) {
+        el.classList.add('visible');
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
