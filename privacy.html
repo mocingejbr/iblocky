@@ -136,6 +136,14 @@ nav {
   white-space: nowrap;
 }
 .nav-logo span { color: var(--primary); }
+.nav-logo .brand-i { color: #000; }
+.footer-brand-name .brand-i { color: #000; }
+[data-theme="dark"] .nav-logo .brand-i,
+[data-theme="dark"] .footer-brand-name .brand-i { color: #fff; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .nav-logo .brand-i,
+  :root:not([data-theme="light"]) .footer-brand-name .brand-i { color: #fff; }
+}
 .nav-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
 .nav-back {
   display: inline-flex;
@@ -428,7 +436,7 @@ footer {
 
 <nav>
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo">i<span>Bloč</span>ky</a>
+    <a href="index.html" class="nav-logo"><span class="brand-i">i</span><span>Bločky</span></a>
     <div class="nav-actions">
       <a href="index.html" class="nav-back">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
@@ -767,7 +775,7 @@ footer {
     <div class="footer-inner">
       <div class="footer-top">
         <div>
-          <div class="footer-brand-name">i<span>Bloč</span>ky</div>
+          <div class="footer-brand-name"><span class="brand-i">i</span><span>Bločky</span></div>
           <div class="footer-tagline">Vaše doklady. Vždy po ruke.</div>
         </div>
         <div class="footer-links">
