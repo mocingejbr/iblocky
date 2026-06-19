@@ -34,7 +34,8 @@
   "processorRequirements": "x64",
   "memoryRequirements": "4 GB",
   "softwareVersion": "1.0.0",
-  "fileSize": "25 MB",
+  "fileSize": "6 MB",
+  "datePublished": "2026-06-19",
   "description": "Windows companion aplikácia pre iBločky, ktorá automaticky importuje naskenované doklady do účtovného softvéru Pohoda.",
   "downloadUrl": "https://github.com/mocingejbr/iblocky/releases/download/v1.0.0/iBlockySync-Setup.exe",
   "publisher": { "@type": "Organization", "name": "Ereska Apps" },
@@ -744,7 +745,7 @@ footer {
 }
 .accordion-item.open .accordion-icon { transform: rotate(45deg); }
 .accordion-body { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.16,1,0.3,1); }
-.accordion-item.open .accordion-body { max-height: 400px; }
+.accordion-item.open .accordion-body { max-height: 600px; }
 .accordion-content { padding: 4px 24px 24px; font-size: 14px; color: var(--text-muted); line-height: 1.7; }
 .accordion-content strong { color: var(--text); }
 .accordion-content code {
@@ -760,12 +761,98 @@ footer {
 .help-inner { max-width: 600px; margin: 0 auto; text-align: center; }
 .help-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
 
+/* ─── BREADCRUMB ─── */
+.dl-breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-subtle);
+  margin-bottom: 18px;
+}
+.dl-breadcrumb a { color: var(--text-muted); transition: color 0.2s; }
+.dl-breadcrumb a:hover { color: var(--primary); }
+.dl-breadcrumb .crumb-sep { opacity: 0.5; }
+.dl-breadcrumb .crumb-current { color: var(--text); }
+
+/* ─── APP PREVIEW (system-tray mockup) ─── */
+.app-preview { display: flex; justify-content: center; margin-top: 40px; }
+.app-window {
+  width: 100%;
+  max-width: 360px;
+  background: var(--bg-alt);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+.app-window-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+.app-window-dots { display: flex; gap: 6px; }
+.app-window-dots span { width: 10px; height: 10px; border-radius: 50%; background: var(--text-subtle); opacity: 0.4; }
+.app-window-title { font-size: 12px; font-weight: 600; color: var(--text-muted); }
+.app-window-body { padding: 18px; display: flex; flex-direction: column; gap: 14px; }
+.app-status-ok {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  background: rgba(34,197,94,0.1);
+  border: 1px solid rgba(34,197,94,0.25);
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #22c55e;
+}
+.app-status-dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 0 rgba(34,197,94,0.5); animation: pulse 2s infinite; }
+.app-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--text-muted);
+  padding: 8px 2px;
+  border-bottom: 1px solid var(--border);
+}
+.app-row:last-child { border-bottom: none; }
+.app-row strong { color: var(--text); font-weight: 600; }
+.app-row-time { font-size: 12px; color: var(--text-subtle); }
+
+/* ─── CHANGELOG ─── */
+#changelog { background: var(--bg-alt); border-top: 1px solid var(--border); }
+.changelog-list { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+.changelog-entry {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+}
+.changelog-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+.changelog-version { font-size: 16px; font-weight: 800; color: var(--text); }
+.changelog-badge {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--primary);
+  background: rgba(var(--primary-rgb),0.12);
+  border: 1px solid rgba(var(--primary-rgb),0.25);
+  padding: 3px 10px; border-radius: 99px;
+}
+.changelog-date { font-size: 13px; color: var(--text-subtle); margin-left: auto; }
+.changelog-entry ul { margin: 0; padding-left: 18px; }
+.changelog-entry li { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+.changelog-all { display: flex; justify-content: center; margin-top: 24px; }
+
 /* ─── RESPONSIVE ─── */
 @media (max-width: 760px) {
   .download-layout {
     grid-template-columns: 1fr;
   }
-  .req-card { order: -1; }
   .dl-button-row { flex-direction: column; align-items: flex-start; }
   .btn-download { width: 100%; justify-content: center; }
   .signpath-card { flex-direction: column; gap: 16px; }
@@ -805,12 +892,36 @@ footer {
 <section id="hero-mini">
   <div class="container">
     <div class="hero-mini-inner fade-up">
+      <nav class="dl-breadcrumb" aria-label="Drobčeky">
+        <a href="index.html">iBločky</a>
+        <span class="crumb-sep">›</span>
+        <a href="index.html#windows">Windows</a>
+        <span class="crumb-sep">›</span>
+        <span class="crumb-current">Stiahnuť</span>
+      </nav>
       <div class="section-label">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M3 5.557L9.938 4.56v6.81H3V5.557zm0 12.886L9.938 19.44v-6.624H3v5.627zm7.188-12.56L21 4v7.37H10.188V5.883zm0 6.737H21V20l-10.813-1.82v-5.56z"/></svg>
         Windows
       </div>
       <h1 class="section-title">Stiahnuť iBlockySync<br>pre Windows</h1>
       <p class="section-subtitle">Oficiálna desktopová aplikácia pre synchronizáciu iBločky s účtovným softvérom Pohoda. Beží na pozadí, automaticky importuje doklady.</p>
+      <div class="app-preview">
+        <div class="app-window" role="img" aria-label="Náhľad aplikácie iBlockySync vo Windows — stav Windows pripojený">
+          <div class="app-window-bar">
+            <div class="app-window-dots"><span></span><span></span><span></span></div>
+            <div class="app-window-title">iBlockySync</div>
+          </div>
+          <div class="app-window-body">
+            <div class="app-status-ok">
+              <span class="app-status-dot"></span>
+              Windows pripojený
+            </div>
+            <div class="app-row"><span>Posledný import</span><strong>3 doklady</strong></div>
+            <div class="app-row"><span>Cieľ</span><strong>Pohoda</strong></div>
+            <div class="app-row"><span>Stav synchronizácie</span><span class="app-row-time">pred 12 s</span></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -830,8 +941,9 @@ footer {
               <span class="dl-meta-tag">v1.0.0</span>
               <span class="dl-meta-tag">Windows 10 / 11</span>
               <span class="dl-meta-tag">64-bit</span>
-              <span class="dl-meta-tag">~25 MB</span>
+              <span class="dl-meta-tag">~6 MB</span>
               <span class="dl-meta-tag">.exe inštalátor</span>
+              <span class="dl-meta-tag">Vydané 19. 6. 2026</span>
             </div>
           </div>
         </div>
@@ -843,7 +955,7 @@ footer {
           </a>
           <div class="dl-file-info">
             <strong>iBlockySync-Setup.exe</strong><br>
-            Windows 10 / 11 · 64-bit · ~25 MB
+            Windows 10 / 11 · 64-bit · ~6 MB
           </div>
         </div>
 
@@ -1075,6 +1187,41 @@ footer {
           </a>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHANGELOG -->
+<section id="changelog">
+  <div class="container">
+    <div class="sec-head fade-up">
+      <div class="section-label">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="10"/></svg>
+        História verzií
+      </div>
+      <h2 class="section-title">Čo je nové</h2>
+      <p class="section-subtitle">Prehľad vydaní aplikácie iBlockySync.</p>
+    </div>
+    <div class="changelog-list fade-up">
+      <div class="changelog-entry">
+        <div class="changelog-head">
+          <span class="changelog-version">v1.0.0</span>
+          <span class="changelog-badge">Najnovšia</span>
+          <span class="changelog-date">19. 6. 2026</span>
+        </div>
+        <ul>
+          <li>Prvé verejné vydanie iBlockySync.</li>
+          <li>Automatický import naskenovaných dokladov priamo do Pohody každých 30 sekúnd.</li>
+          <li>Automatické mapovanie IČO na správnu databázu Pohody pri práci s viacerými firmami.</li>
+          <li>Digitálne podpísaný inštalátor cez SignPath Foundation s priloženým .NET 8.0.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="changelog-all fade-up">
+      <a href="https://github.com/mocingejbr/iblocky/releases" target="_blank" rel="noopener noreferrer" class="dl-allversions">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Všetky verzie a poznámky k vydaniu
+      </a>
     </div>
   </div>
 </section>
