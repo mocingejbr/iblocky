@@ -419,14 +419,14 @@ nav.scrolled {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 14px 32px;
+  padding: 16px 32px;
   background: var(--primary);
   color: #fff;
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
   border-radius: var(--radius-sm);
   transition: background 0.25s, transform 0.18s, box-shadow 0.25s;
-  box-shadow: 0 4px 20px rgba(var(--primary-rgb),0.35);
+  box-shadow: 0 4px 24px rgba(var(--primary-rgb),0.4);
   letter-spacing: 0.01em;
 }
 .btn-primary:hover {
@@ -438,11 +438,11 @@ nav.scrolled {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 14px 32px;
+  padding: 16px 32px;
   background: var(--surface);
   color: var(--text);
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
   transition: background 0.25s, transform 0.18s, border-color 0.25s;
@@ -862,7 +862,8 @@ nav.scrolled {
   flex-shrink: 0;
   width: 46px; height: 46px;
   border-radius: 50%;
-  background: rgba(var(--primary-rgb),0.12);
+  background-color: var(--bg-alt);
+  background-image: linear-gradient(rgba(var(--primary-rgb),0.12), rgba(var(--primary-rgb),0.12));
   border: 2px solid rgba(var(--primary-rgb),0.3);
   display: flex;
   align-items: center;
@@ -988,7 +989,7 @@ nav.scrolled {
   transition: background 0.25s, border-color 0.25s, box-shadow 0.25s;
 }
 .wizard-step:hover .wizard-step-num {
-  background: rgba(var(--primary-rgb),0.1);
+  background-image: linear-gradient(rgba(var(--primary-rgb),0.1), rgba(var(--primary-rgb),0.1));
   border-color: var(--primary);
   box-shadow: 0 0 0 4px rgba(var(--primary-rgb),0.08);
 }
@@ -1033,7 +1034,7 @@ nav.scrolled {
   color: var(--text-muted);
 }
 .step-final .wizard-step-num {
-  background: rgba(var(--primary-rgb),0.15);
+  background-image: linear-gradient(rgba(var(--primary-rgb),0.15), rgba(var(--primary-rgb),0.15));
   border-color: var(--primary);
   color: var(--primary);
 }
@@ -1103,7 +1104,7 @@ nav.scrolled {
   overflow: hidden;
   transition: max-height 0.4s cubic-bezier(0.16,1,0.3,1);
 }
-.accordion-item.open .accordion-body { max-height: 600px; }
+.accordion-item.open .accordion-body { max-height: 1200px; }
 .accordion-content {
   padding: 4px 24px 24px;
 }
@@ -1345,6 +1346,53 @@ footer {
   }
   .sync-arrow-svg { display: none; }
 }
+
+/* ─── UI polish pass: warn tokens, a11y, consistency ─── */
+:root { --warn: #D97706; --warn-light: #F59E0B; --warn-rgb: 217,119,6; }
+[data-theme="light"] { --warn: #B45309; --warn-rgb: 180,83,9; }
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) { --warn: #B45309; --warn-rgb: 180,83,9; } }
+
+/* visible keyboard focus on every interactive control */
+a:focus-visible, button:focus-visible,
+.btn-primary:focus-visible, .btn-secondary:focus-visible, .btn-tier:focus-visible,
+.nav-link:focus-visible, .theme-toggle:focus-visible,
+.accordion-trigger:focus-visible, .footer-link:focus-visible, .ladder-card-link:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-xs);
+}
+
+/* emphasis stays readable inside muted descriptions */
+.wizard-step-desc strong, .feature-desc strong, .win-step-text strong,
+.win-benefit-text span strong, .hero-subtitle strong { color: var(--text); }
+
+/* link to the full setup guide from the overview wizard */
+.setup-guide-cta { display: flex; justify-content: center; margin-top: 40px; }
+
+/* ─── Language toggle (SK / EN), matches legal pages ─── */
+.lang-content { display: none; }
+.lang-toggle {
+  display: flex;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 3px;
+  gap: 2px;
+}
+.lang-btn {
+  padding: 4px 14px;
+  border-radius: 99px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font);
+  transition: background 0.2s, color 0.2s;
+  line-height: 1.4;
+}
+.lang-btn.active { background: var(--primary); color: #fff; }
 </style>
 </head>
 <body>
@@ -1352,12 +1400,16 @@ footer {
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <a href="#" class="nav-logo"><span class="brand-i">i</span><span>Bločky</span></a>
+    <a href="#hero" class="nav-logo"><span class="brand-i">i</span><span>Bločky</span></a>
     <div class="nav-actions">
-      <a href="#ako-to-funguje" class="nav-link">Ako to funguje</a>
-      <a href="#features" class="nav-link">Funkcie</a>
-      <a href="#pricing" class="nav-link">Ceny</a>
+      <a href="#ako-to-funguje" class="nav-link"><span class="nav-i18n-sk">Ako to funguje</span><span class="nav-i18n-en" style="display:none">How it works</span></a>
+      <a href="#features" class="nav-link"><span class="nav-i18n-sk">Funkcie</span><span class="nav-i18n-en" style="display:none">Features</span></a>
+      <a href="#pricing" class="nav-link"><span class="nav-i18n-sk">Ceny</span><span class="nav-i18n-en" style="display:none">Pricing</span></a>
       <a href="#windows" class="nav-link">Windows</a>
+      <div class="lang-toggle">
+        <button class="lang-btn" id="btnSk" onclick="setLang('sk')">SK</button>
+        <button class="lang-btn" id="btnEn" onclick="setLang('en')">EN</button>
+      </div>
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
         <!-- Sun -->
         <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1371,6 +1423,9 @@ footer {
     </div>
   </div>
 </nav>
+
+<!-- ══════════════ SLOVAK ══════════════ -->
+<div id="content-sk" class="lang-content">
 
 <!-- HERO -->
 <section id="hero">
@@ -1925,6 +1980,9 @@ footer {
         </div>
       </div>
     </div>
+    <div class="setup-guide-cta fade-up">
+      <a href="windows-setup.html" class="btn-secondary">Detailný sprievodca krok za krokom →</a>
+    </div>
   </div>
 </section>
 
@@ -2071,8 +2129,649 @@ footer {
   </div>
 </footer>
 
+</div><!-- /content-sk -->
+
+<!-- ══════════════ ENGLISH ══════════════ -->
+<div id="content-en" class="lang-content">
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-eyebrow fade-up">
+          <span class="hero-eyebrow-dot"></span>
+          For iPhone · Pohoda automation optional
+        </div>
+        <h1 class="hero-title fade-up">
+          <span class="brand-i">i</span><span class="brand">Bločky</span>
+        </h1>
+        <p class="hero-tagline fade-up">Your documents. Always at hand.</p>
+        <p class="hero-subtitle fade-up">
+          Scan and archive receipts right on your iPhone. Use Pohoda for accounting? Export documents to XML — or have them imported fully automatically via the Windows companion (Pro Max).
+        </p>
+        <div class="hero-ctas fade-up">
+          <a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" class="btn-primary">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+            </svg>
+            Download on the App Store
+          </a>
+          <a href="download.html" class="btn-secondary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3 5.557L9.938 4.56v6.81H3V5.557zm0 12.886L9.938 19.44v-6.624H3v5.627zm7.188-12.56L21 4v7.37H10.188V5.883zm0 6.737H21V20l-10.813-1.82v-5.56z"/>
+            </svg>
+            Windows companion (Pro Max)
+          </a>
+        </div>
+        <p class="hero-hint fade-up">Start with the iPhone app — Windows is an optional add-on for automatic import into Pohoda.</p>
+        <div class="hero-trust fade-up">
+          <span class="hero-trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            Signed installer
+          </span>
+          <span class="hero-trust-sep">·</span>
+          <span class="hero-trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            .NET included
+          </span>
+          <span class="hero-trust-sep">·</span>
+          <span class="hero-trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/><circle cx="12" cy="12" r="10"/></svg>
+            Made in Slovakia
+          </span>
+        </div>
+      </div>
+      <div class="hero-visual fade-up">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="phone-ui-bar">
+              <div class="phone-ui-dot"></div>
+              <div class="phone-ui-line"></div>
+              <div class="phone-ui-dot" style="opacity:0.3"></div>
+            </div>
+            <div class="phone-ui-card">
+              <div class="phone-ui-card-title">Latest receipt</div>
+              <div class="phone-ui-receipt">
+                <div class="phone-ui-receipt-row">
+                  <span class="phone-ui-receipt-label">Merchant</span>
+                  <span class="phone-ui-receipt-val">Tesco Bratislava</span>
+                </div>
+                <div class="phone-ui-receipt-row">
+                  <span class="phone-ui-receipt-label">Date</span>
+                  <span class="phone-ui-receipt-val">09.06.2026</span>
+                </div>
+                <div class="phone-ui-receipt-amount">38,74 €</div>
+                <span class="phone-ui-tag">Groceries</span>
+              </div>
+            </div>
+            <div class="phone-ui-card">
+              <div class="phone-ui-card-title">Warranty active</div>
+              <div class="phone-ui-receipt">
+                <div class="phone-ui-receipt-row">
+                  <span class="phone-ui-receipt-label">Samsung TV</span>
+                  <span class="phone-ui-receipt-val" style="color:var(--check)">●&nbsp;24 mo.</span>
+                </div>
+                <div class="phone-ui-receipt-row">
+                  <span class="phone-ui-receipt-label">Expires</span>
+                  <span class="phone-ui-receipt-val">May 2027</span>
+                </div>
+              </div>
+            </div>
+            <div class="phone-ui-bar" style="margin-top:auto">
+              <div class="phone-ui-dot" style="opacity:0.4"></div>
+              <div class="phone-ui-line" style="background:rgba(var(--primary-rgb),0.3)"></div>
+              <div class="phone-ui-dot" style="background:var(--check);opacity:0.6"></div>
+            </div>
+          </div>
+          <div class="phone-bottom"></div>
+        </div>
+        <div class="phone-glow"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS (value ladder) -->
+<section id="ako-to-funguje">
+  <div class="container">
+    <div class="features-header">
+      <div class="section-label fade-up">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        How it works
+      </div>
+      <h2 class="section-title fade-up">From scan to Pohoda<br>— at your pace</h2>
+      <p class="section-subtitle fade-up">The iPhone app works on its own. Add export and automation only if you need them.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card fade-up">
+        <div class="feature-icon"><span class="ladder-num">1</span></div>
+        <div class="feature-header">
+          <span class="feature-title">Scan on your iPhone</span>
+          <span class="badge-pro badge-free">Free</span>
+        </div>
+        <p class="feature-desc">Scan a receipt, file it into folders, track warranties and spending in charts. Just an iPhone — nothing else needed.</p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon"><span class="ladder-num">2</span></div>
+        <div class="feature-header">
+          <span class="feature-title">Export to Pohoda</span>
+          <span class="badge-pro">Pro</span>
+        </div>
+        <p class="feature-desc">Optional. Export a document to XML, copy it to your PC and import it into Pohoda manually. No Windows app required.</p>
+      </div>
+      <a href="#windows" class="feature-card ladder-card-link fade-up">
+        <div class="feature-icon"><span class="ladder-num">3</span></div>
+        <div class="feature-header">
+          <span class="feature-title">Or import automatically</span>
+          <span class="badge-pro badge-promax">Pro Max</span>
+        </div>
+        <p class="feature-desc">Optional. Tap Export — the Windows companion running next to Pohoda imports the document by itself. No file copying.</p>
+        <span class="ladder-link-hint">See Windows automation →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="container">
+    <div class="features-header">
+      <div class="section-label fade-up">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        iOS app features
+      </div>
+      <h2 class="section-title fade-up">Everything you need<br>in one place</h2>
+      <p class="section-subtitle fade-up">From scanning to export — complete document management right on your iPhone.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card fade-up">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="5" width="20" height="15" rx="2"/><circle cx="12" cy="12" r="4"/><path d="M7 5V3m10 2V3"/>
+          </svg>
+        </div>
+        <div class="feature-header"><span class="feature-title">QR scanning</span></div>
+        <p class="feature-desc">Point your camera at a receipt. Data is saved instantly straight from the eDane tax portal.</p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <div class="feature-header"><span class="feature-title">Warranty cards</span></div>
+        <p class="feature-desc">Automatic warranty tracking with alerts before expiry. Supports 12/24 months or a custom period.</p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+          </svg>
+        </div>
+        <div class="feature-header"><span class="feature-title">Folders</span></div>
+        <p class="feature-desc">Organize documents by company, category or project. See spending at a glance in charts.</p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6m-4 5H8m8 4H8m2-8H8"/>
+          </svg>
+        </div>
+        <div class="feature-header">
+          <span class="feature-title">PDF export</span>
+          <span class="badge-pro">Pro</span>
+        </div>
+        <p class="feature-desc">Share documents as clean PDFs in one tap. Bulk-export multiple receipts at once.</p>
+      </div>
+      <div class="feature-card fade-up">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+          </svg>
+        </div>
+        <div class="feature-header">
+          <span class="feature-title">XML to Pohoda</span>
+          <span class="badge-pro">Pro</span>
+        </div>
+        <p class="feature-desc">Manual XML export to Pohoda in Pro. With Pro Max the import runs automatically via the Windows companion — no file copying.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="container">
+    <div class="pricing-header">
+      <div class="section-label fade-up">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+        Subscription
+      </div>
+      <h2 class="section-title fade-up">Pick the plan<br>that fits you</h2>
+      <p class="section-subtitle fade-up">Start free. Upgrade when you're ready.</p>
+    </div>
+
+    <div class="pricing-table-wrap fade-up">
+      <table class="pricing-table">
+        <thead>
+          <tr>
+            <th style="text-align:left;width:34%">Feature</th>
+            <th class="col-free">
+              <span class="tier-name">Free</span>
+              <span class="tier-price">Free forever</span>
+            </th>
+            <th class="col-pro">
+              <span class="tier-name">Pro</span>
+              <span class="tier-price"><a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600">See in App Store</a></span>
+            </th>
+            <th class="col-promax">
+              <span class="tier-name">Pro Max</span>
+              <span class="tier-price"><a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600">See in App Store</a></span>
+              <div><span class="badge-excl">Exclusive</span></div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>QR receipt scanning</td><td class="col-free"><span class="check-yes">✓</span></td><td class="col-pro"><span class="check-yes">✓</span></td><td class="col-promax"><span class="check-yes">✓</span></td></tr>
+          <tr><td>Document storage &amp; organization</td><td class="col-free"><span class="check-yes">✓</span></td><td class="col-pro"><span class="check-yes">✓</span></td><td class="col-promax"><span class="check-yes">✓</span></td></tr>
+          <tr><td>Folder management</td><td class="col-free"><span class="check-yes">✓</span></td><td class="col-pro"><span class="check-yes">✓</span></td><td class="col-promax"><span class="check-yes">✓</span></td></tr>
+          <tr><td>Warranty tracking</td><td class="col-free"><span class="check-yes">✓</span></td><td class="col-pro"><span class="check-yes">✓</span></td><td class="col-promax"><span class="check-yes">✓</span></td></tr>
+          <tr><td>Charts &amp; spending overview</td><td class="col-free"><span class="check-yes">✓</span></td><td class="col-pro"><span class="check-yes">✓</span></td><td class="col-promax"><span class="check-yes">✓</span></td></tr>
+          <tr><td>PDF export &amp; sharing</td><td class="col-free"><span class="check-no">—</span></td><td class="col-pro"><span class="check-yes">✓</span></td><td class="col-promax"><span class="check-yes">✓</span></td></tr>
+          <tr><td>Bulk scanning</td><td class="col-free"><span class="check-no">—</span></td><td class="col-pro"><span class="check-yes">✓</span></td><td class="col-promax"><span class="check-yes">✓</span></td></tr>
+          <tr><td>Manual XML export to Pohoda</td><td class="col-free"><span class="check-no">—</span></td><td class="col-pro"><span class="check-yes">✓</span></td><td class="col-promax"><span class="check-yes">✓</span></td></tr>
+          <tr><td>Advanced folder management</td><td class="col-free"><span class="check-no">—</span></td><td class="col-pro"><span class="check-yes">✓</span></td><td class="col-promax"><span class="check-yes">✓</span></td></tr>
+          <tr><td>Automatic sync with Pohoda (Windows)</td><td class="col-free"><span class="check-no">—</span></td><td class="col-pro"><span class="check-no">—</span></td><td class="col-promax"><span class="check-yes">✓</span></td></tr>
+          <tr class="cta-row">
+            <td></td>
+            <td class="col-free"><a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" class="btn-tier btn-tier-muted">Download free</a></td>
+            <td class="col-pro"><a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" class="btn-tier btn-tier-pro">Unlock full version</a></td>
+            <td class="col-promax"><a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" class="btn-tier btn-tier-promax">Upgrade to Pro Max</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pricing-mobile fade-up">
+      <div class="pricing-mobile-card">
+        <div class="pricing-mobile-tier">Free</div>
+        <div class="pricing-mobile-price">Free forever</div>
+        <div class="pricing-mobile-features">
+          <div class="pricing-mobile-row"><span class="check-yes">✓</span> QR scanning</div>
+          <div class="pricing-mobile-row"><span class="check-yes">✓</span> Document storage</div>
+          <div class="pricing-mobile-row"><span class="check-yes">✓</span> Warranty cards</div>
+          <div class="pricing-mobile-row"><span class="check-yes">✓</span> Spending charts</div>
+          <div class="pricing-mobile-row"><span class="check-no">—</span> PDF export</div>
+          <div class="pricing-mobile-row"><span class="check-no">—</span> XML to Pohoda</div>
+        </div>
+        <a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" class="btn-tier btn-tier-muted" style="display:block;text-align:center">Download free</a>
+      </div>
+      <div class="pricing-mobile-card">
+        <div class="pricing-mobile-tier">Pro</div>
+        <div class="pricing-mobile-price"><a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600">See in App Store</a></div>
+        <div class="pricing-mobile-features">
+          <div class="pricing-mobile-row"><span class="check-yes">✓</span> Everything in Free</div>
+          <div class="pricing-mobile-row"><span class="check-yes">✓</span> PDF export &amp; sharing</div>
+          <div class="pricing-mobile-row"><span class="check-yes">✓</span> Bulk scanning</div>
+          <div class="pricing-mobile-row"><span class="check-yes">✓</span> XML export to Pohoda</div>
+          <div class="pricing-mobile-row"><span class="check-no">—</span> Auto sync with Pohoda</div>
+        </div>
+        <a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" class="btn-tier btn-tier-pro" style="display:block;text-align:center">Unlock full version</a>
+      </div>
+      <div class="pricing-mobile-card highlighted">
+        <div class="pricing-mobile-tier">Pro Max <span class="badge-excl">Exclusive</span></div>
+        <div class="pricing-mobile-price"><a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600">See in App Store</a></div>
+        <div class="pricing-mobile-features">
+          <div class="pricing-mobile-row"><span class="check-yes">✓</span> Everything in Pro</div>
+          <div class="pricing-mobile-row"><span class="check-yes">✓</span> Auto sync with Pohoda</div>
+          <div class="pricing-mobile-row"><span class="check-yes">✓</span> Windows companion app</div>
+          <div class="pricing-mobile-row"><span class="check-yes">✓</span> Live "Windows connected" status</div>
+        </div>
+        <a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" class="btn-tier btn-tier-promax" style="display:block;text-align:center">Upgrade to Pro Max</a>
+      </div>
+    </div>
+
+    <div class="pricing-trust fade-up">
+      <span class="pricing-trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+        Cancel anytime
+      </span>
+      <span class="pricing-trust-sep">·</span>
+      <span class="pricing-trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Privacy protected
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- WINDOWS SYNC -->
+<section id="windows">
+  <div class="container">
+    <div class="sync-diagram fade-up">
+
+      <div class="sync-node">
+        <svg viewBox="0 0 36 62" class="sync-node-icon" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="1" width="32" height="60" rx="5" stroke="currentColor" stroke-width="2"/>
+          <rect x="5.5" y="9.5" width="25" height="41" rx="1.5" class="sync-screen-fill"/>
+          <rect x="13" y="54.5" width="10" height="2.5" rx="1.25" fill="currentColor" opacity="0.3"/>
+          <circle cx="18" cy="5.5" r="1.5" fill="currentColor" opacity="0.35"/>
+        </svg>
+        <span class="sync-node-label">iBločky</span>
+      </div>
+
+      <div class="sync-arrow-wrap">
+        <svg class="sync-arrow-svg" viewBox="0 0 64 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="0" y1="10" x2="50" y2="10" class="sync-arrow-line"/>
+          <polyline points="44,3 58,10 44,17" class="sync-arrow-head"/>
+        </svg>
+      </div>
+
+      <div class="sync-node">
+        <svg viewBox="0 0 64 52" class="sync-node-icon" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path class="sync-cloud-path" d="M 10.4 44 L 53.6 44 A 12 12 0 0 0 48 22 A 16 16 0 1 0 16 22 A 12 12 0 0 0 10.4 44 Z"/>
+          <g transform="translate(32,26)">
+            <g class="sync-gear">
+              <path transform="translate(-12,-12)" fill="currentColor" d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"/>
+            </g>
+          </g>
+        </svg>
+        <span class="sync-node-label">Cloud<br>API</span>
+      </div>
+
+      <div class="sync-arrow-wrap">
+        <svg class="sync-arrow-svg" viewBox="0 0 64 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="0" y1="10" x2="50" y2="10" class="sync-arrow-line"/>
+          <polyline points="44,3 58,10 44,17" class="sync-arrow-head"/>
+        </svg>
+      </div>
+
+      <div class="sync-node">
+        <svg viewBox="0 0 64 56" class="sync-node-icon" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="60" height="40" rx="3" stroke="currentColor" stroke-width="2"/>
+          <rect x="6" y="6" width="52" height="32" rx="1.5" class="sync-screen-fill"/>
+          <rect x="24" y="14" width="6.5" height="6.5" rx="0.5" fill="currentColor" opacity="0.7"/>
+          <rect x="33" y="14" width="6.5" height="6.5" rx="0.5" fill="currentColor" opacity="0.7"/>
+          <rect x="24" y="22.5" width="6.5" height="6.5" rx="0.5" fill="currentColor" opacity="0.7"/>
+          <rect x="33" y="22.5" width="6.5" height="6.5" rx="0.5" fill="currentColor" opacity="0.7"/>
+          <line x1="32" y1="42" x2="32" y2="50" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <line x1="20" y1="50" x2="44" y2="50" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <span class="sync-node-label">Pohoda<br>Windows</span>
+      </div>
+
+    </div>
+
+    <div class="windows-inner">
+      <div>
+        <div class="windows-badge fade-up">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M3 5.557L9.938 4.56v6.81H3V5.557zm0 12.886L9.938 19.44v-6.624H3v5.627zm7.188-12.56L21 4v7.37H10.188V5.883zm0 6.737H21V20l-10.813-1.82v-5.56z"/></svg>
+          Automation for Pro Max
+        </div>
+        <h2 class="section-title fade-up">Pohoda imports<br>all by itself</h2>
+        <p class="section-subtitle fade-up">
+          iBlockySync runs quietly in the background on Windows. Every 30 seconds it checks for new documents and imports them straight into Pohoda — with zero intervention.
+        </p>
+        <p class="windows-prereq fade-up">
+          Requires iBločky for iPhone and a <strong>Pro Max</strong> subscription. Just need manual import? <a href="#ako-to-funguje">Manual XML export</a> already works in Pro — no Windows app.
+        </p>
+        <div class="win-steps fade-up">
+          <div class="win-step">
+            <div class="win-step-num">1</div>
+            <div class="win-step-text">
+              <strong>Download the Windows app</strong>
+              <span>Install iBlockySync on a Windows 10+ PC</span>
+            </div>
+          </div>
+          <div class="win-step">
+            <div class="win-step-num">2</div>
+            <div class="win-step-text">
+              <strong>Enter the API key</strong>
+              <span>Copy the key from iBločky → Settings → Sync</span>
+            </div>
+          </div>
+          <div class="win-step">
+            <div class="win-step-num">3</div>
+            <div class="win-step-text">
+              <strong>Pohoda imports automatically</strong>
+              <span>Every scanned receipt appears in Pohoda within 30 seconds</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="win-right fade-up">
+        <div>
+          <h3 class="win-section-title">Why iBlockySync?</h3>
+          <div class="win-benefits">
+            <div class="win-benefit">
+              <div class="win-benefit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48 2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48 2.83-2.83"/></svg>
+              </div>
+              <div class="win-benefit-text">
+                <strong>Automatic imports every 30 seconds</strong>
+                <span>No waiting, no manual work. Runs in the background with no visible window.</span>
+              </div>
+            </div>
+            <div class="win-benefit">
+              <div class="win-benefit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              </div>
+              <div class="win-benefit-text">
+                <strong>One click — no USB, no files</strong>
+                <span>Documents travel from the iPhone through an encrypted cloud queue straight to the PC. No cables, no manual transfers.</span>
+              </div>
+            </div>
+            <div class="win-benefit">
+              <div class="win-benefit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <div class="win-benefit-text">
+                <strong>Encrypted transfer, data stored locally</strong>
+                <span>The transfer is end-to-end encrypted and the generated XML files are stored locally in %APPDATA%\iBlockySync on your PC.</span>
+              </div>
+            </div>
+            <div class="win-benefit">
+              <div class="win-benefit-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>
+              </div>
+              <div class="win-benefit-text">
+                <strong>Works with multiple companies at once</strong>
+                <span>Automatically maps each IČO to the right Pohoda database.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="win-download-card">
+          <div class="win-app-info">
+            <div class="win-app-icon">iB</div>
+            <div>
+              <div class="win-app-name">iBlockySync</div>
+              <div class="win-app-meta">v1.0.0 · Windows 10+ · 64-bit</div>
+              <div class="win-app-trust">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+                Signed installer · SignPath
+              </div>
+            </div>
+          </div>
+          <a href="download.html" class="btn-primary" style="font-size:14px;padding:10px 20px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download for Windows
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SETUP WIZARD -->
+<section id="setup">
+  <div class="container">
+    <div class="setup-header">
+      <div class="section-label fade-up">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+        Setup guide
+      </div>
+      <h2 class="section-title fade-up">Setup in 5 steps</h2>
+      <p class="section-subtitle fade-up">Pohoda automatically imports documents from your iOS app via Windows.</p>
+    </div>
+    <div class="wizard-timeline">
+      <div class="wizard-step fade-up">
+        <div class="wizard-step-num">1</div>
+        <div class="wizard-step-body">
+          <div class="wizard-step-title">Set up sync</div>
+          <p class="wizard-step-desc">Pohoda automatically imports documents from your iOS app via Windows. Enable the feature in iBločky settings.</p>
+        </div>
+      </div>
+      <div class="wizard-step fade-up">
+        <div class="wizard-step-num">2</div>
+        <div class="wizard-step-body">
+          <div class="wizard-step-title">Download the Windows app</div>
+          <p class="wizard-step-desc">The app runs in the background and imports documents into Pohoda automatically. The installer includes every dependency.</p>
+          <div class="wizard-req">
+            <span class="wizard-req-tag">Windows 10+</span>
+            <span class="wizard-req-tag">.NET 8.0 (included)</span>
+            <span class="wizard-req-tag">64-bit</span>
+          </div>
+        </div>
+      </div>
+      <div class="wizard-step fade-up">
+        <div class="wizard-step-num">3</div>
+        <div class="wizard-step-body">
+          <div class="wizard-step-title">Your API key</div>
+          <p class="wizard-step-desc">Copy the key from <strong>iBločky → Settings → Sync</strong> and paste it into the iBlockySync Windows app settings.</p>
+        </div>
+      </div>
+      <div class="wizard-step fade-up">
+        <div class="wizard-step-num">4</div>
+        <div class="wizard-step-body">
+          <div class="wizard-step-title">Verify the connection</div>
+          <p class="wizard-step-desc">We check that the Windows app is running and the key is entered correctly. In iBločky you'll see a live <strong>"Windows connected"</strong> status.</p>
+        </div>
+      </div>
+      <div class="wizard-step step-final fade-up">
+        <div class="wizard-step-num">✓</div>
+        <div class="wizard-step-body">
+          <div class="wizard-step-title">All set!</div>
+          <p class="wizard-step-desc">Pohoda will import documents automatically as soon as you send them from your iPhone. No further action needed.</p>
+        </div>
+      </div>
+    </div>
+    <div class="setup-guide-cta fade-up">
+      <a href="windows-setup.html" class="btn-secondary">Detailed step-by-step guide →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="faq-header">
+      <div class="section-label fade-up">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3m.08 4h.01"/></svg>
+        Guide
+      </div>
+      <h2 class="section-title fade-up">How to export XML to Pohoda</h2>
+      <p class="section-subtitle fade-up">Step by step — from scanning to import into Pohoda.</p>
+    </div>
+    <div class="accordion fade-up">
+      <div class="accordion-item open" id="faq-xml-en">
+        <button class="accordion-trigger" aria-expanded="true" aria-controls="faq-xml-en-body">
+          <span>How to export XML to Pohoda</span>
+          <span class="accordion-icon">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="accordion-body" id="faq-xml-en-body">
+          <div class="accordion-content">
+            <div class="faq-steps">
+              <div class="faq-step"><div class="faq-step-num">1</div><div class="faq-step-text">Create a folder with the <strong>company name and IČO</strong> — iBločky uses this IČO when generating the XML.</div></div>
+              <div class="faq-step"><div class="faq-step-num">2</div><div class="faq-step-text">Inside the folder tap the <strong>Scan button</strong>.</div></div>
+              <div class="faq-step"><div class="faq-step-num">3</div><div class="faq-step-text"><strong>Point the camera</strong> at the receipt's QR code.</div></div>
+              <div class="faq-step"><div class="faq-step-num">4</div><div class="faq-step-text"><strong>Bulk scanning (Pro):</strong> the receipt is saved automatically. <strong>Classic:</strong> confirm with the <em>Save</em> button at the top right.</div></div>
+              <div class="faq-step"><div class="faq-step-num">5</div><div class="faq-step-text">In the folder, tap the <strong>circled check icon</strong> at the top right.</div></div>
+              <div class="faq-step"><div class="faq-step-num">6</div><div class="faq-step-text"><strong>Select the receipts</strong> to export.</div></div>
+              <div class="faq-step"><div class="faq-step-num">7</div><div class="faq-step-text">Tap <strong>Export</strong> in the bottom bar.</div></div>
+              <div class="faq-step"><div class="faq-step-num">8</div><div class="faq-step-text">Choose <strong>how to send</strong> — email, message, AirDrop and more.</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item" id="faq-pohoda-en">
+        <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-pohoda-en-body">
+          <span>Where do I find Pohoda.exe for iBlockySync?</span>
+          <span class="accordion-icon">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="accordion-body" id="faq-pohoda-en-body">
+          <div class="accordion-content">
+            <div class="faq-steps">
+              <div class="faq-step"><div class="faq-step-num">1</div><div class="faq-step-text">iBlockySync <strong>automatically detects</strong> the path to Pohoda.exe on first launch.</div></div>
+              <div class="faq-step"><div class="faq-step-num">2</div><div class="faq-step-text">If auto-detection fails, in the Settings window click <strong>Browse</strong> next to the Pohoda.exe field and select the file manually.</div></div>
+              <div class="faq-step"><div class="faq-step-num">3</div><div class="faq-step-text">Pohoda.exe is usually located in <strong>C:\Program Files\STORMWARE\POHODA\</strong> or a similar folder.</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item" id="faq-multicompany-en">
+        <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-multicompany-en-body">
+          <span>Does iBlockySync work with multiple companies?</span>
+          <span class="accordion-icon">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="accordion-body" id="faq-multicompany-en-body">
+          <div class="accordion-content">
+            <div class="faq-steps">
+              <div class="faq-step"><div class="faq-step-num">1</div><div class="faq-step-text">Yes. iBlockySync <strong>automatically maps the IČO</strong> from each receipt to the right Pohoda database.</div></div>
+              <div class="faq-step"><div class="faq-step-num">2</div><div class="faq-step-text">Update the company list via <strong>Refresh company list</strong> in the tray menu.</div></div>
+              <div class="faq-step"><div class="faq-step-num">3</div><div class="faq-step-text">Every folder in iBločky must have the correct <strong>company IČO</strong> in its name for the mapping to work.</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand-name"><span class="brand-i">i</span><span>Bločky</span></div>
+          <div class="footer-tagline">Your documents. Always at hand.</div>
+        </div>
+        <div class="footer-links">
+          <a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" class="footer-link">App Store</a>
+          <span class="footer-sep">·</span>
+          <a href="download.html" class="footer-link">Windows App</a>
+          <span class="footer-sep">·</span>
+          <a href="privacy.html" class="footer-link">Privacy</a>
+          <span class="footer-sep">·</span>
+          <a href="terms.html" class="footer-link">Terms</a>
+          <span class="footer-sep">·</span>
+          <a href="mailto:ereskaapps@gmail.com" class="footer-link">ereskaapps@gmail.com</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2026 iBločky. All rights reserved.</span>
+        <span class="footer-made">Made in Slovakia 🇸🇰</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /content-en -->
+
 <script>
 (function(){
+  // mark decorative SVGs as hidden from screen readers (icons without their own label)
+  document.querySelectorAll('svg:not([aria-label])').forEach(s => s.setAttribute('aria-hidden', 'true'));
+
   // ─── Nav scroll shadow ───
   const navEl = document.querySelector('nav');
   window.addEventListener('scroll', () => {
@@ -2137,6 +2836,36 @@ footer {
       }
     });
   });
+
+  // ─── Language (SK / EN), shared across pages via localStorage ───
+  window.setLang = function(lang) {
+    document.getElementById('content-sk').style.display = lang === 'sk' ? 'block' : 'none';
+    document.getElementById('content-en').style.display = lang === 'en' ? 'block' : 'none';
+    document.getElementById('btnSk').classList.toggle('active', lang === 'sk');
+    document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+    document.querySelectorAll('.nav-i18n-sk').forEach(el => el.style.display = lang === 'sk' ? '' : 'none');
+    document.querySelectorAll('.nav-i18n-en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+    document.querySelectorAll('#content-' + lang + ' .fade-up').forEach(el => el.classList.add('visible'));
+    html.setAttribute('lang', lang);
+    localStorage.setItem('iblocky-lang', lang);
+  };
+  setLang(localStorage.getItem('iblocky-lang') || 'sk');
+
+  // in-page anchors must target the visible language block (both blocks share section ids)
+  function scrollToVisible(id) {
+    var els = document.querySelectorAll('[id="' + id + '"]');
+    for (var i = 0; i < els.length; i++) {
+      if (els[i].offsetParent !== null) { els[i].scrollIntoView({ behavior: 'smooth', block: 'start' }); return true; }
+    }
+    return false;
+  }
+  document.addEventListener('click', function(e) {
+    var a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var id = a.getAttribute('href').slice(1);
+    if (id && scrollToVisible(id)) { e.preventDefault(); history.replaceState(null, '', '#' + id); }
+  });
+  if (location.hash.length > 1) { setTimeout(function(){ scrollToVisible(location.hash.slice(1)); }, 60); }
 })();
 </script>
 </body>

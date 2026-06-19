@@ -591,14 +591,14 @@ footer {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 14px 28px;
+  padding: 16px 32px;
   background: var(--primary);
   color: #fff;
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
   border-radius: var(--radius-sm);
   transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-  box-shadow: 0 4px 20px rgba(var(--primary-rgb),0.35);
+  box-shadow: 0 4px 24px rgba(var(--primary-rgb),0.4);
 }
 .btn-primary:hover {
   background: var(--primary-light);
@@ -609,11 +609,11 @@ footer {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 14px 28px;
+  padding: 16px 32px;
   background: var(--surface);
   color: var(--text);
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
   transition: background 0.2s, transform 0.15s;
@@ -756,7 +756,7 @@ footer {
 }
 .accordion-item.open .accordion-icon { transform: rotate(45deg); }
 .accordion-body { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.16,1,0.3,1); }
-.accordion-item.open .accordion-body { max-height: 600px; }
+.accordion-item.open .accordion-body { max-height: 1200px; }
 .accordion-content { padding: 4px 24px 24px; font-size: 14px; color: var(--text-muted); line-height: 1.7; }
 .accordion-content strong { color: var(--text); }
 .accordion-content code {
@@ -877,7 +877,83 @@ footer {
   .dl-card { padding: 24px; }
   .req-card { padding: 20px; }
   .signpath-card { padding: 24px; }
+  .hero-mini-ctas .btn-download, .hero-mini-ctas .btn-appstore { width: 100%; justify-content: center; }
 }
+
+/* ─── UI polish pass: warn tokens, a11y, conversion fixes ─── */
+:root { --warn: #D97706; --warn-light: #F59E0B; --warn-rgb: 217,119,6; }
+[data-theme="light"] { --warn: #B45309; --warn-rgb: 180,83,9; }
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) { --warn: #B45309; --warn-rgb: 180,83,9; } }
+
+/* status dot pulse (keyframe was missing — dot never animated) */
+@keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.85); } }
+
+/* visible keyboard focus on every interactive control */
+a:focus-visible, button:focus-visible,
+.btn-download:focus-visible, .btn-primary:focus-visible, .btn-secondary:focus-visible,
+.btn-appstore:focus-visible, .nav-back:focus-visible, .theme-toggle:focus-visible,
+.accordion-trigger:focus-visible, .footer-link:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-xs);
+}
+
+/* prerequisite promoted to an amber alert (blocking info — app is useless without iPhone + Pro Max) */
+.dl-prereq {
+  border-left: 3px solid var(--warn);
+  background: rgba(var(--warn-rgb),0.09);
+  color: var(--text);
+  font-size: 14px;
+  display: flex;
+  gap: 11px;
+  align-items: flex-start;
+}
+.dl-prereq strong { color: var(--text); font-weight: 700; }
+.dl-prereq a { color: var(--primary); font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
+.dl-prereq-icon { flex-shrink: 0; color: var(--warn); margin-top: 1px; }
+
+/* secondary App Store CTA + dual-platform hero buttons */
+.hero-mini-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
+.btn-appstore {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 32px;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  transition: background 0.2s, transform 0.15s, border-color 0.25s;
+}
+.btn-appstore:hover { background: var(--surface-hover); transform: translateY(-2px); border-color: rgba(var(--primary-rgb),0.25); }
+
+/* ─── Language toggle (SK / EN), matches legal pages ─── */
+.lang-content { display: none; }
+.lang-toggle {
+  display: flex;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 3px;
+  gap: 2px;
+}
+.lang-btn {
+  padding: 4px 14px;
+  border-radius: 99px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: var(--font);
+  transition: background 0.2s, color 0.2s;
+  line-height: 1.4;
+}
+.lang-btn.active { background: var(--primary); color: #fff; }
 </style>
 </head>
 <body>
@@ -889,8 +965,12 @@ footer {
     <div class="nav-actions">
       <a href="index.html" class="nav-back">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        Späť na hlavnú
+        <span class="nav-back-sk">Späť na hlavnú</span><span class="nav-back-en" style="display:none">Back to home</span>
       </a>
+      <div class="lang-toggle">
+        <button class="lang-btn" id="btnSk" onclick="setLang('sk')">SK</button>
+        <button class="lang-btn" id="btnEn" onclick="setLang('en')">EN</button>
+      </div>
       <button class="theme-toggle" id="themeToggle" aria-label="Prepnúť tému">
         <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
         <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -898,6 +978,9 @@ footer {
     </div>
   </div>
 </nav>
+
+<!-- ══════════════ SLOVAK ══════════════ -->
+<div id="content-sk" class="lang-content">
 
 <!-- HERO MINI -->
 <section id="hero-mini">
@@ -916,6 +999,16 @@ footer {
       </div>
       <h1 class="section-title">Stiahnuť iBlockySync<br>pre Windows</h1>
       <p class="section-subtitle">Oficiálna desktopová aplikácia pre synchronizáciu iBločky s účtovným softvérom Pohoda. Beží na pozadí, automaticky importuje doklady.</p>
+      <div class="hero-mini-ctas">
+        <a href="#download" class="btn-download">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Stiahnuť pre Windows
+        </a>
+        <a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" class="btn-appstore">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          iPhone aplikácia
+        </a>
+      </div>
       <div class="app-preview">
         <div class="app-window" role="img" aria-label="Náhľad aplikácie iBlockySync vo Windows — stav Windows pripojený">
           <div class="app-window-bar">
@@ -960,7 +1053,8 @@ footer {
         </div>
 
         <div class="dl-prereq">
-          iBlockySync je doplnok k aplikácii <strong>iBločky pre iPhone</strong>. Pred inštaláciou majte appku nainštalovanú a aktívne predplatné <strong>Pro Max</strong> — pri nastavení budete potrebovať API kľúč z aplikácie. Samotná Windows aplikácia bez iPhonu nič nerobí.
+          <svg class="dl-prereq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <div>iBlockySync je <strong>doplnok</strong> k aplikácii <a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener">iBločky pre iPhone</a>. Pred inštaláciou majte appku nainštalovanú a aktívne predplatné <strong>Pro Max</strong> — pri nastavení budete potrebovať API kľúč z aplikácie. Samotná Windows aplikácia bez iPhonu nič nerobí.</div>
         </div>
 
         <div class="dl-button-row">
@@ -1274,6 +1368,8 @@ footer {
         <div class="footer-links">
           <a href="index.html" class="footer-link">Domov</a>
           <span class="footer-sep">·</span>
+          <a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" class="footer-link">App Store</a>
+          <span class="footer-sep">·</span>
           <a href="index.html#windows" class="footer-link">Windows App</a>
           <span class="footer-sep">·</span>
           <a href="windows-setup.html" class="footer-link">Sprievodca nastavením</a>
@@ -1293,8 +1389,420 @@ footer {
   </div>
 </footer>
 
+</div><!-- /content-sk -->
+
+<!-- ══════════════ ENGLISH ══════════════ -->
+<div id="content-en" class="lang-content">
+
+<!-- HERO MINI -->
+<section id="hero-mini">
+  <div class="container">
+    <div class="hero-mini-inner fade-up">
+      <nav class="dl-breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">iBločky</a>
+        <span class="crumb-sep">›</span>
+        <a href="index.html#windows">Windows</a>
+        <span class="crumb-sep">›</span>
+        <span class="crumb-current">Download</span>
+      </nav>
+      <div class="section-label">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M3 5.557L9.938 4.56v6.81H3V5.557zm0 12.886L9.938 19.44v-6.624H3v5.627zm7.188-12.56L21 4v7.37H10.188V5.883zm0 6.737H21V20l-10.813-1.82v-5.56z"/></svg>
+        Windows
+      </div>
+      <h1 class="section-title">Download iBlockySync<br>for Windows</h1>
+      <p class="section-subtitle">The official desktop app that syncs iBločky with the Pohoda accounting software. Runs in the background and imports documents automatically.</p>
+      <div class="hero-mini-ctas">
+        <a href="#download" class="btn-download">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download for Windows
+        </a>
+        <a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" class="btn-appstore">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          iPhone app
+        </a>
+      </div>
+      <div class="app-preview">
+        <div class="app-window" role="img" aria-label="Preview of the iBlockySync Windows app — Windows connected status">
+          <div class="app-window-bar">
+            <div class="app-window-dots"><span></span><span></span><span></span></div>
+            <div class="app-window-title">iBlockySync</div>
+          </div>
+          <div class="app-window-body">
+            <div class="app-status-ok">
+              <span class="app-status-dot"></span>
+              Windows connected
+            </div>
+            <div class="app-row"><span>Last import</span><strong>3 documents</strong></div>
+            <div class="app-row"><span>Target</span><strong>Pohoda</strong></div>
+            <div class="app-row"><span>Sync status</span><span class="app-row-time">12 s ago</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOWNLOAD CARD + REQUIREMENTS -->
+<section id="download">
+  <div class="container">
+    <div class="download-layout">
+
+      <div class="dl-card fade-up">
+        <div class="dl-app-header">
+          <div class="dl-app-icon">iB</div>
+          <div>
+            <div class="dl-app-name">iBlockySync</div>
+            <div class="dl-app-meta">
+              <span class="dl-meta-tag">v1.0.0</span>
+              <span class="dl-meta-tag">Windows 10 / 11</span>
+              <span class="dl-meta-tag">64-bit</span>
+              <span class="dl-meta-tag">~6 MB</span>
+              <span class="dl-meta-tag">.exe installer</span>
+              <span class="dl-meta-tag">Released Jun 19, 2026</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dl-prereq">
+          <svg class="dl-prereq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <div>iBlockySync is a <strong>companion</strong> to the <a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener">iBločky for iPhone</a> app. Before installing, have the app installed and an active <strong>Pro Max</strong> subscription — you'll need the API key from the app during setup. The Windows app does nothing on its own without the iPhone.</div>
+        </div>
+
+        <div class="dl-button-row">
+          <a href="https://github.com/mocingejbr/iblocky/releases/download/v1.0.0/iBlockySync-Setup.exe" class="btn-download">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download iBlockySync-Setup.exe
+          </a>
+          <div class="dl-file-info">
+            <strong>iBlockySync-Setup.exe</strong><br>
+            Windows 10 / 11 · 64-bit · ~6 MB
+          </div>
+        </div>
+
+        <div class="dl-publisher">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          Publisher: <strong>Ereska Apps</strong> · digitally signed via SignPath Foundation
+        </div>
+
+        <div class="dl-smartscreen">
+          <div class="dl-smartscreen-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <p>Windows SmartScreen may show a warning on first launch. Click <strong>"More info"</strong> and then <strong>"Run anyway"</strong>. The installer is digitally signed — this is expected behavior for newer apps.</p>
+        </div>
+
+        <a href="https://github.com/mocingejbr/iblocky/releases" target="_blank" rel="noopener noreferrer" class="dl-allversions">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          All versions and release notes
+        </a>
+      </div>
+
+      <div class="req-card fade-up">
+        <div class="req-card-title">System requirements</div>
+        <div class="req-list">
+
+          <div class="req-item">
+            <div class="req-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <div>
+              <div class="req-label">Operating system</div>
+              <div class="req-value">Windows 10 / 11</div>
+            </div>
+          </div>
+
+          <div class="req-item">
+            <div class="req-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+            </div>
+            <div>
+              <div class="req-label">Architecture</div>
+              <div class="req-value">64-bit (x64)</div>
+            </div>
+          </div>
+
+          <div class="req-item">
+            <div class="req-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <div>
+              <div class="req-label">.NET Runtime</div>
+              <div class="req-value">8.0 (included)</div>
+            </div>
+          </div>
+
+          <div class="req-item">
+            <div class="req-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12H2M2 12l4-4M2 12l4 4M22 12l-4-4M22 12l-4 4"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+            <div>
+              <div class="req-label">Memory (RAM)</div>
+              <div class="req-value">4 GB (recommended)</div>
+            </div>
+          </div>
+
+          <div class="req-item">
+            <div class="req-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+            </div>
+            <div>
+              <div class="req-label">Disk space</div>
+              <div class="req-value">~50 MB</div>
+            </div>
+          </div>
+
+          <div class="req-item">
+            <div class="req-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <div>
+              <div class="req-label">Connection</div>
+              <div class="req-value">Internet (for sync)</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- INSTALL STEPS -->
+<section id="install">
+  <div class="container">
+    <div class="sec-head fade-up">
+      <div class="section-label">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Installation
+      </div>
+      <h2 class="section-title">Install in 3 steps</h2>
+      <p class="section-subtitle">From download to a running system-tray app — in under a minute.</p>
+    </div>
+    <div class="install-steps fade-up">
+      <div class="install-step">
+        <div class="install-step-num">1</div>
+        <div class="install-step-text">
+          <strong>Download the installer</strong>
+          <span>Click the button above and save <code>iBlockySync-Setup.exe</code>. Once the download finishes, open it.</span>
+        </div>
+      </div>
+      <div class="install-step">
+        <div class="install-step-num">2</div>
+        <div class="install-step-text">
+          <strong>Run it and confirm SmartScreen</strong>
+          <span>If the blue Windows SmartScreen dialog appears, click "More info" → "Run anyway". The installer is signed, so this is safe and expected. .NET 8.0 is included — nothing else to install.</span>
+        </div>
+      </div>
+      <div class="install-step">
+        <div class="install-step-num">3</div>
+        <div class="install-step-text">
+          <strong>The app runs in the system tray</strong>
+          <span>After installation iBlockySync starts in the background and its icon appears in the system tray (bottom-right near the clock). No window opens — the app is ready to sync.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONNECT WITH IPHONE -->
+<section id="connect">
+  <div class="container">
+    <div class="connect-card fade-up">
+      <div class="connect-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="3"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+      </div>
+      <div class="connect-body">
+        <div class="connect-title">Last step — connect with your iPhone</div>
+        <p class="connect-desc">The app still needs your API key from iBločky so it knows where documents belong. Copy it from <strong>iBločky → Settings → Windows Sync</strong> and paste it into iBlockySync. The full procedure, including the Pohoda login, is in the setup guide.</p>
+        <a href="windows-setup.html" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Open the setup guide
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TROUBLESHOOTING FAQ -->
+<section id="dl-faq">
+  <div class="container">
+    <div class="sec-head fade-up">
+      <div class="section-label">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3m.08 4h.01"/></svg>
+        Troubleshooting
+      </div>
+      <h2 class="section-title">Installation FAQ</h2>
+    </div>
+    <div class="accordion fade-up">
+      <div class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false" aria-controls="dlfaq-smartscreen-en">
+          <span>Windows showed a SmartScreen warning — is it safe?</span>
+          <span class="accordion-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="accordion-body" id="dlfaq-smartscreen-en">
+          <div class="accordion-content">Yes. The installer is digitally signed via <strong>SignPath Foundation</strong>. SmartScreen warns about every newer app until it builds reputation with Microsoft. Click <strong>"More info"</strong> and then <strong>"Run anyway"</strong>.</div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false" aria-controls="dlfaq-dotnet-en">
+          <span>Do I need to install .NET?</span>
+          <span class="accordion-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="accordion-body" id="dlfaq-dotnet-en">
+          <div class="accordion-content">No. <strong>.NET 8.0 is bundled</strong> right in the installer. You don't need any other dependencies — just run <code>iBlockySync-Setup.exe</code>.</div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false" aria-controls="dlfaq-running-en">
+          <span>How do I know the app is running?</span>
+          <span class="accordion-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="accordion-body" id="dlfaq-running-en">
+          <div class="accordion-content">iBlockySync runs in the background with no window. Its icon shows in the <strong>system tray</strong> (bottom-right). Once you've entered the API key, the iBločky app on your iPhone shows a live <strong>"Windows connected"</strong> status.</div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false" aria-controls="dlfaq-pohoda-en">
+          <span>Where does the app find Pohoda.exe?</span>
+          <span class="accordion-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="accordion-body" id="dlfaq-pohoda-en">
+          <div class="accordion-content">iBlockySync <strong>automatically detects</strong> the path to Pohoda.exe on first launch. If detection fails, click <strong>Browse</strong> in settings and pick the file manually — typically in <code>C:\Program Files\STORMWARE\POHODA\</code>.</div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false" aria-controls="dlfaq-multi-en">
+          <span>Does it work with multiple companies?</span>
+          <span class="accordion-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="accordion-body" id="dlfaq-multi-en">
+          <div class="accordion-content">Yes. iBlockySync <strong>automatically maps the IČO</strong> from each receipt to the right Pohoda database. Every folder in iBločky must have the correct company <strong>IČO</strong> in its name for the mapping to work.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CODE SIGNING / SIGNPATH -->
+<section id="codesigning">
+  <div class="container">
+    <div class="codesigning-inner">
+      <div class="signpath-card fade-up">
+        <div class="signpath-shield">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        </div>
+        <div class="signpath-content">
+          <div class="signpath-title">Digital code signing</div>
+          <p class="signpath-desc">
+            Code signing for this software is provided by <strong>SignPath Foundation</strong> — a non-profit that offers free code-signing infrastructure for open-source projects. A signed installer guarantees the file hasn't been altered since release.
+          </p>
+          <a href="https://signpath.org" target="_blank" rel="noopener noreferrer" class="signpath-link">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            signpath.org
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHANGELOG -->
+<section id="changelog">
+  <div class="container">
+    <div class="sec-head fade-up">
+      <div class="section-label">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="10"/></svg>
+        Version history
+      </div>
+      <h2 class="section-title">What's new</h2>
+      <p class="section-subtitle">Release history for iBlockySync.</p>
+    </div>
+    <div class="changelog-list fade-up">
+      <div class="changelog-entry">
+        <div class="changelog-head">
+          <span class="changelog-version">v1.0.0</span>
+          <span class="changelog-badge">Latest</span>
+          <span class="changelog-date">Jun 19, 2026</span>
+        </div>
+        <ul>
+          <li>First public release of iBlockySync.</li>
+          <li>Automatic import of scanned documents straight into Pohoda every 30 seconds.</li>
+          <li>Automatic IČO mapping to the right Pohoda database when working with multiple companies.</li>
+          <li>Digitally signed installer via SignPath Foundation with .NET 8.0 bundled.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="changelog-all fade-up">
+      <a href="https://github.com/mocingejbr/iblocky/releases" target="_blank" rel="noopener noreferrer" class="dl-allversions">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        All versions and release notes
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- HELP -->
+<section id="help">
+  <div class="container">
+    <div class="help-inner fade-up">
+      <div class="section-label" style="margin-left:auto;margin-right:auto;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></svg>
+        Support
+      </div>
+      <h2 class="section-title">Need help?</h2>
+      <p class="section-subtitle">Stuck on installation or connecting to Pohoda? We're here to help.</p>
+      <div class="help-actions">
+        <a href="mailto:ereskaapps@gmail.com" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+          Email us
+        </a>
+        <a href="windows-setup.html" class="btn-secondary">Setup guide</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand-name"><span class="brand-i">i</span><span>Bločky</span></div>
+          <div class="footer-tagline">Your documents. Always at hand.</div>
+        </div>
+        <div class="footer-links">
+          <a href="index.html" class="footer-link">Home</a>
+          <span class="footer-sep">·</span>
+          <a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" class="footer-link">App Store</a>
+          <span class="footer-sep">·</span>
+          <a href="index.html#windows" class="footer-link">Windows App</a>
+          <span class="footer-sep">·</span>
+          <a href="windows-setup.html" class="footer-link">Setup guide</a>
+          <span class="footer-sep">·</span>
+          <a href="privacy.html" class="footer-link">Privacy</a>
+          <span class="footer-sep">·</span>
+          <a href="terms.html" class="footer-link">Terms</a>
+          <span class="footer-sep">·</span>
+          <a href="mailto:ereskaapps@gmail.com" class="footer-link">ereskaapps@gmail.com</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2026 iBločky. All rights reserved.</span>
+        <span class="footer-made">Made in Slovakia 🇸🇰</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /content-en -->
+
 <script>
 (function(){
+  // mark decorative SVGs as hidden from screen readers (icons without their own label)
+  document.querySelectorAll('svg:not([aria-label])').forEach(s => s.setAttribute('aria-hidden', 'true'));
+
   const navEl = document.querySelector('nav');
   window.addEventListener('scroll', () => {
     navEl.classList.toggle('scrolled', window.scrollY > 16);
@@ -1352,6 +1860,35 @@ footer {
         el.classList.add('visible');
       }
     });
+  });
+
+  // ─── Language (SK / EN), shared across pages via localStorage ───
+  window.setLang = function(lang) {
+    document.getElementById('content-sk').style.display = lang === 'sk' ? 'block' : 'none';
+    document.getElementById('content-en').style.display = lang === 'en' ? 'block' : 'none';
+    document.getElementById('btnSk').classList.toggle('active', lang === 'sk');
+    document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+    document.querySelectorAll('.nav-back-sk').forEach(el => el.style.display = lang === 'sk' ? '' : 'none');
+    document.querySelectorAll('.nav-back-en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
+    document.querySelectorAll('#content-' + lang + ' .fade-up').forEach(el => el.classList.add('visible'));
+    html.setAttribute('lang', lang);
+    localStorage.setItem('iblocky-lang', lang);
+  };
+  setLang(localStorage.getItem('iblocky-lang') || 'sk');
+
+  // in-page anchors must target the visible language block (both blocks share section ids)
+  function scrollToVisible(id) {
+    var els = document.querySelectorAll('[id="' + id + '"]');
+    for (var i = 0; i < els.length; i++) {
+      if (els[i].offsetParent !== null) { els[i].scrollIntoView({ behavior: 'smooth', block: 'start' }); return true; }
+    }
+    return false;
+  }
+  document.addEventListener('click', function(e) {
+    var a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var id = a.getAttribute('href').slice(1);
+    if (id && scrollToVisible(id)) { e.preventDefault(); history.replaceState(null, '', '#' + id); }
   });
 })();
 </script>

@@ -474,6 +474,17 @@ footer {
   .prose { padding-top: 96px; padding-left: 18px; padding-right: 18px; }
   .footer-top { flex-direction: column; }
 }
+
+/* ─── UI polish pass: a11y + readability ─── */
+a:focus-visible, button:focus-visible,
+.nav-back:focus-visible, .lang-btn:focus-visible,
+.theme-toggle:focus-visible, .footer-link:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-xs);
+}
+/* stronger inline links (gold light-theme link contrast is borderline) */
+.prose a { color: var(--primary); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
 </style>
 </head>
 <body>
@@ -852,6 +863,9 @@ footer {
 
 <script>
 (function(){
+  // mark decorative SVGs as hidden from screen readers (icons without their own label)
+  document.querySelectorAll('svg:not([aria-label])').forEach(s => s.setAttribute('aria-hidden', 'true'));
+
   // ─── Nav scroll shadow ───
   const navEl = document.querySelector('nav');
   window.addEventListener('scroll', () => {
