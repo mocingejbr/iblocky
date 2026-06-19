@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iBločky — Stiahnuť iBlockySync pre Windows</title>
+<link rel="icon" type="image/jpeg" href="favicon.jpg">
+<link rel="apple-touch-icon" href="favicon.jpg">
+<meta name="description" content="Stiahnite iBlockySync — oficiálnu Windows aplikáciu pre synchronizáciu iBločky s účtovným softvérom Pohoda.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+/* ─── CSS Variables ─── */
+:root {
+  --primary: #637A9F;
+  --primary-rgb: 99,122,159;
+  --primary-light: #7d97bf;
+  --bg: #0F1117;
+  --bg-alt: #161B27;
+  --surface: rgba(255,255,255,0.04);
+  --surface-hover: rgba(255,255,255,0.07);
+  --border: rgba(255,255,255,0.08);
+  --text: #F0F2F5;
+  --text-muted: #8B9AB5;
+  --text-subtle: #5A6880;
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.5);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-xs: 6px;
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --nav-bg: rgba(15,17,23,0.85);
+  --glass-bg: rgba(255,255,255,0.04);
+  --glass-border: rgba(255,255,255,0.08);
+  --success-rgb: 34,197,94;
+  --success: #22C55E;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --primary: #C9A84C;
+    --primary-rgb: 201,168,76;
+    --primary-light: #E8C872;
+    --bg: #FAFAF8;
+    --bg-alt: #F0EDE6;
+    --surface: rgba(0,0,0,0.03);
+    --surface-hover: rgba(0,0,0,0.06);
+    --border: rgba(0,0,0,0.08);
+    --text: #1A1F2E;
+    --text-muted: #5C6478;
+    --text-subtle: #9AA0B0;
+    --shadow: 0 4px 24px rgba(0,0,0,0.08);
+    --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
+    --nav-bg: rgba(250,250,248,0.88);
+    --glass-bg: rgba(255,255,255,0.7);
+    --glass-border: rgba(0,0,0,0.06);
+  }
+}
+
+[data-theme="light"] {
+  --primary: #C9A84C;
+  --primary-rgb: 201,168,76;
+  --primary-light: #E8C872;
+  --bg: #FAFAF8;
+  --bg-alt: #F0EDE6;
+  --surface: rgba(0,0,0,0.03);
+  --surface-hover: rgba(0,0,0,0.06);
+  --border: rgba(0,0,0,0.08);
+  --text: #1A1F2E;
+  --text-muted: #5C6478;
+  --text-subtle: #9AA0B0;
+  --shadow: 0 4px 24px rgba(0,0,0,0.08);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
+  --nav-bg: rgba(250,250,248,0.88);
+  --glass-bg: rgba(255,255,255,0.7);
+  --glass-border: rgba(0,0,0,0.06);
+}
+
+[data-theme="dark"] {
+  --primary: #637A9F;
+  --primary-rgb: 99,122,159;
+  --primary-light: #7d97bf;
+  --bg: #0F1117;
+  --bg-alt: #161B27;
+  --surface: rgba(255,255,255,0.04);
+  --surface-hover: rgba(255,255,255,0.07);
+  --border: rgba(255,255,255,0.08);
+  --text: #F0F2F5;
+  --text-muted: #8B9AB5;
+  --text-subtle: #5A6880;
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.5);
+  --nav-bg: rgba(15,17,23,0.85);
+  --glass-bg: rgba(255,255,255,0.04);
+  --glass-border: rgba(255,255,255,0.08);
+}
+
+/* ─── Reset & Base ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+  transition: background 0.3s, color 0.3s;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+/* ─── Scroll Animations ─── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+.fade-up:nth-child(2) { transition-delay: 0.08s; }
+.fade-up:nth-child(3) { transition-delay: 0.16s; }
+.fade-up:nth-child(4) { transition-delay: 0.24s; }
+.fade-up:nth-child(5) { transition-delay: 0.32s; }
+.fade-up:nth-child(6) { transition-delay: 0.4s; }
+
+/* ─── Layout ─── */
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+section { padding: 96px 0; }
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary);
+  background: rgba(var(--primary-rgb),0.1);
+  border: 1px solid rgba(var(--primary-rgb),0.25);
+  padding: 6px 14px;
+  border-radius: 99px;
+  margin-bottom: 20px;
+}
+.section-title {
+  font-size: clamp(26px, 4vw, 40px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 16px;
+  text-wrap: balance;
+}
+.section-subtitle {
+  font-size: 17px;
+  color: var(--text-muted);
+  max-width: 560px;
+  line-height: 1.65;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: var(--nav-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.3s, box-shadow 0.3s;
+  box-shadow: 0 1px 0 var(--border);
+}
+nav.scrolled {
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18), 0 1px 0 var(--border);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.nav-logo {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text);
+}
+.nav-logo .brand-i { color: #000; }
+.nav-logo span { color: var(--primary); }
+[data-theme="dark"] .nav-logo .brand-i { color: #fff; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .nav-logo .brand-i { color: #fff; }
+}
+.nav-back {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  padding: 6px 12px;
+  border-radius: var(--radius-xs);
+  transition: color 0.2s, background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav-back:hover { color: var(--text); background: var(--surface); }
+.nav-actions { display: flex; align-items: center; gap: 12px; }
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.theme-toggle:hover { background: var(--surface-hover); color: var(--text); }
+.icon-sun, .icon-moon { display: none; }
+[data-theme="dark"] .icon-moon,
+:root:not([data-theme]) .icon-moon { display: block; }
+[data-theme="light"] .icon-sun { display: block; }
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) .icon-moon { display: none; }
+  :root:not([data-theme]) .icon-sun { display: block; }
+}
+
+/* ─── HERO MINI ─── */
+#hero-mini {
+  padding-top: 148px;
+  padding-bottom: 0;
+  position: relative;
+  overflow: hidden;
+}
+#hero-mini::before {
+  content: '';
+  position: absolute;
+  top: -100px; right: -200px;
+  width: 700px; height: 600px;
+  background: radial-gradient(ellipse, rgba(var(--primary-rgb),0.12) 0%, transparent 68%);
+  pointer-events: none;
+  z-index: 0;
+}
+#hero-mini::after {
+  content: '';
+  position: absolute;
+  bottom: -80px; left: -150px;
+  width: 500px; height: 400px;
+  background: radial-gradient(ellipse, rgba(var(--primary-rgb),0.06) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-mini-inner {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.hero-mini-inner .section-subtitle { margin: 0 auto; }
+
+/* ─── DOWNLOAD SECTION ─── */
+#download { padding-top: 64px; padding-bottom: 96px; }
+.download-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 32px;
+  align-items: start;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Main download card */
+.dl-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 32px;
+  transition: border-color 0.25s;
+}
+.dl-card:hover { border-color: rgba(var(--primary-rgb),0.2); }
+
+.dl-app-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 28px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--border);
+}
+.dl-app-icon {
+  width: 72px; height: 72px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(var(--primary-rgb),0.3) 0%, rgba(var(--primary-rgb),0.12) 100%);
+  border: 1px solid rgba(var(--primary-rgb),0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--primary);
+  letter-spacing: -0.04em;
+  flex-shrink: 0;
+}
+.dl-app-name {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+.dl-app-meta {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.dl-meta-tag {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 99px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+}
+
+.dl-button-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.btn-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 32px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 24px rgba(var(--primary-rgb),0.4);
+  white-space: nowrap;
+}
+.btn-download:hover {
+  background: var(--primary-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(var(--primary-rgb),0.5);
+}
+.dl-file-info {
+  font-size: 13px;
+  color: var(--text-subtle);
+  line-height: 1.5;
+}
+.dl-file-info strong { color: var(--text-muted); font-weight: 500; }
+
+.dl-smartscreen {
+  margin-top: 20px;
+  padding: 12px 16px;
+  background: rgba(var(--primary-rgb),0.06);
+  border: 1px solid rgba(var(--primary-rgb),0.14);
+  border-radius: var(--radius-sm);
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.dl-smartscreen-icon {
+  flex-shrink: 0;
+  margin-top: 1px;
+  color: var(--primary);
+  opacity: 0.7;
+}
+.dl-smartscreen p {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+/* Requirements sidebar card */
+.req-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+.req-card-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+  margin-bottom: 18px;
+}
+.req-list { display: flex; flex-direction: column; gap: 0; }
+.req-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--border);
+}
+.req-item:last-child { border-bottom: none; padding-bottom: 0; }
+.req-item:first-child { padding-top: 0; }
+.req-icon {
+  flex-shrink: 0;
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  background: rgba(var(--primary-rgb),0.1);
+  border: 1px solid rgba(var(--primary-rgb),0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+}
+.req-label { font-size: 12px; color: var(--text-subtle); margin-bottom: 1px; }
+.req-value { font-size: 14px; font-weight: 600; color: var(--text); }
+
+/* ─── SIGNPATH SECTION ─── */
+#codesigning {
+  background: var(--bg-alt);
+  padding: 64px 0;
+}
+.codesigning-inner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+.signpath-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 32px 36px;
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+.signpath-shield {
+  flex-shrink: 0;
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  background: rgba(var(--success-rgb),0.1);
+  border: 1px solid rgba(var(--success-rgb),0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--success);
+}
+.signpath-content { flex: 1; }
+.signpath-title {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+.signpath-desc {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-bottom: 14px;
+}
+.signpath-desc-en {
+  font-size: 13px;
+  color: var(--text-subtle);
+  line-height: 1.6;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-style: italic;
+}
+.signpath-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--success);
+  padding: 5px 12px;
+  border-radius: var(--radius-xs);
+  border: 1px solid rgba(var(--success-rgb),0.25);
+  background: rgba(var(--success-rgb),0.07);
+  transition: background 0.2s, color 0.2s;
+  margin-top: 14px;
+}
+.signpath-link:hover {
+  background: rgba(var(--success-rgb),0.14);
+}
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  padding: 56px 0 40px;
+}
+.footer-inner { display: flex; flex-direction: column; gap: 32px; }
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.footer-brand-name {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.footer-brand-name .brand-i { color: #000; }
+.footer-brand-name span { color: var(--primary); }
+[data-theme="dark"] .footer-brand-name .brand-i { color: #fff; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .footer-brand-name .brand-i { color: #fff; }
+}
+.footer-tagline { font-size: 14px; color: var(--text-muted); font-style: italic; }
+.footer-links { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.footer-link {
+  font-size: 14px;
+  color: var(--text-muted);
+  padding: 6px 10px;
+  border-radius: var(--radius-xs);
+  transition: color 0.2s, background 0.2s;
+}
+.footer-link:hover { color: var(--text); background: var(--surface); }
+.footer-sep { color: var(--text-subtle); user-select: none; opacity: 0.6; }
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.footer-copy { font-size: 13px; color: var(--text-subtle); }
+.footer-made { font-size: 13px; color: var(--text-subtle); }
+
+/* Buttons */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(var(--primary-rgb),0.35);
+}
+.btn-primary:hover {
+  background: var(--primary-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(var(--primary-rgb),0.45);
+}
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-secondary:hover { background: var(--surface-hover); transform: translateY(-2px); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 760px) {
+  .download-layout {
+    grid-template-columns: 1fr;
+  }
+  .req-card { order: -1; }
+  .dl-button-row { flex-direction: column; align-items: flex-start; }
+  .btn-download { width: 100%; justify-content: center; }
+  .signpath-card { flex-direction: column; gap: 16px; }
+  section { padding: 72px 0; }
+  #hero-mini { padding-top: 120px; }
+  #download { padding-top: 48px; padding-bottom: 72px; }
+  .footer-top { flex-direction: column; }
+}
+@media (max-width: 480px) {
+  .dl-app-header { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .dl-card { padding: 24px; }
+  .req-card { padding: 20px; }
+  .signpath-card { padding: 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><span class="brand-i">i</span><span>Bločky</span></a>
+    <div class="nav-actions">
+      <a href="index.html" class="nav-back">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Späť na hlavnú
+      </a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Prepnúť tému">
+        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO MINI -->
+<section id="hero-mini">
+  <div class="container">
+    <div class="hero-mini-inner fade-up">
+      <div class="section-label">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M3 5.557L9.938 4.56v6.81H3V5.557zm0 12.886L9.938 19.44v-6.624H3v5.627zm7.188-12.56L21 4v7.37H10.188V5.883zm0 6.737H21V20l-10.813-1.82v-5.56z"/></svg>
+        Windows
+      </div>
+      <h1 class="section-title">Stiahnuť iBlockySync<br>pre Windows</h1>
+      <p class="section-subtitle">Oficiálna desktopová aplikácia pre synchronizáciu iBločky s účtovným softvérom Pohoda. Beží na pozadí, automaticky importuje doklady.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DOWNLOAD CARD + REQUIREMENTS -->
+<section id="download">
+  <div class="container">
+    <div class="download-layout">
+
+      <!-- Main download card -->
+      <div class="dl-card fade-up">
+        <div class="dl-app-header">
+          <div class="dl-app-icon">iB</div>
+          <div>
+            <div class="dl-app-name">iBlockySync</div>
+            <div class="dl-app-meta">
+              <span class="dl-meta-tag">v1.0.0</span>
+              <span class="dl-meta-tag">Windows 10 / 11</span>
+              <span class="dl-meta-tag">64-bit</span>
+              <span class="dl-meta-tag">.exe inštalátor</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dl-button-row">
+          <a href="https://github.com/mocingejbr/iblocky/releases/download/v1.0.0/iBlockySync-Setup.exe" class="btn-download">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Stiahnuť iBlockySync-Setup.exe
+          </a>
+          <div class="dl-file-info">
+            <strong>iBlockySync-Setup.exe</strong><br>
+            Windows 10 / 11 · 64-bit
+          </div>
+        </div>
+
+        <div class="dl-smartscreen">
+          <div class="dl-smartscreen-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <p>Windows SmartScreen môže zobraziť upozornenie pri prvom spustení. Kliknite na <strong>„Ďalšie informácie"</strong> a potom <strong>„Spustiť"</strong>. Inštalátor je digitálne podpísaný.</p>
+        </div>
+      </div>
+
+      <!-- Requirements sidebar -->
+      <div class="req-card fade-up">
+        <div class="req-card-title">Systémové požiadavky</div>
+        <div class="req-list">
+
+          <div class="req-item">
+            <div class="req-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <div>
+              <div class="req-label">Operačný systém</div>
+              <div class="req-value">Windows 10 / 11</div>
+            </div>
+          </div>
+
+          <div class="req-item">
+            <div class="req-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>
+            </div>
+            <div>
+              <div class="req-label">Architektúra</div>
+              <div class="req-value">64-bit (x64)</div>
+            </div>
+          </div>
+
+          <div class="req-item">
+            <div class="req-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <div>
+              <div class="req-label">.NET Runtime</div>
+              <div class="req-value">8.0 (zahrnuté)</div>
+            </div>
+          </div>
+
+          <div class="req-item">
+            <div class="req-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12H2M2 12l4-4M2 12l4 4M22 12l-4-4M22 12l-4 4"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+            <div>
+              <div class="req-label">Pamäť RAM</div>
+              <div class="req-value">4 GB (odporúčané)</div>
+            </div>
+          </div>
+
+          <div class="req-item">
+            <div class="req-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+            </div>
+            <div>
+              <div class="req-label">Miesto na disku</div>
+              <div class="req-value">~50 MB</div>
+            </div>
+          </div>
+
+          <div class="req-item">
+            <div class="req-icon">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <div>
+              <div class="req-label">Pripojenie</div>
+              <div class="req-value">Internet (pre sync)</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CODE SIGNING / SIGNPATH -->
+<section id="codesigning">
+  <div class="container">
+    <div class="codesigning-inner">
+      <div class="signpath-card fade-up">
+        <div class="signpath-shield">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        </div>
+        <div class="signpath-content">
+          <div class="signpath-title">Digitálne podpisovanie kódu</div>
+          <p class="signpath-desc">
+            Digitálny podpis tohto softvéru je zabezpečený prostredníctvom <strong>SignPath Foundation</strong> — neziskovej organizácie, ktorá poskytuje bezplatnú infraštruktúru na podpisovanie kódu pre open-source projekty. Podpísaný kód zaisťuje, že inštalátor nebol po zverejnení pozmenený.
+          </p>
+          <p class="signpath-desc-en">
+            Code signing for this software is provided by <strong>SignPath Foundation</strong>, a non-profit organization providing free code signing infrastructure for open-source projects.
+          </p>
+          <a href="https://signpath.org" target="_blank" rel="noopener noreferrer" class="signpath-link">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            signpath.org
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand-name"><span class="brand-i">i</span><span>Bločky</span></div>
+          <div class="footer-tagline">Vaše doklady. Vždy po ruke.</div>
+        </div>
+        <div class="footer-links">
+          <a href="index.html" class="footer-link">Domov</a>
+          <span class="footer-sep">·</span>
+          <a href="index.html#windows" class="footer-link">Windows App</a>
+          <span class="footer-sep">·</span>
+          <a href="windows-setup.html" class="footer-link">Sprievodca nastavením</a>
+          <span class="footer-sep">·</span>
+          <a href="privacy.html" class="footer-link">Ochrana súkromia</a>
+          <span class="footer-sep">·</span>
+          <a href="terms.html" class="footer-link">Podmienky použitia</a>
+          <span class="footer-sep">·</span>
+          <a href="mailto:ereskaapps@gmail.com" class="footer-link">ereskaapps@gmail.com</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2025 iBločky. Všetky práva vyhradené.</span>
+        <span class="footer-made">Vyrobené na Slovensku 🇸🇰</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const navEl = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    navEl.classList.toggle('scrolled', window.scrollY > 16);
+  }, { passive: true });
+
+  const html = document.documentElement;
+  const btn = document.getElementById('themeToggle');
+  const stored = localStorage.getItem('iblocky-theme');
+  if (stored) html.setAttribute('data-theme', stored);
+
+  btn.addEventListener('click', () => {
+    const current = html.getAttribute('data-theme');
+    const sys = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    let next;
+    if (!current) {
+      next = sys === 'dark' ? 'light' : 'dark';
+    } else {
+      next = current === 'dark' ? 'light' : 'dark';
+    }
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('iblocky-theme', next);
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.fade-up').forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight) {
+        el.classList.add('visible');
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
