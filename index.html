@@ -394,6 +394,13 @@ nav.scrolled {
   max-width: 460px;
 }
 .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+.hero-hint {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-top: 16px;
+  max-width: 460px;
+}
 /* UI Polish: low-key hero trust strip reinforcing safety/quality without flash */
 .hero-trust {
   display: flex;
@@ -551,6 +558,21 @@ nav.scrolled {
   background: radial-gradient(ellipse, rgba(var(--primary-rgb),0.24) 0%, transparent 68%);
   pointer-events: none;
   z-index: -1;
+}
+
+/* ─── AKO TO FUNGUJE (value ladder) ─── */
+/* Sits on bg between hero (bg) and features (bg-alt); top border demarcates it from hero */
+#ako-to-funguje { background: var(--bg); border-top: 1px solid var(--border); }
+.ladder-num { font-size: 20px; font-weight: 800; color: var(--primary); line-height: 1; }
+.badge-free { background: rgba(127,127,127,0.14); color: var(--text-muted); border-color: rgba(127,127,127,0.28); }
+.badge-promax { background: rgba(var(--primary-rgb),0.22); border-color: rgba(var(--primary-rgb),0.4); }
+.ladder-card-link { text-decoration: none; display: block; }
+.ladder-link-hint {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--primary);
 }
 
 /* ─── FEATURES ─── */
@@ -783,6 +805,18 @@ nav.scrolled {
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
+.windows-prereq {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin: -8px 0 28px;
+  max-width: 460px;
+  padding: 12px 16px;
+  border-left: 2px solid rgba(var(--primary-rgb),0.4);
+  background: rgba(var(--primary-rgb),0.06);
+  border-radius: 8px;
+}
+.windows-prereq a { color: var(--primary); font-weight: 600; }
 .windows-badge {
   display: inline-flex;
   align-items: center;
@@ -1320,6 +1354,7 @@ footer {
   <div class="nav-inner">
     <a href="#" class="nav-logo"><span class="brand-i">i</span><span>Bločky</span></a>
     <div class="nav-actions">
+      <a href="#ako-to-funguje" class="nav-link">Ako to funguje</a>
       <a href="#features" class="nav-link">Funkcie</a>
       <a href="#pricing" class="nav-link">Ceny</a>
       <a href="#windows" class="nav-link">Windows</a>
@@ -1344,14 +1379,14 @@ footer {
       <div>
         <div class="hero-eyebrow fade-up">
           <span class="hero-eyebrow-dot"></span>
-          Pre iPhone &amp; Windows
+          Pre iPhone · Pohoda automatizácia voliteľná
         </div>
         <h1 class="hero-title fade-up">
           <span class="brand-i">i</span><span class="brand">Bločky</span>
         </h1>
         <p class="hero-tagline fade-up">Vaše doklady. Vždy po ruke.</p>
         <p class="hero-subtitle fade-up">
-          Naskenujte bloček v iPhone — Windows aplikácia ho automaticky naimportuje do Pohody. Pre účtovníkov, firmy a každého, kto pracuje s Pohodou.
+          Skenujte a archivujte bločky priamo v iPhone. Účtujete v Pohode? Exportujte doklady do XML — alebo ich nechajte naimportovať úplne automaticky cez Windows companion (Pro Max).
         </p>
         <div class="hero-ctas fade-up">
           <a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" class="btn-primary">
@@ -1364,9 +1399,10 @@ footer {
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
               <path d="M3 5.557L9.938 4.56v6.81H3V5.557zm0 12.886L9.938 19.44v-6.624H3v5.627zm7.188-12.56L21 4v7.37H10.188V5.883zm0 6.737H21V20l-10.813-1.82v-5.56z"/>
             </svg>
-            Stiahnuť pre Windows
+            Windows companion (Pro Max)
           </a>
         </div>
+        <p class="hero-hint fade-up">Začnite iPhone aplikáciou — Windows je voliteľný doplnok pre automatický import do Pohody.</p>
         <div class="hero-trust fade-up">
           <span class="hero-trust-item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
@@ -1431,6 +1467,50 @@ footer {
         </div>
         <div class="phone-glow"></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- AKO TO FUNGUJE (value ladder) -->
+<section id="ako-to-funguje">
+  <div class="container">
+    <div class="features-header">
+      <div class="section-label fade-up">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+        Ako to funguje
+      </div>
+      <h2 class="section-title fade-up">Od skenu po Pohodu<br>— vašim tempom</h2>
+      <p class="section-subtitle fade-up">iPhone aplikácia funguje samostatne. Export a automatizáciu pridáte, len ak ich potrebujete.</p>
+    </div>
+    <div class="features-grid">
+      <!-- Level 1 -->
+      <div class="feature-card fade-up">
+        <div class="feature-icon"><span class="ladder-num">1</span></div>
+        <div class="feature-header">
+          <span class="feature-title">Naskenujte v iPhone</span>
+          <span class="badge-pro badge-free">Zadarmo</span>
+        </div>
+        <p class="feature-desc">Naskenujte bloček, uložte si ho do priečinkov, sledujte záruky a výdavky v grafoch. Stačí iPhone — nič ďalšie netreba.</p>
+      </div>
+      <!-- Level 2 -->
+      <div class="feature-card fade-up">
+        <div class="feature-icon"><span class="ladder-num">2</span></div>
+        <div class="feature-header">
+          <span class="feature-title">Exportujte do Pohody</span>
+          <span class="badge-pro">Pro</span>
+        </div>
+        <p class="feature-desc">Voliteľné. Vyexportujte doklad do XML, prekopírujte na počítač a naimportujte do Pohody ručne. Bez Windows aplikácie.</p>
+      </div>
+      <!-- Level 3 -->
+      <a href="#windows" class="feature-card ladder-card-link fade-up">
+        <div class="feature-icon"><span class="ladder-num">3</span></div>
+        <div class="feature-header">
+          <span class="feature-title">Alebo import automaticky</span>
+          <span class="badge-pro badge-promax">Pro Max</span>
+        </div>
+        <p class="feature-desc">Voliteľné. Klepnete na Export — Windows companion bežiaci pri Pohode doklad naimportuje sám. Žiadne kopírovanie súborov.</p>
+        <span class="ladder-link-hint">Pozrieť Windows automatizáciu →</span>
+      </a>
     </div>
   </div>
 </section>
@@ -1501,7 +1581,7 @@ footer {
           <span class="feature-title">XML do Pohody</span>
           <span class="badge-pro">Pro</span>
         </div>
-        <p class="feature-desc">Exportujte priamo do účtovného softvéru Pohoda. Manuálne aj automaticky cez Windows companion app.</p>
+        <p class="feature-desc">Manuálny XML export do Pohody v Pro. S Pro Max prebehne import automaticky cez Windows companion — bez kopírovania súborov.</p>
       </div>
     </div>
   </div>
@@ -1700,6 +1780,9 @@ footer {
         <h2 class="section-title fade-up">Pohoda importuje<br>sama od seba</h2>
         <p class="section-subtitle fade-up">
           iBlockySync beží potichu na pozadí vo Windows. Každých 30 sekúnd skontroluje nové doklady a importuje ich priamo do Pohody — bez akéhokoľvek zásahu.
+        </p>
+        <p class="windows-prereq fade-up">
+          Vyžaduje iBločky pre iPhone a predplatné <strong>Pro Max</strong>. Stačí vám ručný import? <a href="#ako-to-funguje">Manuálny XML export</a> funguje už v Pro — bez Windows aplikácie.
         </p>
         <div class="win-steps fade-up">
           <div class="win-step">
