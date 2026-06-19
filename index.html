@@ -6,7 +6,61 @@
 <title>iBločky — Vaše doklady. Vždy po ruke.</title>
 <link rel="icon" type="image/jpeg" href="favicon.jpg">
 <link rel="apple-touch-icon" href="favicon.jpg">
-<meta name="description" content="Skenujte bločky, sledujte záruky, exportujte do Pohody — všetko z jednej aplikácie pre iPhone.">
+<meta name="description" content="Skenujte bločky, sledujte záruky, exportujte do Pohody — všetko z jednej aplikácie pre iPhone. iBlockySync automaticky importuje doklady do Pohody na Windows.">
+<link rel="canonical" href="https://iblocky.sk/">
+<meta name="theme-color" content="#0F1117" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FAFAF8" media="(prefers-color-scheme: light)">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="iBločky">
+<meta property="og:locale" content="sk_SK">
+<meta property="og:title" content="iBločky — Vaše doklady. Vždy po ruke.">
+<meta property="og:description" content="Naskenujte bloček v iPhone — iBlockySync ho automaticky naimportuje do Pohody na Windows. Pre účtovníkov, firmy a používateľov Pohody.">
+<meta property="og:url" content="https://iblocky.sk/">
+<meta property="og:image" content="https://iblocky.sk/favicon.jpg">
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="iBločky — Vaše doklady. Vždy po ruke.">
+<meta name="twitter:description" content="Naskenujte bloček v iPhone — iBlockySync ho automaticky naimportuje do Pohody na Windows.">
+<meta name="twitter:image" content="https://iblocky.sk/favicon.jpg">
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "iBlockySync",
+  "operatingSystem": "Windows 10, Windows 11",
+  "applicationCategory": "BusinessApplication",
+  "description": "Windows companion aplikácia pre iBločky, ktorá automaticky importuje naskenované doklady do účtovného softvéru Pohoda.",
+  "downloadUrl": "https://iblocky.sk/download.html",
+  "softwareVersion": "1.0.0",
+  "publisher": { "@type": "Organization", "name": "Ereska Apps" },
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Ako exportovať XML doklady do Pohody?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Vytvorte v iBločky priečinok s názvom a IČO firmy, naskenujte bločky, v priečinku ich označte na export a odošlite. iBlockySync na Windows ich automaticky naimportuje do Pohody." }
+    },
+    {
+      "@type": "Question",
+      "name": "Kde nájde iBlockySync súbor Pohoda.exe?",
+      "acceptedAnswer": { "@type": "Answer", "text": "iBlockySync automaticky deteguje cestu k Pohoda.exe pri prvom spustení. Pri zlyhaní detekcie ju vyberiete ručne cez Browse, štandardne v C:\\Program Files\\STORMWARE\\POHODA\\." }
+    },
+    {
+      "@type": "Question",
+      "name": "Funguje iBlockySync s viacerými firmami?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Áno. iBlockySync automaticky mapuje IČO z každého bločku na správnu databázu Pohody. Každý priečinok v iBločky musí mať v názve správne IČO firmy." }
+    }
+  ]
+}
+</script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
@@ -340,6 +394,19 @@ nav.scrolled {
   max-width: 460px;
 }
 .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+/* UI Polish: low-key hero trust strip reinforcing safety/quality without flash */
+.hero-trust {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.hero-trust-item { display: inline-flex; align-items: center; gap: 7px; }
+.hero-trust-item svg { width: 15px; height: 15px; color: var(--primary); flex-shrink: 0; }
+.hero-trust-sep { color: var(--text-subtle); opacity: 0.4; }
 /* UI Polish: increased horizontal padding for more generous CTA hit area; added border-color transition */
 .btn-primary {
   display: inline-flex;
@@ -1282,10 +1349,10 @@ footer {
         </h1>
         <p class="hero-tagline fade-up">Vaše doklady. Vždy po ruke.</p>
         <p class="hero-subtitle fade-up">
-          Skenujte bloček, sledujte záruky, exportujte do Pohody — všetko z jednej aplikácie.
+          Naskenujte bloček v iPhone — Windows aplikácia ho automaticky naimportuje do Pohody. Pre účtovníkov, firmy a každého, kto pracuje s Pohodou.
         </p>
         <div class="hero-ctas fade-up">
-          <a href="#app-store" class="btn-primary">
+          <a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" class="btn-primary">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
               <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
             </svg>
@@ -1297,6 +1364,22 @@ footer {
             </svg>
             Stiahnuť pre Windows
           </a>
+        </div>
+        <div class="hero-trust fade-up">
+          <span class="hero-trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+            Podpísaný inštalátor
+          </span>
+          <span class="hero-trust-sep">·</span>
+          <span class="hero-trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            .NET je súčasťou
+          </span>
+          <span class="hero-trust-sep">·</span>
+          <span class="hero-trust-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/><circle cx="12" cy="12" r="10"/></svg>
+            Vyrobené na Slovensku
+          </span>
         </div>
       </div>
       <div class="hero-visual fade-up">
@@ -1446,11 +1529,11 @@ footer {
             </th>
             <th class="col-pro">
               <span class="tier-name">Pro</span>
-              <span class="tier-price">[APP STORE PRICE]</span>
+              <span class="tier-price"><a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600">Pozri v App Store</a></span>
             </th>
             <th class="col-promax">
               <span class="tier-name">Pro Max</span>
-              <span class="tier-price">[APP STORE PRICE]</span>
+              <span class="tier-price"><a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600">Pozri v App Store</a></span>
               <div><span class="badge-excl">Exkluzívne</span></div>
             </th>
           </tr>
@@ -1468,9 +1551,9 @@ footer {
           <tr><td>Automatická synchronizácia s Pohodou (Windows)</td><td class="col-free"><span class="check-no">—</span></td><td class="col-pro"><span class="check-no">—</span></td><td class="col-promax"><span class="check-yes">✓</span></td></tr>
           <tr class="cta-row">
             <td></td>
-            <td class="col-free"><a href="#app-store" class="btn-tier btn-tier-muted">Stiahnuť zadarmo</a></td>
-            <td class="col-pro"><a href="#app-store" class="btn-tier btn-tier-pro">Odomkni plnú verziu</a></td>
-            <td class="col-promax"><a href="#app-store" class="btn-tier btn-tier-promax">Upgraduj na Pro Max</a></td>
+            <td class="col-free"><a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" class="btn-tier btn-tier-muted">Stiahnuť zadarmo</a></td>
+            <td class="col-pro"><a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" class="btn-tier btn-tier-pro">Odomkni plnú verziu</a></td>
+            <td class="col-promax"><a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" class="btn-tier btn-tier-promax">Upgraduj na Pro Max</a></td>
           </tr>
         </tbody>
       </table>
@@ -1489,11 +1572,11 @@ footer {
           <div class="pricing-mobile-row"><span class="check-no">—</span> PDF export</div>
           <div class="pricing-mobile-row"><span class="check-no">—</span> XML do Pohody</div>
         </div>
-        <a href="#app-store" class="btn-tier btn-tier-muted" style="display:block;text-align:center">Stiahnuť zadarmo</a>
+        <a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" class="btn-tier btn-tier-muted" style="display:block;text-align:center">Stiahnuť zadarmo</a>
       </div>
       <div class="pricing-mobile-card">
         <div class="pricing-mobile-tier">Pro</div>
-        <div class="pricing-mobile-price">[APP STORE PRICE]</div>
+        <div class="pricing-mobile-price"><a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600">Pozri v App Store</a></div>
         <div class="pricing-mobile-features">
           <div class="pricing-mobile-row"><span class="check-yes">✓</span> Všetko z Zadarmo</div>
           <div class="pricing-mobile-row"><span class="check-yes">✓</span> PDF export &amp; zdieľanie</div>
@@ -1501,18 +1584,18 @@ footer {
           <div class="pricing-mobile-row"><span class="check-yes">✓</span> XML export do Pohody</div>
           <div class="pricing-mobile-row"><span class="check-no">—</span> Auto sync s Pohodou</div>
         </div>
-        <a href="#app-store" class="btn-tier btn-tier-pro" style="display:block;text-align:center">Odomkni plnú verziu</a>
+        <a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" class="btn-tier btn-tier-pro" style="display:block;text-align:center">Odomkni plnú verziu</a>
       </div>
       <div class="pricing-mobile-card highlighted">
         <div class="pricing-mobile-tier">Pro Max <span class="badge-excl">Exkluzívne</span></div>
-        <div class="pricing-mobile-price">[APP STORE PRICE]</div>
+        <div class="pricing-mobile-price"><a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" style="color:var(--primary);font-weight:600">Pozri v App Store</a></div>
         <div class="pricing-mobile-features">
           <div class="pricing-mobile-row"><span class="check-yes">✓</span> Všetko z Pro</div>
           <div class="pricing-mobile-row"><span class="check-yes">✓</span> Auto sync s Pohodou</div>
           <div class="pricing-mobile-row"><span class="check-yes">✓</span> Windows companion app</div>
           <div class="pricing-mobile-row"><span class="check-yes">✓</span> Live "Windows pripojený" stav</div>
         </div>
-        <a href="#app-store" class="btn-tier btn-tier-promax" style="display:block;text-align:center">Upgraduj na Pro Max</a>
+        <a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" class="btn-tier btn-tier-promax" style="display:block;text-align:center">Upgraduj na Pro Max</a>
       </div>
     </div>
 
@@ -1659,7 +1742,7 @@ footer {
               </div>
               <div class="win-benefit-text">
                 <strong>Jedno kliknutie — žiadne USB, žiadne súbory</strong>
-                <span>Bezdrôtové prepojenie cez šifrované cloudové queue. Žiadna fyzická práca.</span>
+                <span>Doklady putujú z iPhonu cez šifrovanú cloudovú frontu priamo do PC. Žiadne káble, žiadne ručné prenášanie.</span>
               </div>
             </div>
             <div class="win-benefit">
@@ -1667,8 +1750,8 @@ footer {
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               </div>
               <div class="win-benefit-text">
-                <strong>Šifrované, lokálne, bez cloudu</strong>
-                <span>XML súbory sa ukladajú lokálne v %APPDATA%\iBlockySync. Vaše dáta zostávajú u vás.</span>
+                <strong>Šifrovaný prenos, lokálne uložené dáta</strong>
+                <span>Prenos je end-to-end šifrovaný a vygenerované XML súbory sa ukladajú lokálne v %APPDATA%\iBlockySync na vašom PC.</span>
               </div>
             </div>
             <div class="win-benefit">
@@ -1880,9 +1963,9 @@ footer {
           <div class="footer-tagline">Vaše doklady. Vždy po ruke.</div>
         </div>
         <div class="footer-links">
-          <a href="#app-store" class="footer-link">App Store</a>
+          <a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" class="footer-link">App Store</a>
           <span class="footer-sep">·</span>
-          <a href="#windows-download" class="footer-link">Windows App</a>
+          <a href="download.html" class="footer-link">Windows App</a>
           <span class="footer-sep">·</span>
           <a href="privacy.html" class="footer-link">Ochrana súkromia</a>
           <span class="footer-sep">·</span>
@@ -1892,7 +1975,7 @@ footer {
         </div>
       </div>
       <div class="footer-bottom">
-        <span class="footer-copy">© 2025 iBločky. Všetky práva vyhradené.</span>
+        <span class="footer-copy">© 2026 iBločky. Všetky práva vyhradené.</span>
         <span class="footer-made">Vyrobené na Slovensku 🇸🇰</span>
       </div>
     </div>
