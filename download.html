@@ -6,7 +6,41 @@
 <title>iBločky — Stiahnuť iBlockySync pre Windows</title>
 <link rel="icon" type="image/jpeg" href="favicon.jpg">
 <link rel="apple-touch-icon" href="favicon.jpg">
-<meta name="description" content="Stiahnite iBlockySync — oficiálnu Windows aplikáciu pre synchronizáciu iBločky s účtovným softvérom Pohoda.">
+<meta name="description" content="Stiahnite iBlockySync — oficiálnu Windows aplikáciu pre synchronizáciu iBločky s účtovným softvérom Pohoda. Windows 10/11, 64-bit, .NET zahrnutý, digitálne podpísané.">
+<link rel="canonical" href="https://iblocky.sk/download.html">
+<meta name="theme-color" content="#0F1117" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FAFAF8" media="(prefers-color-scheme: light)">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="iBločky">
+<meta property="og:locale" content="sk_SK">
+<meta property="og:title" content="Stiahnuť iBlockySync pre Windows">
+<meta property="og:description" content="Oficiálna desktopová aplikácia pre synchronizáciu iBločky s Pohodou. Beží na pozadí, automaticky importuje doklady. Digitálne podpísaný inštalátor.">
+<meta property="og:url" content="https://iblocky.sk/download.html">
+<meta property="og:image" content="https://iblocky.sk/favicon.jpg">
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Stiahnuť iBlockySync pre Windows">
+<meta name="twitter:description" content="Oficiálna Windows aplikácia pre synchronizáciu iBločky s Pohodou. Digitálne podpísaný inštalátor.">
+<meta name="twitter:image" content="https://iblocky.sk/favicon.jpg">
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "iBlockySync",
+  "operatingSystem": "Windows 10, Windows 11",
+  "applicationCategory": "BusinessApplication",
+  "processorRequirements": "x64",
+  "memoryRequirements": "4 GB",
+  "softwareVersion": "1.0.0",
+  "fileSize": "25 MB",
+  "description": "Windows companion aplikácia pre iBločky, ktorá automaticky importuje naskenované doklady do účtovného softvéru Pohoda.",
+  "downloadUrl": "https://github.com/mocingejbr/iblocky/releases/download/v1.0.0/iBlockySync-Setup.exe",
+  "publisher": { "@type": "Organization", "name": "Ereska Apps" },
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
+}
+</script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
@@ -574,6 +608,158 @@ footer {
 }
 .btn-secondary:hover { background: var(--surface-hover); transform: translateY(-2px); }
 
+/* ─── SHARED SECTION HEADER ─── */
+.sec-head { text-align: center; margin-bottom: 48px; }
+.sec-head .section-subtitle { margin: 0 auto; }
+.sec-head .section-label { margin-left: auto; margin-right: auto; }
+
+/* ─── DOWNLOAD CARD EXTRAS ─── */
+.dl-publisher {
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--text-subtle);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.dl-publisher svg { width: 14px; height: 14px; color: var(--primary); opacity: 0.8; flex-shrink: 0; }
+.dl-allversions {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+  transition: opacity 0.2s;
+}
+.dl-allversions:hover { opacity: 0.7; }
+.dl-allversions svg { width: 13px; height: 13px; }
+
+/* ─── INSTALL STEPS ─── */
+#install { background: var(--bg); border-top: 1px solid var(--border); }
+.install-steps {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.install-steps::before {
+  content: '';
+  position: absolute;
+  left: 23px; top: 32px; bottom: 32px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--primary), rgba(var(--primary-rgb),0.1));
+}
+.install-step { display: flex; gap: 20px; align-items: flex-start; padding: 14px 0; position: relative; }
+.install-step-num {
+  flex-shrink: 0;
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid rgba(var(--primary-rgb),0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--primary);
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 0 4px var(--bg);
+}
+.install-step-text strong { display: block; font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.install-step-text span { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+/* ─── CONNECT (iPhone bridge) ─── */
+#connect { background: var(--bg-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.connect-card {
+  max-width: 760px;
+  margin: 0 auto;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 32px 36px;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.connect-icon {
+  flex-shrink: 0;
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  background: rgba(var(--primary-rgb),0.12);
+  border: 1px solid rgba(var(--primary-rgb),0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+}
+.connect-body { flex: 1; min-width: 240px; }
+.connect-title { font-size: 18px; font-weight: 700; margin-bottom: 6px; color: var(--text); }
+.connect-desc { font-size: 14px; color: var(--text-muted); line-height: 1.65; margin-bottom: 18px; }
+
+/* ─── TROUBLESHOOTING ACCORDION (ported from index) ─── */
+#dl-faq { background: var(--bg); }
+.accordion { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+.accordion-item {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color 0.25s;
+}
+.accordion-item.open { border-color: rgba(var(--primary-rgb),0.2); }
+.accordion-trigger {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  gap: 16px;
+  transition: background 0.2s;
+}
+.accordion-trigger:hover { background: var(--surface-hover); }
+.accordion-icon {
+  flex-shrink: 0;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transition: transform 0.3s;
+}
+.accordion-item.open .accordion-icon { transform: rotate(45deg); }
+.accordion-body { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.16,1,0.3,1); }
+.accordion-item.open .accordion-body { max-height: 400px; }
+.accordion-content { padding: 4px 24px 24px; font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+.accordion-content strong { color: var(--text); }
+.accordion-content code {
+  font-size: 12.5px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xs);
+  padding: 1px 6px;
+}
+
+/* ─── HELP ─── */
+#help { background: var(--bg-alt); border-top: 1px solid var(--border); }
+.help-inner { max-width: 600px; margin: 0 auto; text-align: center; }
+.help-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
+
 /* ─── RESPONSIVE ─── */
 @media (max-width: 760px) {
   .download-layout {
@@ -644,6 +830,7 @@ footer {
               <span class="dl-meta-tag">v1.0.0</span>
               <span class="dl-meta-tag">Windows 10 / 11</span>
               <span class="dl-meta-tag">64-bit</span>
+              <span class="dl-meta-tag">~25 MB</span>
               <span class="dl-meta-tag">.exe inštalátor</span>
             </div>
           </div>
@@ -656,16 +843,26 @@ footer {
           </a>
           <div class="dl-file-info">
             <strong>iBlockySync-Setup.exe</strong><br>
-            Windows 10 / 11 · 64-bit
+            Windows 10 / 11 · 64-bit · ~25 MB
           </div>
+        </div>
+
+        <div class="dl-publisher">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          Vydavateľ: <strong>Ereska Apps</strong> · digitálne podpísané cez SignPath Foundation
         </div>
 
         <div class="dl-smartscreen">
           <div class="dl-smartscreen-icon">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
           </div>
-          <p>Windows SmartScreen môže zobraziť upozornenie pri prvom spustení. Kliknite na <strong>„Ďalšie informácie"</strong> a potom <strong>„Spustiť"</strong>. Inštalátor je digitálne podpísaný.</p>
+          <p>Windows SmartScreen môže zobraziť upozornenie pri prvom spustení. Kliknite na <strong>„Ďalšie informácie"</strong> a potom <strong>„Spustiť aj tak"</strong>. Inštalátor je digitálne podpísaný — ide o očakávané správanie pri novších aplikáciách.</p>
         </div>
+
+        <a href="https://github.com/mocingejbr/iblocky/releases" target="_blank" rel="noopener noreferrer" class="dl-allversions">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Všetky verzie a poznámky k vydaniu
+        </a>
       </div>
 
       <!-- Requirements sidebar -->
@@ -740,6 +937,122 @@ footer {
   </div>
 </section>
 
+<!-- INSTALL STEPS -->
+<section id="install">
+  <div class="container">
+    <div class="sec-head fade-up">
+      <div class="section-label">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Inštalácia
+      </div>
+      <h2 class="section-title">Inštalácia za 3 kroky</h2>
+      <p class="section-subtitle">Od stiahnutia po bežiacu aplikáciu v system tray — za menej než minútu.</p>
+    </div>
+    <div class="install-steps fade-up">
+      <div class="install-step">
+        <div class="install-step-num">1</div>
+        <div class="install-step-text">
+          <strong>Stiahnite inštalátor</strong>
+          <span>Kliknite na tlačidlo vyššie a uložte súbor <code>iBlockySync-Setup.exe</code>. Po dokončení sťahovania ho otvorte.</span>
+        </div>
+      </div>
+      <div class="install-step">
+        <div class="install-step-num">2</div>
+        <div class="install-step-text">
+          <strong>Spustite a potvrďte SmartScreen</strong>
+          <span>Ak sa zobrazí modré okno Windows SmartScreen, kliknite na „Ďalšie informácie" → „Spustiť aj tak". Inštalátor je podpísaný, takže ide o bezpečné a očakávané správanie. .NET 8.0 je súčasťou — nič ďalšie inštalovať netreba.</span>
+        </div>
+      </div>
+      <div class="install-step">
+        <div class="install-step-num">3</div>
+        <div class="install-step-text">
+          <strong>Aplikácia beží v system tray</strong>
+          <span>Po inštalácii sa iBlockySync spustí na pozadí a jeho ikona sa objaví v systémovej lište (vpravo dole pri hodinách). Žiadne okno sa neotvorí — aplikácia je pripravená synchronizovať.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONNECT WITH IPHONE -->
+<section id="connect">
+  <div class="container">
+    <div class="connect-card fade-up">
+      <div class="connect-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="3"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+      </div>
+      <div class="connect-body">
+        <div class="connect-title">Posledný krok — prepojte s iPhone</div>
+        <p class="connect-desc">Aplikácia ešte potrebuje váš API kľúč z iBločky, aby vedela, kam doklady patria. Skopírujte ho z <strong>iBločky → Nastavenia → Windows Sync</strong> a vložte do iBlockySync. Celý postup vrátane prihlásenia do Pohody nájdete v sprievodcovi nastavením.</p>
+        <a href="windows-setup.html" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Otvoriť sprievodcu nastavením
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TROUBLESHOOTING FAQ -->
+<section id="dl-faq">
+  <div class="container">
+    <div class="sec-head fade-up">
+      <div class="section-label">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3m.08 4h.01"/></svg>
+        Riešenie problémov
+      </div>
+      <h2 class="section-title">Časté otázky k inštalácii</h2>
+    </div>
+    <div class="accordion fade-up">
+      <div class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false" aria-controls="dlfaq-smartscreen">
+          <span>Windows zobrazil varovanie SmartScreen — je to bezpečné?</span>
+          <span class="accordion-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="accordion-body" id="dlfaq-smartscreen">
+          <div class="accordion-content">Áno. Inštalátor je digitálne podpísaný cez <strong>SignPath Foundation</strong>. SmartScreen zobrazuje upozornenie pri každej novšej aplikácii, kým si nevybuduje reputáciu u Microsoftu. Kliknite na <strong>„Ďalšie informácie"</strong> a potom <strong>„Spustiť aj tak"</strong>.</div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false" aria-controls="dlfaq-dotnet">
+          <span>Potrebujem nainštalovať .NET?</span>
+          <span class="accordion-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="accordion-body" id="dlfaq-dotnet">
+          <div class="accordion-content">Nie. <strong>.NET 8.0 je zabalený priamo v inštalátore</strong>. Nemusíte inštalovať žiadne ďalšie závislosti — stačí spustiť <code>iBlockySync-Setup.exe</code>.</div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false" aria-controls="dlfaq-running">
+          <span>Ako zistím, že aplikácia beží?</span>
+          <span class="accordion-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="accordion-body" id="dlfaq-running">
+          <div class="accordion-content">iBlockySync beží na pozadí bez okna. Jeho <strong>ikona sa zobrazí v system tray</strong> (vpravo dole). Po vložení API kľúča uvidíte v aplikácii iBločky na iPhone živý stav <strong>„Windows pripojený"</strong>.</div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false" aria-controls="dlfaq-pohoda">
+          <span>Kde nájde aplikácia Pohoda.exe?</span>
+          <span class="accordion-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="accordion-body" id="dlfaq-pohoda">
+          <div class="accordion-content">iBlockySync <strong>automaticky deteguje</strong> cestu k Pohoda.exe pri prvom spustení. Ak detekcia zlyhá, v nastaveniach kliknite na <strong>Browse</strong> a vyberte súbor ručne — štandardne v <code>C:\Program Files\STORMWARE\POHODA\</code>.</div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-trigger" aria-expanded="false" aria-controls="dlfaq-multi">
+          <span>Funguje to s viacerými firmami?</span>
+          <span class="accordion-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </button>
+        <div class="accordion-body" id="dlfaq-multi">
+          <div class="accordion-content">Áno. iBlockySync <strong>automaticky mapuje IČO</strong> z každého bločku na správnu databázu Pohody. Každý priečinok v iBločky musí mať v názve správne <strong>IČO firmy</strong>, aby mapovanie fungovalo.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CODE SIGNING / SIGNPATH -->
 <section id="codesigning">
   <div class="container">
@@ -761,6 +1074,27 @@ footer {
             signpath.org
           </a>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HELP -->
+<section id="help">
+  <div class="container">
+    <div class="help-inner fade-up">
+      <div class="section-label" style="margin-left:auto;margin-right:auto;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></svg>
+        Podpora
+      </div>
+      <h2 class="section-title">Potrebujete pomoc?</h2>
+      <p class="section-subtitle">Nedarí sa vám inštalácia alebo prepojenie s Pohodou? Sme tu pre vás.</p>
+      <div class="help-actions">
+        <a href="mailto:ereskaapps@gmail.com" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+          Napíšte nám
+        </a>
+        <a href="windows-setup.html" class="btn-secondary">Sprievodca nastavením</a>
       </div>
     </div>
   </div>
@@ -790,7 +1124,7 @@ footer {
         </div>
       </div>
       <div class="footer-bottom">
-        <span class="footer-copy">© 2025 iBločky. Všetky práva vyhradené.</span>
+        <span class="footer-copy">© 2026 iBločky. Všetky práva vyhradené.</span>
         <span class="footer-made">Vyrobené na Slovensku 🇸🇰</span>
       </div>
     </div>
@@ -832,6 +1166,22 @@ footer {
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // ─── Accordion ───
+  document.querySelectorAll('.accordion-trigger').forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const item = trigger.closest('.accordion-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.accordion-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
 
   window.addEventListener('load', () => {
     document.querySelectorAll('.fade-up').forEach(el => {
