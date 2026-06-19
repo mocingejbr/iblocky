@@ -463,7 +463,7 @@ nav.scrolled {
 /* UI Polish: slightly stronger phone frame shadow and inner glow for premium look */
 .phone-frame {
   width: 260px;
-  height: 530px;
+  aspect-ratio: 1320 / 2868;
   background: var(--bg-alt);
   border-radius: 46px;
   border: 2px solid rgba(255,255,255,0.12);
@@ -1139,7 +1139,7 @@ footer {
 @media (max-width: 900px) {
   .hero-inner { grid-template-columns: 1fr; gap: 48px; }
   .hero-visual { order: -1; }
-  .phone-frame { width: 220px; height: 440px; }
+  .phone-frame { width: 220px; }
   /* UI Polish: on tablet the 2-col features grid should show all 5 cards cleanly */
   .features-grid { grid-template-columns: repeat(2, 1fr); }
   .features-grid .feature-card:nth-child(4) { grid-column: auto; }
@@ -1419,8 +1419,8 @@ a:focus-visible, button:focus-visible,
       </div>
       <div class="hero-visual fade-up">
         <div class="phone-frame">
-          <img class="mockup-shot light" src="assets/app-light.png" alt="iBlocky — aplikácia" loading="lazy" width="260" height="530">
-          <img class="mockup-shot dark" src="assets/app-dark.png" alt="iBlocky — aplikácia" loading="lazy" width="260" height="530">
+          <img class="mockup-shot light" src="assets/app-light.png" alt="iBlocky — aplikácia" loading="lazy" width="260" height="565">
+          <img class="mockup-shot dark" src="assets/app-dark.png" alt="iBlocky — aplikácia" loading="lazy" width="260" height="565">
         </div>
         <div class="phone-glow"></div>
       </div>
@@ -2086,8 +2086,8 @@ a:focus-visible, button:focus-visible,
       </div>
       <div class="hero-visual fade-up">
         <div class="phone-frame">
-          <img class="mockup-shot light" src="assets/app-light.png" alt="iBlocky app" loading="lazy" width="260" height="530">
-          <img class="mockup-shot dark" src="assets/app-dark.png" alt="iBlocky app" loading="lazy" width="260" height="530">
+          <img class="mockup-shot light" src="assets/app-light.png" alt="iBlocky app" loading="lazy" width="260" height="565">
+          <img class="mockup-shot dark" src="assets/app-dark.png" alt="iBlocky app" loading="lazy" width="260" height="565">
         </div>
         <div class="phone-glow"></div>
       </div>
