@@ -675,7 +675,11 @@ nav.scrolled {
 }
 .tier-name { display: block; font-size: 18px; font-weight: 800; margin-bottom: 4px; }
 .tier-price { display: block; font-size: 13px; font-weight: 400; color: var(--text-muted); }
-.tier-price-main { display: block; font-size: 22px; font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin: 4px 0 1px; }
+/* UI Polish: baseline-aligned price display replacing flat stacked spans */
+.tier-price-display { display: flex; align-items: baseline; justify-content: center; gap: 1px; margin: 8px 0 2px; line-height: 1; }
+.tier-currency { font-size: 15px; font-weight: 600; color: var(--text-muted); align-self: flex-start; margin-top: 5px; }
+.tier-amount { font-size: 32px; font-weight: 800; letter-spacing: -0.04em; color: var(--text); }
+.tier-period { font-size: 12px; font-weight: 400; color: var(--text-subtle); margin-left: 2px; align-self: flex-end; margin-bottom: 3px; }
 .badge-excl {
   display: inline-block;
   font-size: 10px;
@@ -1196,7 +1200,8 @@ footer {
   box-shadow: 0 0 0 1px rgba(var(--primary-rgb),0.12), 0 8px 32px rgba(var(--primary-rgb),0.12);
 }
 .pricing-mobile-tier { font-size: 20px; font-weight: 800; margin-bottom: 4px; }
-.pricing-mobile-price { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; }
+/* UI Polish: remove override so inner price spans inherit correctly */
+.pricing-mobile-price { font-size: inherit; color: inherit; margin-bottom: 16px; }
 .pricing-mobile-features { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
 .pricing-mobile-row { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text-muted); }
 .pricing-mobile-row .check-yes { font-size: 15px; }
@@ -1595,13 +1600,19 @@ a:focus-visible, button:focus-visible,
             </th>
             <th class="col-pro">
               <span class="tier-name">Pro</span>
-              <span class="tier-price-main">€2,99</span>
-              <span class="tier-price">/ mesiac</span>
+              <div class="tier-price-display">
+                <span class="tier-currency">€</span>
+                <span class="tier-amount">2,99</span>
+                <span class="tier-period">/mes</span>
+              </div>
             </th>
             <th class="col-promax">
               <span class="tier-name">Pro Max</span>
-              <span class="tier-price-main">€14,99</span>
-              <span class="tier-price">/ mesiac</span>
+              <div class="tier-price-display">
+                <span class="tier-currency">€</span>
+                <span class="tier-amount">14,99</span>
+                <span class="tier-period">/mes</span>
+              </div>
               <div><span class="badge-excl">Exkluzívne</span></div>
             </th>
           </tr>
@@ -1619,8 +1630,8 @@ a:focus-visible, button:focus-visible,
           <tr class="cta-row">
             <td></td>
             <td class="col-free"><a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" class="btn-tier btn-tier-muted">Stiahnuť zadarmo</a></td>
-            <td class="col-pro"></td>
-            <td class="col-promax"></td>
+            <td class="col-pro"><a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" class="btn-tier btn-tier-pro">Odomknúť plnú verziu</a></td>
+            <td class="col-promax"><a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" class="btn-tier btn-tier-promax">Prejsť na Pro Max</a></td>
           </tr>
         </tbody>
       </table>
@@ -1643,7 +1654,7 @@ a:focus-visible, button:focus-visible,
       </div>
       <div class="pricing-mobile-card">
         <div class="pricing-mobile-tier">Pro</div>
-        <div class="pricing-mobile-price"><span class="tier-price-main">€2,99</span><span style="font-size:12px"> / mesiac</span></div>
+        <div class="pricing-mobile-price"><div class="tier-price-display" style="justify-content:flex-start"><span class="tier-currency">€</span><span class="tier-amount">2,99</span><span class="tier-period">/mes</span></div></div>
         <div class="pricing-mobile-features">
           <div class="pricing-mobile-row"><span class="check-yes">✓</span> Všetko z Zadarmo</div>
           <div class="pricing-mobile-row"><span class="check-yes">✓</span> PDF export &amp; zdieľanie</div>
@@ -1654,7 +1665,7 @@ a:focus-visible, button:focus-visible,
       </div>
       <div class="pricing-mobile-card highlighted">
         <div class="pricing-mobile-tier">Pro Max <span class="badge-excl">Exkluzívne</span></div>
-        <div class="pricing-mobile-price"><span class="tier-price-main">€14,99</span><span style="font-size:12px"> / mesiac</span></div>
+        <div class="pricing-mobile-price"><div class="tier-price-display" style="justify-content:flex-start"><span class="tier-currency">€</span><span class="tier-amount">14,99</span><span class="tier-period">/mes</span></div></div>
         <div class="pricing-mobile-features">
           <div class="pricing-mobile-row"><span class="check-yes">✓</span> Všetko z Pro</div>
           <div class="pricing-mobile-row"><span class="check-yes">✓</span> Auto sync s Pohodou</div>
@@ -2264,13 +2275,19 @@ a:focus-visible, button:focus-visible,
             </th>
             <th class="col-pro">
               <span class="tier-name">Pro</span>
-              <span class="tier-price-main">€2.99</span>
-              <span class="tier-price">/ month</span>
+              <div class="tier-price-display">
+                <span class="tier-currency">€</span>
+                <span class="tier-amount">2.99</span>
+                <span class="tier-period">/mo</span>
+              </div>
             </th>
             <th class="col-promax">
               <span class="tier-name">Pro Max</span>
-              <span class="tier-price-main">€14.99</span>
-              <span class="tier-price">/ month</span>
+              <div class="tier-price-display">
+                <span class="tier-currency">€</span>
+                <span class="tier-amount">14.99</span>
+                <span class="tier-period">/mo</span>
+              </div>
               <div><span class="badge-excl">Exclusive</span></div>
             </th>
           </tr>
@@ -2312,7 +2329,7 @@ a:focus-visible, button:focus-visible,
       </div>
       <div class="pricing-mobile-card">
         <div class="pricing-mobile-tier">Pro</div>
-        <div class="pricing-mobile-price"><span class="tier-price-main">€2.99</span><span style="font-size:12px"> / month</span></div>
+        <div class="pricing-mobile-price"><div class="tier-price-display" style="justify-content:flex-start"><span class="tier-currency">€</span><span class="tier-amount">2.99</span><span class="tier-period">/mo</span></div></div>
         <div class="pricing-mobile-features">
           <div class="pricing-mobile-row"><span class="check-yes">✓</span> Everything in Free</div>
           <div class="pricing-mobile-row"><span class="check-yes">✓</span> PDF export &amp; sharing</div>
@@ -2324,7 +2341,7 @@ a:focus-visible, button:focus-visible,
       </div>
       <div class="pricing-mobile-card highlighted">
         <div class="pricing-mobile-tier">Pro Max <span class="badge-excl">Exclusive</span></div>
-        <div class="pricing-mobile-price"><span class="tier-price-main">€14.99</span><span style="font-size:12px"> / month</span></div>
+        <div class="pricing-mobile-price"><div class="tier-price-display" style="justify-content:flex-start"><span class="tier-currency">€</span><span class="tier-amount">14.99</span><span class="tier-period">/mo</span></div></div>
         <div class="pricing-mobile-features">
           <div class="pricing-mobile-row"><span class="check-yes">✓</span> Everything in Pro</div>
           <div class="pricing-mobile-row"><span class="check-yes">✓</span> Auto sync with Pohoda</div>
