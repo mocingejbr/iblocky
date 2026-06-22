@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="sk">
+<html lang="sk" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,8 +8,8 @@
 <link rel="apple-touch-icon" href="favicon.jpg">
 <meta name="description" content="Stiahnite iBločky Windows Companion — oficiálnu Windows aplikáciu pre synchronizáciu iBločky s účtovným softvérom Pohoda. Windows 10/11, .NET zahrnutý, digitálne podpísané.">
 <link rel="canonical" href="https://iblocky.sk/download.html">
-<meta name="theme-color" content="#0F1117" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#FAFAF8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#08090A" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FBFBF9" media="(prefers-color-scheme: light)">
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="iBločky">
@@ -41,92 +41,45 @@
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
 }
 </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 /* ─── CSS Variables ─── */
-:root {
-  --primary: #637A9F;
-  --primary-rgb: 99,122,159;
-  --primary-light: #7d97bf;
-  --bg: #0F1117;
-  --bg-alt: #161B27;
-  --surface: rgba(255,255,255,0.04);
-  --surface-hover: rgba(255,255,255,0.07);
-  --border: rgba(255,255,255,0.08);
-  --text: #F0F2F5;
-  --text-muted: #8B9AB5;
-  --text-subtle: #5A6880;
-  --shadow: 0 4px 24px rgba(0,0,0,0.4);
-  --shadow-lg: 0 16px 48px rgba(0,0,0,0.5);
-  --radius: 16px;
-  --radius-sm: 10px;
-  --radius-xs: 6px;
-  --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --nav-bg: rgba(15,17,23,0.85);
-  --glass-bg: rgba(255,255,255,0.04);
-  --glass-border: rgba(255,255,255,0.08);
-  --success-rgb: 34,197,94;
-  --success: #22C55E;
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0}
+:root{
+  --bg:#08090A;--bg2:#0C0D10;--bg3:#101216;
+  --surface:rgba(255,255,255,0.024);--surface2:rgba(255,255,255,0.05);
+  --border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.14);
+  --text:#F7F8F8;--text2:#888D96;--text3:#5A5E66;
+  --accent:#92ADD6;--accent2:#637A9F;--accentSoft:rgba(146,173,214,0.13);--accentBorder:rgba(146,173,214,0.30);
+  --onAccent:#fff;--green:#46C98B;--nav:rgba(8,9,10,0.70);--glow:rgba(146,173,214,0.16);
+  --primary:#637A9F;--primary-rgb:99,122,159;--primary-light:#92ADD6;
+  --bg-alt:#0C0D10;--surface-hover:rgba(255,255,255,0.05);
+  --text-muted:#888D96;--text-subtle:#5A5E66;
+  --nav-bg:rgba(8,9,10,0.70);--glass-bg:rgba(255,255,255,0.024);--glass-border:rgba(255,255,255,0.08);
+  --radius:16px;--radius-sm:10px;--radius-xs:6px;
+  --shadow:0 4px 24px rgba(0,0,0,0.4);--shadow-lg:0 16px 48px rgba(0,0,0,0.5);
+  --warn:#D97706;--warn-light:#F59E0B;--warn-rgb:217,119,6;
+  --success:#46C98B;--success-rgb:70,201,139;
+  --font:Inter,-apple-system,BlinkMacSystemFont,sans-serif;
 }
-
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) {
-    --primary: #C9A84C;
-    --primary-rgb: 201,168,76;
-    --primary-light: #E8C872;
-    --bg: #FAFAF8;
-    --bg-alt: #F0EDE6;
-    --surface: rgba(0,0,0,0.03);
-    --surface-hover: rgba(0,0,0,0.06);
-    --border: rgba(0,0,0,0.08);
-    --text: #1A1F2E;
-    --text-muted: #5C6478;
-    --text-subtle: #9AA0B0;
-    --shadow: 0 4px 24px rgba(0,0,0,0.08);
-    --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
-    --nav-bg: rgba(250,250,248,0.88);
-    --glass-bg: rgba(255,255,255,0.7);
-    --glass-border: rgba(0,0,0,0.06);
-  }
-}
-
-[data-theme="light"] {
-  --primary: #C9A84C;
-  --primary-rgb: 201,168,76;
-  --primary-light: #E8C872;
-  --bg: #FAFAF8;
-  --bg-alt: #F0EDE6;
-  --surface: rgba(0,0,0,0.03);
-  --surface-hover: rgba(0,0,0,0.06);
-  --border: rgba(0,0,0,0.08);
-  --text: #1A1F2E;
-  --text-muted: #5C6478;
-  --text-subtle: #9AA0B0;
-  --shadow: 0 4px 24px rgba(0,0,0,0.08);
-  --shadow-lg: 0 16px 48px rgba(0,0,0,0.12);
-  --nav-bg: rgba(250,250,248,0.88);
-  --glass-bg: rgba(255,255,255,0.7);
-  --glass-border: rgba(0,0,0,0.06);
-}
-
-[data-theme="dark"] {
-  --primary: #637A9F;
-  --primary-rgb: 99,122,159;
-  --primary-light: #7d97bf;
-  --bg: #0F1117;
-  --bg-alt: #161B27;
-  --surface: rgba(255,255,255,0.04);
-  --surface-hover: rgba(255,255,255,0.07);
-  --border: rgba(255,255,255,0.08);
-  --text: #F0F2F5;
-  --text-muted: #8B9AB5;
-  --text-subtle: #5A6880;
-  --shadow: 0 4px 24px rgba(0,0,0,0.4);
-  --shadow-lg: 0 16px 48px rgba(0,0,0,0.5);
-  --nav-bg: rgba(15,17,23,0.85);
-  --glass-bg: rgba(255,255,255,0.04);
-  --glass-border: rgba(255,255,255,0.08);
+html[data-theme="light"]{
+  --bg:#FBFBF9;--bg2:#F4F2EC;--bg3:#EEEBE2;
+  --surface:rgba(28,24,14,0.022);--surface2:rgba(28,24,14,0.045);
+  --border:rgba(28,24,14,0.10);--border2:rgba(28,24,14,0.16);
+  --text:#17181B;--text2:#5F636C;--text3:#9A9EA8;
+  --accent:#A07D24;--accent2:#C0A040;--accentSoft:rgba(201,168,76,0.15);--accentBorder:rgba(201,168,76,0.42);
+  --onAccent:#1a1509;--green:#16A34A;--nav:rgba(251,251,249,0.80);--glow:rgba(201,168,76,0.18);
+  --primary:#C0A040;--primary-rgb:192,160,64;--primary-light:#A07D24;
+  --bg-alt:#F4F2EC;--surface-hover:rgba(28,24,14,0.045);
+  --text-muted:#5F636C;--text-subtle:#9A9EA8;
+  --nav-bg:rgba(251,251,249,0.80);--glass-bg:rgba(28,24,14,0.022);--glass-border:rgba(28,24,14,0.10);
+  --warn:#B45309;--warn-rgb:180,83,9;
+  --success:#16A34A;--success-rgb:22,163,74;
 }
 
 /* ─── Reset & Base ─── */
@@ -712,59 +665,8 @@ footer {
 .connect-title { font-size: 18px; font-weight: 700; margin-bottom: 6px; color: var(--text); }
 .connect-desc { font-size: 14px; color: var(--text-muted); line-height: 1.65; margin-bottom: 18px; }
 
-/* ─── TROUBLESHOOTING ACCORDION (ported from index) ─── */
+/* ─── FAQ ─── */
 #dl-faq { background: var(--bg); }
-.accordion { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
-.accordion-item {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius);
-  overflow: hidden;
-  transition: border-color 0.25s;
-}
-.accordion-item.open { border-color: rgba(var(--primary-rgb),0.2); }
-.accordion-trigger {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 24px;
-  background: transparent;
-  border: none;
-  color: var(--text);
-  font-family: var(--font);
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  text-align: left;
-  gap: 16px;
-  transition: background 0.2s;
-}
-.accordion-trigger:hover { background: var(--surface-hover); }
-.accordion-icon {
-  flex-shrink: 0;
-  width: 24px; height: 24px;
-  border-radius: 50%;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-muted);
-  transition: transform 0.3s;
-}
-.accordion-item.open .accordion-icon { transform: rotate(45deg); }
-.accordion-body { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.16,1,0.3,1); }
-.accordion-item.open .accordion-body { max-height: 1200px; }
-.accordion-content { padding: 4px 24px 24px; font-size: 14px; color: var(--text-muted); line-height: 1.7; }
-.accordion-content strong { color: var(--text); }
-.accordion-content code {
-  font-size: 12.5px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xs);
-  padding: 1px 6px;
-}
 
 /* ─── HELP ─── */
 #help { background: var(--bg-alt); border-top: 1px solid var(--border); }
@@ -832,10 +734,7 @@ footer {
   .hero-mini-ctas .btn-download, .hero-mini-ctas .btn-appstore { width: 100%; justify-content: center; }
 }
 
-/* ─── UI polish pass: warn tokens, a11y, conversion fixes ─── */
-:root { --warn: #D97706; --warn-light: #F59E0B; --warn-rgb: 217,119,6; }
-[data-theme="light"] { --warn: #B45309; --warn-rgb: 180,83,9; }
-@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) { --warn: #B45309; --warn-rgb: 180,83,9; } }
+/* ─── UI polish pass: a11y, conversion fixes ─── */
 
 @media (max-width: 640px) {
   .sync-diagram { flex-direction: column; max-width: 200px; }
@@ -847,7 +746,7 @@ footer {
 a:focus-visible, button:focus-visible,
 .btn-download:focus-visible, .btn-primary:focus-visible, .btn-secondary:focus-visible,
 .btn-appstore:focus-visible, .nav-back:focus-visible, .theme-toggle:focus-visible,
-.accordion-trigger:focus-visible, .footer-link:focus-visible {
+.footer-link:focus-visible {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
   border-radius: var(--radius-xs);
@@ -909,26 +808,38 @@ a:focus-visible, button:focus-visible,
   line-height: 1.4;
 }
 .lang-btn.active { background: var(--primary); color: #fff; }
+@keyframes ibUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes ibFlow{0%{left:0;opacity:0;transform:scale(.4)}14%{opacity:1;transform:scale(1)}86%{opacity:1;transform:scale(1)}100%{left:100%;opacity:0;transform:scale(.4)}}
+@keyframes ibHalo{0%{transform:scale(1);opacity:.55}100%{transform:scale(1.45);opacity:0}}
+@keyframes ibGlowPulse{0%,100%{opacity:.5}50%{opacity:1}}
+@keyframes ibSpin{to{transform:rotate(360deg)}}
+.ib-faq summary{list-style:none;cursor:pointer}
+.ib-faq summary::-webkit-details-marker{display:none}
+.ib-faq summary::marker{content:""}
+.ib-faq .ib-faq-icon{transition:transform .3s}
+.ib-faq[open] .ib-faq-icon{transform:rotate(45deg)}
+.ib-faq[open] .ib-faq-body{animation:ibUp .32s both}
+
 </style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav>
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo"><span class="brand-i">i</span><span>Bločky</span></a>
-    <div class="nav-actions">
-      <a href="index.html" class="nav-back">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<nav style="position:fixed;top:0;left:0;right:0;z-index:100;background:var(--nav);backdrop-filter:blur(18px) saturate(180%);-webkit-backdrop-filter:blur(18px) saturate(180%);border-bottom:1px solid var(--border)">
+  <div style="display:flex;align-items:center;justify-content:space-between;height:58px;max-width:1140px;margin:0 auto;padding:0 24px">
+    <a href="index.html" style="display:inline-flex;align-items:baseline;font-size:18px;font-weight:700;letter-spacing:-0.03em;color:var(--text);text-decoration:none"><span>i</span><span style="color:var(--accent)">Bločky</span></a>
+    <div style="display:flex;align-items:center;gap:4px">
+      <a href="index.html" style="display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:500;color:var(--text2);padding:7px 11px;border-radius:7px;text-decoration:none">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <span class="nav-back-sk">Späť na hlavnú</span><span class="nav-back-en" style="display:none">Back to home</span>
       </a>
-      <div class="lang-toggle">
-        <button class="lang-btn" id="btnSk" onclick="setLang('sk')">SK</button>
-        <button class="lang-btn" id="btnEn" onclick="setLang('en')">EN</button>
+      <div style="display:flex;background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:2px;gap:2px;margin-left:4px">
+        <button id="btn-sk" onclick="setLang('sk')" style="padding:4px 13px;border-radius:999px;font-size:12.5px;font-weight:600;cursor:pointer;border:none;background:var(--accent2);color:var(--onAccent);font-family:inherit;line-height:1.4">SK</button>
+        <button id="btn-en" onclick="setLang('en')" style="padding:4px 13px;border-radius:999px;font-size:12.5px;font-weight:600;cursor:pointer;border:none;background:transparent;color:var(--text2);font-family:inherit;line-height:1.4">EN</button>
       </div>
-      <button class="theme-toggle" id="themeToggle" aria-label="Prepnúť tému">
-        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <button id="ib-theme-btn" aria-label="Toggle theme" style="display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:999px;background:var(--surface);border:1px solid var(--border);cursor:pointer;color:var(--text2)">
+        <svg id="ib-icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg id="ib-icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M18.66 5.34l-1.41 1.41"/></svg>
       </button>
     </div>
   </div>
@@ -957,63 +868,54 @@ a:focus-visible, button:focus-visible,
           iPhone aplikácia
         </a>
       </div>
-      <div class="sync-diagram fade-up">
-
-        <!-- Node 1: iPhone / iBločky -->
-        <div class="sync-node">
-          <svg viewBox="0 0 36 62" class="sync-node-icon" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="2" y="1" width="32" height="60" rx="5" stroke="currentColor" stroke-width="2"/>
-            <rect x="5.5" y="9.5" width="25" height="41" rx="1.5" class="sync-screen-fill"/>
-            <rect x="13" y="54.5" width="10" height="2.5" rx="1.25" fill="currentColor" opacity="0.3"/>
-            <circle cx="18" cy="5.5" r="1.5" fill="currentColor" opacity="0.35"/>
-          </svg>
-          <span class="sync-node-label">iBločky</span>
+      <div style="display:flex;align-items:flex-start;justify-content:center;gap:4px;flex-wrap:wrap;margin-top:48px">
+        <!-- iPhone node -->
+        <div style="display:flex;flex-direction:column;align-items:center;gap:12px;flex:none">
+          <div style="width:82px;height:82px;border-radius:22px;background:linear-gradient(155deg,var(--surface2),var(--surface));border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;color:var(--accent);box-shadow:0 14px 32px rgba(0,0,0,0.12),inset 0 1px 0 rgba(255,255,255,0.06)">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="3.2"/><path d="M11 18h2"/></svg>
+          </div>
+          <span style="font-size:10px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--text2)">iBločky</span>
         </div>
-
-        <!-- Arrow 1 -->
-        <div class="sync-arrow-wrap">
-          <svg class="sync-arrow-svg" viewBox="0 0 64 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <line x1="0" y1="10" x2="50" y2="10" class="sync-arrow-line"/>
-            <polyline points="44,3 58,10 44,17" class="sync-arrow-head"/>
-          </svg>
+        <!-- Connector 1 -->
+        <div style="width:88px;height:12px;margin-top:35px;position:relative;flex:none">
+          <div style="position:absolute;left:0;right:0;top:50%;height:2px;margin-top:-1px;border-radius:2px;background:linear-gradient(90deg,transparent,var(--accentBorder) 16%,var(--accentBorder) 84%,transparent)"></div>
+          <span style="position:absolute;top:50%;margin-top:-4px;width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px 2px var(--glow);animation:ibFlow 2.4s linear infinite"></span>
+          <span style="position:absolute;top:50%;margin-top:-3px;width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 9px 1px var(--glow);animation:ibFlow 2.4s linear infinite;animation-delay:1.2s"></span>
         </div>
-
-        <!-- Node 2: Cloud + rotating gear -->
-        <div class="sync-node">
-          <svg viewBox="0 0 64 52" class="sync-node-icon" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path class="sync-cloud-path" d="M 10.4 44 L 53.6 44 A 12 12 0 0 0 48 22 A 16 16 0 1 0 16 22 A 12 12 0 0 0 10.4 44 Z"/>
-            <g transform="translate(32,26)">
-              <g class="sync-gear">
-                <path transform="translate(-12,-12)" fill="currentColor" d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"/>
-              </g>
-            </g>
-          </svg>
-          <span class="sync-node-label">Cloud<br>API</span>
+        <!-- Cloud node -->
+        <div style="display:flex;flex-direction:column;align-items:center;gap:12px;flex:none">
+          <div style="position:relative;width:82px;height:82px">
+            <span style="position:absolute;inset:0;border-radius:22px;border:1px solid var(--accentBorder);animation:ibHalo 2.8s ease-out infinite"></span>
+            <span style="position:absolute;inset:0;border-radius:22px;border:1px solid var(--accentBorder);animation:ibHalo 2.8s ease-out infinite;animation-delay:1.4s"></span>
+            <div style="position:absolute;inset:0;border-radius:22px;background:linear-gradient(155deg,var(--accentSoft),var(--surface));border:1px solid var(--accentBorder);display:flex;align-items:center;justify-content:center;color:var(--accent);box-shadow:0 14px 32px var(--glow),inset 0 1px 0 rgba(255,255,255,0.06)">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 19a4.5 4.5 0 0 0 0-9 6 6 0 0 0-11.6 1.5A4 4 0 0 0 6.5 19z"/></svg>
+            </div>
+            <div style="position:absolute;right:-6px;bottom:-6px;width:28px;height:28px;border-radius:50%;background:var(--accent2);display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 4px 12px var(--glow);border:2.5px solid var(--bg)">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="animation:ibSpin 4s linear infinite;transform-box:fill-box;transform-origin:center" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg>
+            </div>
+          </div>
+          <span style="font-size:10px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--accent)">Cloud API</span>
         </div>
-
-        <!-- Arrow 2 -->
-        <div class="sync-arrow-wrap">
-          <svg class="sync-arrow-svg" viewBox="0 0 64 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <line x1="0" y1="10" x2="50" y2="10" class="sync-arrow-line"/>
-            <polyline points="44,3 58,10 44,17" class="sync-arrow-head"/>
-          </svg>
+        <!-- Connector 2 -->
+        <div style="width:88px;height:12px;margin-top:35px;position:relative;flex:none">
+          <div style="position:absolute;left:0;right:0;top:50%;height:2px;margin-top:-1px;border-radius:2px;background:linear-gradient(90deg,transparent,var(--accentBorder) 16%,var(--accentBorder) 84%,transparent)"></div>
+          <span style="position:absolute;top:50%;margin-top:-4px;width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px 2px var(--glow);animation:ibFlow 2.4s linear infinite;animation-delay:1.2s"></span>
+          <span style="position:absolute;top:50%;margin-top:-3px;width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 9px 1px var(--glow);animation:ibFlow 2.4s linear infinite"></span>
         </div>
-
-        <!-- Node 3: Windows PC + Pohoda -->
-        <div class="sync-node">
-          <svg viewBox="0 0 64 56" class="sync-node-icon" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="2" y="2" width="60" height="40" rx="3" stroke="currentColor" stroke-width="2"/>
-            <rect x="6" y="6" width="52" height="32" rx="1.5" class="sync-screen-fill"/>
-            <rect x="24" y="14" width="6.5" height="6.5" rx="0.5" fill="currentColor" opacity="0.7"/>
-            <rect x="33" y="14" width="6.5" height="6.5" rx="0.5" fill="currentColor" opacity="0.7"/>
-            <rect x="24" y="22.5" width="6.5" height="6.5" rx="0.5" fill="currentColor" opacity="0.7"/>
-            <rect x="33" y="22.5" width="6.5" height="6.5" rx="0.5" fill="currentColor" opacity="0.7"/>
-            <line x1="32" y1="42" x2="32" y2="50" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <line x1="20" y1="50" x2="44" y2="50" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-          </svg>
-          <span class="sync-node-label">Pohoda<br>Windows</span>
+        <!-- Windows node -->
+        <div style="display:flex;flex-direction:column;align-items:center;gap:12px;flex:none">
+          <div style="width:82px;height:82px;border-radius:22px;background:linear-gradient(155deg,var(--surface2),var(--surface));border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;color:var(--accent);box-shadow:0 14px 32px rgba(0,0,0,0.12),inset 0 1px 0 rgba(255,255,255,0.06)">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2.5"/><path d="M8 21h8m-4-4v4"/></svg>
+          </div>
+          <span style="font-size:10px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--text2)">Pohoda · Windows</span>
         </div>
-
+      </div>
+      <!-- Flow caption -->
+      <div style="display:flex;justify-content:center;margin-top:22px">
+        <span style="display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:0.01em;color:var(--text2);padding:6px 15px;border-radius:999px;background:var(--surface);border:1px solid var(--border)">
+          <span style="width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:ibGlowPulse 1.8s ease-in-out infinite"></span>
+          Automaticky · každých 30 sekúnd
+        </span>
       </div>
     </div>
   </div>
@@ -1212,52 +1114,52 @@ a:focus-visible, button:focus-visible,
       </div>
       <h2 class="section-title">Časté otázky k inštalácii</h2>
     </div>
-    <div class="accordion fade-up">
-      <div class="accordion-item">
-        <button class="accordion-trigger" aria-expanded="false" aria-controls="dlfaq-smartscreen">
+    <div style="display:flex;flex-direction:column;gap:10px" class="fade-up">
+      <details class="ib-faq" style="background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden">
+        <summary style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 22px;color:var(--text);font-size:15px;font-weight:600;letter-spacing:-0.01em">
           <span>Windows zobrazil varovanie SmartScreen — je to bezpečné?</span>
-          <span class="accordion-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
-        </button>
-        <div class="accordion-body" id="dlfaq-smartscreen">
-          <div class="accordion-content">Áno. Inštalátor je digitálne podpísaný cez <strong>SignPath Foundation</strong>. SmartScreen zobrazuje upozornenie pri každej novšej aplikácii, kým si nevybuduje reputáciu u Microsoftu. Kliknite na <strong>„Ďalšie informácie"</strong> a potom <strong>„Spustiť aj tak"</strong>.</div>
+          <span class="ib-faq-icon" style="flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text2)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </summary>
+        <div class="ib-faq-body" style="padding:2px 22px 20px">
+          <p style="font-size:13.5px;color:var(--text2);line-height:1.65;margin:0">Áno. Inštalátor je digitálne podpísaný cez <strong>SignPath Foundation</strong>. SmartScreen zobrazuje upozornenie pri každej novšej aplikácii, kým si nevybuduje reputáciu u Microsoftu. Kliknite na <strong>„Ďalšie informácie“</strong> a potom <strong>„Spustiť aj tak“</strong>.</p>
         </div>
-      </div>
-      <div class="accordion-item">
-        <button class="accordion-trigger" aria-expanded="false" aria-controls="dlfaq-dotnet">
+      </details>
+      <details class="ib-faq" style="background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden">
+        <summary style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 22px;color:var(--text);font-size:15px;font-weight:600;letter-spacing:-0.01em">
           <span>Potrebujem nainštalovať .NET?</span>
-          <span class="accordion-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
-        </button>
-        <div class="accordion-body" id="dlfaq-dotnet">
-          <div class="accordion-content">Nie. <strong>.NET 8.0 je zabalený priamo v inštalátore</strong>. Nemusíte inštalovať žiadne ďalšie závislosti — stačí spustiť <code>iBlockyWindowsCompanion-Setup.exe</code>.</div>
+          <span class="ib-faq-icon" style="flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text2)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </summary>
+        <div class="ib-faq-body" style="padding:2px 22px 20px">
+          <p style="font-size:13.5px;color:var(--text2);line-height:1.65;margin:0">Nie. <strong>.NET 8.0 je zabalený priamo v inštalátore</strong>. Nemusíte inštalovať žiadne ďalšie závislosti — stačí spustiť <code>iBlockyWindowsCompanion-Setup.exe</code>.</p>
         </div>
-      </div>
-      <div class="accordion-item">
-        <button class="accordion-trigger" aria-expanded="false" aria-controls="dlfaq-running">
+      </details>
+      <details class="ib-faq" style="background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden">
+        <summary style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 22px;color:var(--text);font-size:15px;font-weight:600;letter-spacing:-0.01em">
           <span>Ako zistím, že aplikácia beží?</span>
-          <span class="accordion-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
-        </button>
-        <div class="accordion-body" id="dlfaq-running">
-          <div class="accordion-content">iBločky Windows Companion beží na pozadí bez okna. Jeho <strong>ikona sa zobrazí v system tray</strong> (vpravo dole). Po vložení API kľúča uvidíte v aplikácii iBločky na iPhone živý stav <strong>„Windows pripojený"</strong>.</div>
+          <span class="ib-faq-icon" style="flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text2)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </summary>
+        <div class="ib-faq-body" style="padding:2px 22px 20px">
+          <p style="font-size:13.5px;color:var(--text2);line-height:1.65;margin:0">iBločky Windows Companion beží na pozadí bez okna. Jeho <strong>ikona sa zobrazí v system tray</strong> (vpravo dole). Po vložení API kľúča uvidíte v aplikácii iBločky na iPhone živý stav <strong>„Windows pripojený“</strong>.</p>
         </div>
-      </div>
-      <div class="accordion-item">
-        <button class="accordion-trigger" aria-expanded="false" aria-controls="dlfaq-pohoda">
+      </details>
+      <details class="ib-faq" style="background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden">
+        <summary style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 22px;color:var(--text);font-size:15px;font-weight:600;letter-spacing:-0.01em">
           <span>Kde nájde aplikácia Pohoda.exe?</span>
-          <span class="accordion-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
-        </button>
-        <div class="accordion-body" id="dlfaq-pohoda">
-          <div class="accordion-content">iBločky Windows Companion <strong>automaticky deteguje</strong> cestu k Pohoda.exe pri prvom spustení. Ak detekcia zlyhá, v nastaveniach kliknite na <strong>Browse</strong> a vyberte súbor ručne — štandardne v <code>C:\Program Files\STORMWARE\POHODA\</code>.</div>
+          <span class="ib-faq-icon" style="flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text2)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </summary>
+        <div class="ib-faq-body" style="padding:2px 22px 20px">
+          <p style="font-size:13.5px;color:var(--text2);line-height:1.65;margin:0">iBločky Windows Companion <strong>automaticky deteguje</strong> cestu k Pohoda.exe pri prvom spustení. Ak detekcia zlyhá, v nastaveniach kliknite na <strong>Browse</strong> a vyberte súbor ručne — štandardne v <code>C:\Program Files\STORMWARE\POHODA\</code>.</p>
         </div>
-      </div>
-      <div class="accordion-item">
-        <button class="accordion-trigger" aria-expanded="false" aria-controls="dlfaq-multi">
+      </details>
+      <details class="ib-faq" style="background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden">
+        <summary style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 22px;color:var(--text);font-size:15px;font-weight:600;letter-spacing:-0.01em">
           <span>Funguje to s viacerými firmami?</span>
-          <span class="accordion-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
-        </button>
-        <div class="accordion-body" id="dlfaq-multi">
-          <div class="accordion-content">Áno. iBločky Windows Companion <strong>automaticky mapuje IČO</strong> z každého bločku na správnu databázu Pohody. Každý priečinok v iBločky musí mať v názve správne <strong>IČO firmy</strong>, aby mapovanie fungovalo.</div>
+          <span class="ib-faq-icon" style="flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text2)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </summary>
+        <div class="ib-faq-body" style="padding:2px 22px 20px">
+          <p style="font-size:13.5px;color:var(--text2);line-height:1.65;margin:0">Áno. iBločky Windows Companion <strong>automaticky mapuje IČO</strong> z každého bločku na správnu databázu Pohody. Každý priečinok v iBločky musí mať v názve správne <strong>IČO firmy</strong>, aby mapovanie fungovalo.</p>
         </div>
-      </div>
+      </details>
     </div>
   </div>
 </section>
@@ -1354,34 +1256,32 @@ a:focus-visible, button:focus-visible,
 </section>
 
 <!-- FOOTER -->
-<footer>
-  <div class="container">
-    <div class="footer-inner">
-      <div class="footer-top">
-        <div>
-          <div class="footer-brand-name"><span class="brand-i">i</span><span>Bločky</span></div>
-          <div class="footer-tagline">Vaše doklady. Vždy po ruke.</div>
-        </div>
-        <div class="footer-links">
-          <a href="index.html" class="footer-link">Domov</a>
-          <span class="footer-sep">·</span>
-          <a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" class="footer-link">App Store</a>
-          <span class="footer-sep">·</span>
-          <a href="index.html#windows" class="footer-link">Windows Companion</a>
-          <span class="footer-sep">·</span>
-          <a href="windows-setup.html" class="footer-link">Sprievodca nastavením</a>
-          <span class="footer-sep">·</span>
-          <a href="privacy.html" class="footer-link">Ochrana súkromia</a>
-          <span class="footer-sep">·</span>
-          <a href="terms.html" class="footer-link">Podmienky použitia</a>
-          <span class="footer-sep">·</span>
-          <a href="mailto:ereskaapps@gmail.com" class="footer-link">ereskaapps@gmail.com</a>
-        </div>
+<footer style="position:relative;z-index:1;padding:52px 24px 40px;border-top:1px solid var(--border)">
+  <div style="max-width:1140px;margin:0 auto;display:flex;flex-direction:column;gap:28px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:28px;flex-wrap:wrap">
+      <div>
+        <div style="font-size:20px;font-weight:700;letter-spacing:-0.03em;color:var(--text)">i<span style="color:var(--accent)">Bločky</span></div>
+        <div style="font-size:13.5px;color:var(--text2);margin-top:3px">Vaše doklady. Vždy po ruke.</div>
       </div>
-      <div class="footer-bottom">
-        <span class="footer-copy">© 2026 iBločky. Všetky práva vyhradené.</span>
-        <span class="footer-made">Vyrobené na Slovensku 🇸🇰</span>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+        <a href="index.html" style="font-size:13.5px;color:var(--text2);padding:6px 10px;border-radius:7px;text-decoration:none">Domov</a>
+        <span style="color:var(--text3);opacity:.5">·</span>
+        <a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&ct=iblocky-site&mt=8" target="_blank" rel="noopener" style="font-size:13.5px;color:var(--text2);padding:6px 10px;border-radius:7px;text-decoration:none">App Store</a>
+        <span style="color:var(--text3);opacity:.5">·</span>
+        <a href="index.html#windows" style="font-size:13.5px;color:var(--accent);padding:6px 10px;border-radius:7px;text-decoration:none">Windows Companion</a>
+        <span style="color:var(--text3);opacity:.5">·</span>
+        <a href="windows-setup.html" style="font-size:13.5px;color:var(--text2);padding:6px 10px;border-radius:7px;text-decoration:none">Sprievodca nastavením</a>
+        <span style="color:var(--text3);opacity:.5">·</span>
+        <a href="privacy.html" style="font-size:13.5px;color:var(--text2);padding:6px 10px;border-radius:7px;text-decoration:none">Ochrana súkromia</a>
+        <span style="color:var(--text3);opacity:.5">·</span>
+        <a href="terms.html" style="font-size:13.5px;color:var(--text2);padding:6px 10px;border-radius:7px;text-decoration:none">Podmienky použitia</a>
+        <span style="color:var(--text3);opacity:.5">·</span>
+        <a href="mailto:ereskaapps@gmail.com" style="font-size:13.5px;color:var(--text2);padding:6px 10px;border-radius:7px;text-decoration:none">ereskaapps@gmail.com</a>
       </div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-top:22px;border-top:1px solid var(--border)">
+      <span style="font-size:13px;color:var(--text3)">© 2026 iBločky. Všetky práva vyhradené.</span>
+      <span style="font-size:13px;color:var(--text3)">Vyrobené na Slovensku 🇸🇰</span>
     </div>
   </div>
 </footer>
@@ -1411,58 +1311,54 @@ a:focus-visible, button:focus-visible,
           iPhone app
         </a>
       </div>
-      <div class="sync-diagram fade-up">
-
-        <div class="sync-node">
-          <svg viewBox="0 0 36 62" class="sync-node-icon" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="2" y="1" width="32" height="60" rx="5" stroke="currentColor" stroke-width="2"/>
-            <rect x="5.5" y="9.5" width="25" height="41" rx="1.5" class="sync-screen-fill"/>
-            <rect x="13" y="54.5" width="10" height="2.5" rx="1.25" fill="currentColor" opacity="0.3"/>
-            <circle cx="18" cy="5.5" r="1.5" fill="currentColor" opacity="0.35"/>
-          </svg>
-          <span class="sync-node-label">iBločky</span>
+      <div style="display:flex;align-items:flex-start;justify-content:center;gap:4px;flex-wrap:wrap;margin-top:48px">
+        <!-- iPhone node -->
+        <div style="display:flex;flex-direction:column;align-items:center;gap:12px;flex:none">
+          <div style="width:82px;height:82px;border-radius:22px;background:linear-gradient(155deg,var(--surface2),var(--surface));border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;color:var(--accent);box-shadow:0 14px 32px rgba(0,0,0,0.12),inset 0 1px 0 rgba(255,255,255,0.06)">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="3.2"/><path d="M11 18h2"/></svg>
+          </div>
+          <span style="font-size:10px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--text2)">iBločky</span>
         </div>
-
-        <div class="sync-arrow-wrap">
-          <svg class="sync-arrow-svg" viewBox="0 0 64 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <line x1="0" y1="10" x2="50" y2="10" class="sync-arrow-line"/>
-            <polyline points="44,3 58,10 44,17" class="sync-arrow-head"/>
-          </svg>
+        <!-- Connector 1 -->
+        <div style="width:88px;height:12px;margin-top:35px;position:relative;flex:none">
+          <div style="position:absolute;left:0;right:0;top:50%;height:2px;margin-top:-1px;border-radius:2px;background:linear-gradient(90deg,transparent,var(--accentBorder) 16%,var(--accentBorder) 84%,transparent)"></div>
+          <span style="position:absolute;top:50%;margin-top:-4px;width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px 2px var(--glow);animation:ibFlow 2.4s linear infinite"></span>
+          <span style="position:absolute;top:50%;margin-top:-3px;width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 9px 1px var(--glow);animation:ibFlow 2.4s linear infinite;animation-delay:1.2s"></span>
         </div>
-
-        <div class="sync-node">
-          <svg viewBox="0 0 64 52" class="sync-node-icon" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path class="sync-cloud-path" d="M 10.4 44 L 53.6 44 A 12 12 0 0 0 48 22 A 16 16 0 1 0 16 22 A 12 12 0 0 0 10.4 44 Z"/>
-            <g transform="translate(32,26)">
-              <g class="sync-gear">
-                <path transform="translate(-12,-12)" fill="currentColor" d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"/>
-              </g>
-            </g>
-          </svg>
-          <span class="sync-node-label">Cloud<br>API</span>
+        <!-- Cloud node -->
+        <div style="display:flex;flex-direction:column;align-items:center;gap:12px;flex:none">
+          <div style="position:relative;width:82px;height:82px">
+            <span style="position:absolute;inset:0;border-radius:22px;border:1px solid var(--accentBorder);animation:ibHalo 2.8s ease-out infinite"></span>
+            <span style="position:absolute;inset:0;border-radius:22px;border:1px solid var(--accentBorder);animation:ibHalo 2.8s ease-out infinite;animation-delay:1.4s"></span>
+            <div style="position:absolute;inset:0;border-radius:22px;background:linear-gradient(155deg,var(--accentSoft),var(--surface));border:1px solid var(--accentBorder);display:flex;align-items:center;justify-content:center;color:var(--accent);box-shadow:0 14px 32px var(--glow),inset 0 1px 0 rgba(255,255,255,0.06)">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 19a4.5 4.5 0 0 0 0-9 6 6 0 0 0-11.6 1.5A4 4 0 0 0 6.5 19z"/></svg>
+            </div>
+            <div style="position:absolute;right:-6px;bottom:-6px;width:28px;height:28px;border-radius:50%;background:var(--accent2);display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 4px 12px var(--glow);border:2.5px solid var(--bg)">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="animation:ibSpin 4s linear infinite;transform-box:fill-box;transform-origin:center" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg>
+            </div>
+          </div>
+          <span style="font-size:10px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--accent)">Cloud API</span>
         </div>
-
-        <div class="sync-arrow-wrap">
-          <svg class="sync-arrow-svg" viewBox="0 0 64 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <line x1="0" y1="10" x2="50" y2="10" class="sync-arrow-line"/>
-            <polyline points="44,3 58,10 44,17" class="sync-arrow-head"/>
-          </svg>
+        <!-- Connector 2 -->
+        <div style="width:88px;height:12px;margin-top:35px;position:relative;flex:none">
+          <div style="position:absolute;left:0;right:0;top:50%;height:2px;margin-top:-1px;border-radius:2px;background:linear-gradient(90deg,transparent,var(--accentBorder) 16%,var(--accentBorder) 84%,transparent)"></div>
+          <span style="position:absolute;top:50%;margin-top:-4px;width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px 2px var(--glow);animation:ibFlow 2.4s linear infinite;animation-delay:1.2s"></span>
+          <span style="position:absolute;top:50%;margin-top:-3px;width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 9px 1px var(--glow);animation:ibFlow 2.4s linear infinite"></span>
         </div>
-
-        <div class="sync-node">
-          <svg viewBox="0 0 64 56" class="sync-node-icon" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="2" y="2" width="60" height="40" rx="3" stroke="currentColor" stroke-width="2"/>
-            <rect x="6" y="6" width="52" height="32" rx="1.5" class="sync-screen-fill"/>
-            <rect x="24" y="14" width="6.5" height="6.5" rx="0.5" fill="currentColor" opacity="0.7"/>
-            <rect x="33" y="14" width="6.5" height="6.5" rx="0.5" fill="currentColor" opacity="0.7"/>
-            <rect x="24" y="22.5" width="6.5" height="6.5" rx="0.5" fill="currentColor" opacity="0.7"/>
-            <rect x="33" y="22.5" width="6.5" height="6.5" rx="0.5" fill="currentColor" opacity="0.7"/>
-            <line x1="32" y1="42" x2="32" y2="50" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <line x1="20" y1="50" x2="44" y2="50" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-          </svg>
-          <span class="sync-node-label">Pohoda<br>Windows</span>
+        <!-- Windows node -->
+        <div style="display:flex;flex-direction:column;align-items:center;gap:12px;flex:none">
+          <div style="width:82px;height:82px;border-radius:22px;background:linear-gradient(155deg,var(--surface2),var(--surface));border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;color:var(--accent);box-shadow:0 14px 32px rgba(0,0,0,0.12),inset 0 1px 0 rgba(255,255,255,0.06)">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2.5"/><path d="M8 21h8m-4-4v4"/></svg>
+          </div>
+          <span style="font-size:10px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--text2)">Pohoda · Windows</span>
         </div>
-
+      </div>
+      <!-- Flow caption -->
+      <div style="display:flex;justify-content:center;margin-top:22px">
+        <span style="display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:0.01em;color:var(--text2);padding:6px 15px;border-radius:999px;background:var(--surface);border:1px solid var(--border)">
+          <span style="width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:ibGlowPulse 1.8s ease-in-out infinite"></span>
+          Automatic · every 30 seconds
+        </span>
       </div>
     </div>
   </div>
@@ -1659,52 +1555,52 @@ a:focus-visible, button:focus-visible,
       </div>
       <h2 class="section-title">Installation FAQ</h2>
     </div>
-    <div class="accordion fade-up">
-      <div class="accordion-item">
-        <button class="accordion-trigger" aria-expanded="false" aria-controls="dlfaq-smartscreen-en">
+    <div style="display:flex;flex-direction:column;gap:10px" class="fade-up">
+      <details class="ib-faq" style="background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden">
+        <summary style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 22px;color:var(--text);font-size:15px;font-weight:600;letter-spacing:-0.01em">
           <span>Windows showed a SmartScreen warning — is it safe?</span>
-          <span class="accordion-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
-        </button>
-        <div class="accordion-body" id="dlfaq-smartscreen-en">
-          <div class="accordion-content">Yes. The installer is digitally signed via <strong>SignPath Foundation</strong>. SmartScreen warns about every newer app until it builds reputation with Microsoft. Click <strong>"More info"</strong> and then <strong>"Run anyway"</strong>.</div>
+          <span class="ib-faq-icon" style="flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text2)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </summary>
+        <div class="ib-faq-body" style="padding:2px 22px 20px">
+          <p style="font-size:13.5px;color:var(--text2);line-height:1.65;margin:0">Yes. The installer is digitally signed via <strong>SignPath Foundation</strong>. SmartScreen warns about every newer app until it builds reputation with Microsoft. Click <strong>“More info”</strong> and then <strong>“Run anyway”</strong>.</p>
         </div>
-      </div>
-      <div class="accordion-item">
-        <button class="accordion-trigger" aria-expanded="false" aria-controls="dlfaq-dotnet-en">
+      </details>
+      <details class="ib-faq" style="background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden">
+        <summary style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 22px;color:var(--text);font-size:15px;font-weight:600;letter-spacing:-0.01em">
           <span>Do I need to install .NET?</span>
-          <span class="accordion-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
-        </button>
-        <div class="accordion-body" id="dlfaq-dotnet-en">
-          <div class="accordion-content">No. <strong>.NET 8.0 is bundled</strong> right in the installer. You don't need any other dependencies — just run <code>iBlockyWindowsCompanion-Setup.exe</code>.</div>
+          <span class="ib-faq-icon" style="flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text2)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </summary>
+        <div class="ib-faq-body" style="padding:2px 22px 20px">
+          <p style="font-size:13.5px;color:var(--text2);line-height:1.65;margin:0">No. <strong>.NET 8.0 is bundled</strong> right in the installer. You don't need any other dependencies — just run <code>iBlockyWindowsCompanion-Setup.exe</code>.</p>
         </div>
-      </div>
-      <div class="accordion-item">
-        <button class="accordion-trigger" aria-expanded="false" aria-controls="dlfaq-running-en">
+      </details>
+      <details class="ib-faq" style="background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden">
+        <summary style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 22px;color:var(--text);font-size:15px;font-weight:600;letter-spacing:-0.01em">
           <span>How do I know the app is running?</span>
-          <span class="accordion-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
-        </button>
-        <div class="accordion-body" id="dlfaq-running-en">
-          <div class="accordion-content">iBločky Windows Companion runs in the background with no window. Its icon shows in the <strong>system tray</strong> (bottom-right). Once you've entered the API key, the iBločky app on your iPhone shows a live <strong>"Windows connected"</strong> status.</div>
+          <span class="ib-faq-icon" style="flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text2)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </summary>
+        <div class="ib-faq-body" style="padding:2px 22px 20px">
+          <p style="font-size:13.5px;color:var(--text2);line-height:1.65;margin:0">iBločky Windows Companion runs in the background with no window. Its icon shows in the <strong>system tray</strong> (bottom-right). Once you've entered the API key, the iBločky app on your iPhone shows a live <strong>“Windows connected”</strong> status.</p>
         </div>
-      </div>
-      <div class="accordion-item">
-        <button class="accordion-trigger" aria-expanded="false" aria-controls="dlfaq-pohoda-en">
+      </details>
+      <details class="ib-faq" style="background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden">
+        <summary style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 22px;color:var(--text);font-size:15px;font-weight:600;letter-spacing:-0.01em">
           <span>Where does the app find Pohoda.exe?</span>
-          <span class="accordion-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
-        </button>
-        <div class="accordion-body" id="dlfaq-pohoda-en">
-          <div class="accordion-content">iBločky Windows Companion <strong>automatically detects</strong> the path to Pohoda.exe on first launch. If detection fails, click <strong>Browse</strong> in settings and pick the file manually — typically in <code>C:\Program Files\STORMWARE\POHODA\</code>.</div>
+          <span class="ib-faq-icon" style="flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text2)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </summary>
+        <div class="ib-faq-body" style="padding:2px 22px 20px">
+          <p style="font-size:13.5px;color:var(--text2);line-height:1.65;margin:0">iBločky Windows Companion <strong>automatically detects</strong> the path to Pohoda.exe on first launch. If detection fails, click <strong>Browse</strong> in settings and pick the file manually — typically in <code>C:\Program Files\STORMWARE\POHODA\</code>.</p>
         </div>
-      </div>
-      <div class="accordion-item">
-        <button class="accordion-trigger" aria-expanded="false" aria-controls="dlfaq-multi-en">
+      </details>
+      <details class="ib-faq" style="background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden">
+        <summary style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 22px;color:var(--text);font-size:15px;font-weight:600;letter-spacing:-0.01em">
           <span>Does it work with multiple companies?</span>
-          <span class="accordion-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
-        </button>
-        <div class="accordion-body" id="dlfaq-multi-en">
-          <div class="accordion-content">Yes. iBločky Windows Companion <strong>automatically maps the IČO</strong> from each receipt to the right Pohoda database. Every folder in iBločky must have the correct company <strong>IČO</strong> in its name for the mapping to work.</div>
+          <span class="ib-faq-icon" style="flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text2)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </summary>
+        <div class="ib-faq-body" style="padding:2px 22px 20px">
+          <p style="font-size:13.5px;color:var(--text2);line-height:1.65;margin:0">Yes. iBločky Windows Companion <strong>automatically maps the IČO</strong> from each receipt to the right Pohoda database. Every folder in iBločky must have the correct company <strong>IČO</strong> in its name for the mapping to work.</p>
         </div>
-      </div>
+      </details>
     </div>
   </div>
 </section>
@@ -1798,34 +1694,32 @@ a:focus-visible, button:focus-visible,
 </section>
 
 <!-- FOOTER -->
-<footer>
-  <div class="container">
-    <div class="footer-inner">
-      <div class="footer-top">
-        <div>
-          <div class="footer-brand-name"><span class="brand-i">i</span><span>Bločky</span></div>
-          <div class="footer-tagline">Your documents. Always at hand.</div>
-        </div>
-        <div class="footer-links">
-          <a href="index.html" class="footer-link">Home</a>
-          <span class="footer-sep">·</span>
-          <a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" class="footer-link">App Store</a>
-          <span class="footer-sep">·</span>
-          <a href="index.html#windows" class="footer-link">Windows Companion</a>
-          <span class="footer-sep">·</span>
-          <a href="windows-setup.html" class="footer-link">Setup guide</a>
-          <span class="footer-sep">·</span>
-          <a href="privacy.html" class="footer-link">Privacy</a>
-          <span class="footer-sep">·</span>
-          <a href="terms.html" class="footer-link">Terms</a>
-          <span class="footer-sep">·</span>
-          <a href="mailto:ereskaapps@gmail.com" class="footer-link">ereskaapps@gmail.com</a>
-        </div>
+<footer style="position:relative;z-index:1;padding:52px 24px 40px;border-top:1px solid var(--border)">
+  <div style="max-width:1140px;margin:0 auto;display:flex;flex-direction:column;gap:28px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:28px;flex-wrap:wrap">
+      <div>
+        <div style="font-size:20px;font-weight:700;letter-spacing:-0.03em;color:var(--text)">i<span style="color:var(--accent)">Bločky</span></div>
+        <div style="font-size:13.5px;color:var(--text2);margin-top:3px">Your documents. Always at hand.</div>
       </div>
-      <div class="footer-bottom">
-        <span class="footer-copy">© 2026 iBločky. All rights reserved.</span>
-        <span class="footer-made">Made in Slovakia 🇸🇰</span>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+        <a href="index.html" style="font-size:13.5px;color:var(--text2);padding:6px 10px;border-radius:7px;text-decoration:none">Home</a>
+        <span style="color:var(--text3);opacity:.5">·</span>
+        <a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&ct=iblocky-site&mt=8" target="_blank" rel="noopener" style="font-size:13.5px;color:var(--text2);padding:6px 10px;border-radius:7px;text-decoration:none">App Store</a>
+        <span style="color:var(--text3);opacity:.5">·</span>
+        <a href="index.html#windows" style="font-size:13.5px;color:var(--accent);padding:6px 10px;border-radius:7px;text-decoration:none">Windows Companion</a>
+        <span style="color:var(--text3);opacity:.5">·</span>
+        <a href="windows-setup.html" style="font-size:13.5px;color:var(--text2);padding:6px 10px;border-radius:7px;text-decoration:none">Setup guide</a>
+        <span style="color:var(--text3);opacity:.5">·</span>
+        <a href="privacy.html" style="font-size:13.5px;color:var(--text2);padding:6px 10px;border-radius:7px;text-decoration:none">Privacy</a>
+        <span style="color:var(--text3);opacity:.5">·</span>
+        <a href="terms.html" style="font-size:13.5px;color:var(--text2);padding:6px 10px;border-radius:7px;text-decoration:none">Terms</a>
+        <span style="color:var(--text3);opacity:.5">·</span>
+        <a href="mailto:ereskaapps@gmail.com" style="font-size:13.5px;color:var(--text2);padding:6px 10px;border-radius:7px;text-decoration:none">ereskaapps@gmail.com</a>
       </div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-top:22px;border-top:1px solid var(--border)">
+      <span style="font-size:13px;color:var(--text3)">© 2026 iBločky. All rights reserved.</span>
+      <span style="font-size:13px;color:var(--text3)">Made in Slovakia 🇸🇰</span>
     </div>
   </div>
 </footer>
@@ -1834,32 +1728,27 @@ a:focus-visible, button:focus-visible,
 
 <script>
 (function(){
-  // mark decorative SVGs as hidden from screen readers (icons without their own label)
   document.querySelectorAll('svg:not([aria-label])').forEach(s => s.setAttribute('aria-hidden', 'true'));
 
-  const navEl = document.querySelector('nav');
-  window.addEventListener('scroll', () => {
-    navEl.classList.toggle('scrolled', window.scrollY > 16);
-  }, { passive: true });
-
   const html = document.documentElement;
-  const btn = document.getElementById('themeToggle');
-  const stored = localStorage.getItem('iblocky-theme');
-  if (stored) html.setAttribute('data-theme', stored);
 
-  btn.addEventListener('click', () => {
-    const current = html.getAttribute('data-theme');
-    const sys = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-    let next;
-    if (!current) {
-      next = sys === 'dark' ? 'light' : 'dark';
-    } else {
-      next = current === 'dark' ? 'light' : 'dark';
-    }
+  // ─── Theme ───
+  const stored = localStorage.getItem('iblocky-theme');
+  if (stored === 'light' || stored === 'dark') html.setAttribute('data-theme', stored);
+  function syncThemeIcons() {
+    const isLight = html.getAttribute('data-theme') === 'light';
+    document.getElementById('ib-icon-moon').style.display = isLight ? 'none' : '';
+    document.getElementById('ib-icon-sun').style.display = isLight ? '' : 'none';
+  }
+  syncThemeIcons();
+  document.getElementById('ib-theme-btn').addEventListener('click', () => {
+    const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
     html.setAttribute('data-theme', next);
     localStorage.setItem('iblocky-theme', next);
+    syncThemeIcons();
   });
 
+  // ─── Scroll animations ───
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -1868,40 +1757,25 @@ a:focus-visible, button:focus-visible,
       }
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-  // ─── Accordion ───
-  document.querySelectorAll('.accordion-trigger').forEach(trigger => {
-    trigger.addEventListener('click', () => {
-      const item = trigger.closest('.accordion-item');
-      const isOpen = item.classList.contains('open');
-      document.querySelectorAll('.accordion-item').forEach(i => {
-        i.classList.remove('open');
-        i.querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
-      });
-      if (!isOpen) {
-        item.classList.add('open');
-        trigger.setAttribute('aria-expanded', 'true');
-      }
-    });
-  });
 
   window.addEventListener('load', () => {
     document.querySelectorAll('.fade-up').forEach(el => {
-      const rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight) {
-        el.classList.add('visible');
-      }
+      if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('visible');
     });
   });
 
-  // ─── Language (SK / EN), shared across pages via localStorage ───
+  // ─── Language ───
   window.setLang = function(lang) {
     document.getElementById('content-sk').style.display = lang === 'sk' ? 'block' : 'none';
     document.getElementById('content-en').style.display = lang === 'en' ? 'block' : 'none';
-    document.getElementById('btnSk').classList.toggle('active', lang === 'sk');
-    document.getElementById('btnEn').classList.toggle('active', lang === 'en');
+    const skBtn = document.getElementById('btn-sk');
+    const enBtn = document.getElementById('btn-en');
+    const activeStyle = 'padding:4px 13px;border-radius:999px;font-size:12.5px;font-weight:600;cursor:pointer;border:none;background:var(--accent2);color:var(--onAccent);font-family:inherit;line-height:1.4';
+    const idleStyle  = 'padding:4px 13px;border-radius:999px;font-size:12.5px;font-weight:600;cursor:pointer;border:none;background:transparent;color:var(--text2);font-family:inherit;line-height:1.4';
+    skBtn.setAttribute('style', lang === 'sk' ? activeStyle : idleStyle);
+    enBtn.setAttribute('style', lang === 'en' ? activeStyle : idleStyle);
     document.querySelectorAll('.nav-back-sk').forEach(el => el.style.display = lang === 'sk' ? '' : 'none');
     document.querySelectorAll('.nav-back-en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
     document.querySelectorAll('#content-' + lang + ' .fade-up').forEach(el => el.classList.add('visible'));
@@ -1910,7 +1784,7 @@ a:focus-visible, button:focus-visible,
   };
   setLang(localStorage.getItem('iblocky-lang') || 'sk');
 
-  // in-page anchors must target the visible language block (both blocks share section ids)
+  // in-page anchors must target the visible language block
   function scrollToVisible(id) {
     var els = document.querySelectorAll('[id="' + id + '"]');
     for (var i = 0; i < els.length; i++) {
