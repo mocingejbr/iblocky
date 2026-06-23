@@ -733,6 +733,12 @@ footer {
   .signpath-card { padding: 24px; }
   .hero-mini-ctas .btn-download, .hero-mini-ctas .btn-appstore { width: 100%; justify-content: center; }
 }
+@media(max-width:540px){
+  .ib-sync-nodes{flex-direction:column!important;align-items:center!important;gap:0!important}
+  .ib-sync-conn{width:2px!important;height:48px!important;margin-top:0!important}
+  .ib-sync-conn>div{left:50%!important;right:auto!important;width:2px!important;height:100%!important;top:0!important;margin-top:0!important;background:linear-gradient(180deg,transparent,var(--accentBorder) 16%,var(--accentBorder) 84%,transparent)!important}
+  .ib-sync-conn>span{display:none!important}
+}
 
 /* ─── UI polish pass: a11y, conversion fixes ─── */
 
@@ -868,7 +874,7 @@ a:focus-visible, button:focus-visible,
           iPhone aplikácia
         </a>
       </div>
-      <div style="display:flex;align-items:flex-start;justify-content:center;gap:4px;flex-wrap:wrap;margin-top:48px">
+      <div class="ib-sync-nodes" style="display:flex;align-items:flex-start;justify-content:center;gap:4px;margin-top:48px">
         <!-- iPhone node -->
         <div style="display:flex;flex-direction:column;align-items:center;gap:12px;flex:none">
           <div style="width:82px;height:82px;border-radius:22px;background:linear-gradient(155deg,var(--surface2),var(--surface));border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;color:var(--accent);box-shadow:0 14px 32px rgba(0,0,0,0.12),inset 0 1px 0 rgba(255,255,255,0.06)">
@@ -877,7 +883,7 @@ a:focus-visible, button:focus-visible,
           <span style="font-size:10px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--text2)">iBločky</span>
         </div>
         <!-- Connector 1 -->
-        <div style="width:88px;height:12px;margin-top:35px;position:relative;flex:none">
+        <div class="ib-sync-conn" style="width:88px;height:12px;margin-top:35px;position:relative;flex:none">
           <div style="position:absolute;left:0;right:0;top:50%;height:2px;margin-top:-1px;border-radius:2px;background:linear-gradient(90deg,transparent,var(--accentBorder) 16%,var(--accentBorder) 84%,transparent)"></div>
           <span style="position:absolute;top:50%;margin-top:-4px;width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px 2px var(--glow);animation:ibFlow 2.4s linear infinite"></span>
           <span style="position:absolute;top:50%;margin-top:-3px;width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 9px 1px var(--glow);animation:ibFlow 2.4s linear infinite;animation-delay:1.2s"></span>
@@ -897,7 +903,7 @@ a:focus-visible, button:focus-visible,
           <span style="font-size:10px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--accent)">Cloud API</span>
         </div>
         <!-- Connector 2 -->
-        <div style="width:88px;height:12px;margin-top:35px;position:relative;flex:none">
+        <div class="ib-sync-conn" style="width:88px;height:12px;margin-top:35px;position:relative;flex:none">
           <div style="position:absolute;left:0;right:0;top:50%;height:2px;margin-top:-1px;border-radius:2px;background:linear-gradient(90deg,transparent,var(--accentBorder) 16%,var(--accentBorder) 84%,transparent)"></div>
           <span style="position:absolute;top:50%;margin-top:-4px;width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px 2px var(--glow);animation:ibFlow 2.4s linear infinite;animation-delay:1.2s"></span>
           <span style="position:absolute;top:50%;margin-top:-3px;width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 9px 1px var(--glow);animation:ibFlow 2.4s linear infinite"></span>
@@ -1311,7 +1317,7 @@ a:focus-visible, button:focus-visible,
           iPhone app
         </a>
       </div>
-      <div style="display:flex;align-items:flex-start;justify-content:center;gap:4px;flex-wrap:wrap;margin-top:48px">
+      <div class="ib-sync-nodes" style="display:flex;align-items:flex-start;justify-content:center;gap:4px;margin-top:48px">
         <!-- iPhone node -->
         <div style="display:flex;flex-direction:column;align-items:center;gap:12px;flex:none">
           <div style="width:82px;height:82px;border-radius:22px;background:linear-gradient(155deg,var(--surface2),var(--surface));border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;color:var(--accent);box-shadow:0 14px 32px rgba(0,0,0,0.12),inset 0 1px 0 rgba(255,255,255,0.06)">
@@ -1320,7 +1326,7 @@ a:focus-visible, button:focus-visible,
           <span style="font-size:10px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--text2)">iBločky</span>
         </div>
         <!-- Connector 1 -->
-        <div style="width:88px;height:12px;margin-top:35px;position:relative;flex:none">
+        <div class="ib-sync-conn" style="width:88px;height:12px;margin-top:35px;position:relative;flex:none">
           <div style="position:absolute;left:0;right:0;top:50%;height:2px;margin-top:-1px;border-radius:2px;background:linear-gradient(90deg,transparent,var(--accentBorder) 16%,var(--accentBorder) 84%,transparent)"></div>
           <span style="position:absolute;top:50%;margin-top:-4px;width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px 2px var(--glow);animation:ibFlow 2.4s linear infinite"></span>
           <span style="position:absolute;top:50%;margin-top:-3px;width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 9px 1px var(--glow);animation:ibFlow 2.4s linear infinite;animation-delay:1.2s"></span>
@@ -1340,7 +1346,7 @@ a:focus-visible, button:focus-visible,
           <span style="font-size:10px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--accent)">Cloud API</span>
         </div>
         <!-- Connector 2 -->
-        <div style="width:88px;height:12px;margin-top:35px;position:relative;flex:none">
+        <div class="ib-sync-conn" style="width:88px;height:12px;margin-top:35px;position:relative;flex:none">
           <div style="position:absolute;left:0;right:0;top:50%;height:2px;margin-top:-1px;border-radius:2px;background:linear-gradient(90deg,transparent,var(--accentBorder) 16%,var(--accentBorder) 84%,transparent)"></div>
           <span style="position:absolute;top:50%;margin-top:-4px;width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px 2px var(--glow);animation:ibFlow 2.4s linear infinite;animation-delay:1.2s"></span>
           <span style="position:absolute;top:50%;margin-top:-3px;width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 9px 1px var(--glow);animation:ibFlow 2.4s linear infinite"></span>

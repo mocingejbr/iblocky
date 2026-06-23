@@ -91,7 +91,12 @@ html:not([data-theme="light"]) .ib-shot-dark{display:block}
   .ib-features-grid{grid-template-columns:1fr 1fr!important}
   .ib-pricing-grid{grid-template-columns:1fr!important}
   .ib-windows-2col{grid-template-columns:1fr!important}
-  .ib-sync-nodes{flex-wrap:wrap;gap:8px!important}
+}
+@media(max-width:540px){
+  .ib-sync-nodes{flex-direction:column!important;align-items:center!important;gap:0!important}
+  .ib-sync-conn{width:2px!important;height:48px!important;margin-top:0!important}
+  .ib-sync-conn>div{left:50%!important;right:auto!important;width:2px!important;height:100%!important;top:0!important;margin-top:0!important;background:linear-gradient(180deg,transparent,var(--accentBorder) 16%,var(--accentBorder) 84%,transparent)!important}
+  .ib-sync-conn>span{display:none!important}
 }
 @media(max-width:600px){
   .ib-features-grid{grid-template-columns:1fr!important}
@@ -298,7 +303,7 @@ html:not([data-theme="light"]) .ib-shot-dark{display:block}
           <span data-i18n="windows.nodeApp" style="font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--text2)">iBločky</span>
         </div>
         <!-- Connector 1 (pulse) -->
-        <div style="width:96px;height:14px;margin-top:38px;position:relative;flex:none">
+        <div class="ib-sync-conn" style="width:96px;height:14px;margin-top:38px;position:relative;flex:none">
           <div style="position:absolute;left:0;right:0;top:50%;height:2px;margin-top:-1px;border-radius:2px;background:linear-gradient(90deg,transparent,var(--accentBorder) 16%,var(--accentBorder) 84%,transparent)"></div>
           <span style="position:absolute;top:50%;margin-top:-4px;width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px 2px var(--glow);animation:ibFlow 2.4s linear infinite"></span>
           <span style="position:absolute;top:50%;margin-top:-3px;width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 9px 1px var(--glow);animation:ibFlow 2.4s linear infinite;animation-delay:1.2s"></span>
@@ -314,7 +319,7 @@ html:not([data-theme="light"]) .ib-shot-dark{display:block}
           <span data-i18n="windows.nodeCloud" style="font-size:11px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--accent)">Cloud API</span>
         </div>
         <!-- Connector 2 (pulse) -->
-        <div style="width:96px;height:14px;margin-top:38px;position:relative;flex:none">
+        <div class="ib-sync-conn" style="width:96px;height:14px;margin-top:38px;position:relative;flex:none">
           <div style="position:absolute;left:0;right:0;top:50%;height:2px;margin-top:-1px;border-radius:2px;background:linear-gradient(90deg,transparent,var(--accentBorder) 16%,var(--accentBorder) 84%,transparent)"></div>
           <span style="position:absolute;top:50%;margin-top:-4px;width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px 2px var(--glow);animation:ibFlow 2.4s linear infinite;animation-delay:1.2s"></span>
           <span style="position:absolute;top:50%;margin-top:-3px;width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 9px 1px var(--glow);animation:ibFlow 2.4s linear infinite"></span>
