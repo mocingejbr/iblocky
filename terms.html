@@ -195,6 +195,7 @@ main::before {
   padding: 108px 24px 80px;
   position: relative;
   z-index: 1;
+  animation: ibUp .4s both;
 }
 .prose-header {
   margin-bottom: 48px;
@@ -358,6 +359,8 @@ footer {
 }
 .footer-copy { font-size: 13px; color: var(--text-subtle); }
 .footer-made { font-size: 13px; color: var(--text-subtle); }
+
+@keyframes ibUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 
 @media (max-width: 600px) {
   .nav-back span { display: none; }
@@ -782,23 +785,23 @@ a:focus-visible, button:focus-visible,
     <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:28px;flex-wrap:wrap">
       <div>
         <div style="font-size:20px;font-weight:700;letter-spacing:-0.03em;color:var(--text)">i<span style="color:var(--accent)">Bločky</span></div>
-        <div style="font-size:13.5px;color:var(--text2);margin-top:3px">Vaše doklady. Vždy po ruke.</div>
+        <div id="ft-tagline" style="font-size:13.5px;color:var(--text2);margin-top:3px">Vaše doklady. Vždy po ruke.</div>
       </div>
       <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
         <a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&ct=iblocky-site&mt=8" target="_blank" rel="noopener" style="font-size:13.5px;color:var(--text2);padding:6px 10px;border-radius:7px;text-decoration:none">App Store</a>
         <span style="color:var(--text3);opacity:.5">·</span>
         <a href="download.html" style="font-size:13.5px;color:var(--text2);padding:6px 10px;border-radius:7px;text-decoration:none">Windows Companion</a>
         <span style="color:var(--text3);opacity:.5">·</span>
-        <a href="privacy.html" style="font-size:13.5px;color:var(--text2);padding:6px 10px;border-radius:7px;text-decoration:none">Ochrana súkromia</a>
+        <a href="privacy.html" style="font-size:13.5px;color:var(--text2);padding:6px 10px;border-radius:7px;text-decoration:none"><span id="ft-privacy">Ochrana súkromia</span></a>
         <span style="color:var(--text3);opacity:.5">·</span>
-        <a href="terms.html" style="font-size:13.5px;color:var(--accent);padding:6px 10px;border-radius:7px;text-decoration:none">Podmienky použitia</a>
+        <a href="terms.html" style="font-size:13.5px;color:var(--accent);padding:6px 10px;border-radius:7px;text-decoration:none"><span id="ft-terms">Podmienky použitia</span></a>
         <span style="color:var(--text3);opacity:.5">·</span>
         <a href="mailto:ereskaapps@gmail.com" style="font-size:13.5px;color:var(--text2);padding:6px 10px;border-radius:7px;text-decoration:none">ereskaapps@gmail.com</a>
       </div>
     </div>
     <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-top:22px;border-top:1px solid var(--border)">
-      <span style="font-size:13px;color:var(--text3)">© 2026 iBločky. Všetky práva vyhradené.</span>
-      <span style="font-size:13px;color:var(--text3)">Vyrobené na Slovensku 🇸🇰</span>
+      <span id="ft-copy" style="font-size:13px;color:var(--text3)">© 2026 iBločky. Všetky práva vyhradené.</span>
+      <span id="ft-made" style="font-size:13px;color:var(--text3)">Vyrobené na Slovensku 🇸🇰</span>
     </div>
   </div>
 </footer>
@@ -839,6 +842,15 @@ a:focus-visible, button:focus-visible,
     document.querySelectorAll('.nav-back-en').forEach(el => el.style.display = lang === 'en' ? '' : 'none');
     html.setAttribute('lang', lang);
     localStorage.setItem('iblocky-lang', lang);
+    const T = {
+      sk: { tagline:'Vaše doklady. Vždy po ruke.', privacy:'Ochrana súkromia', terms:'Podmienky použitia', copy:'© 2026 iBločky. Všetky práva vyhradené.', made:'Vyrobené na Slovensku 🇸🇰' },
+      en: { tagline:'Your documents. Always at hand.', privacy:'Privacy', terms:'Terms', copy:'© 2026 iBločky. All rights reserved.', made:'Made in Slovakia 🇸🇰' }
+    };
+    document.getElementById('ft-tagline').textContent = T[lang].tagline;
+    document.getElementById('ft-privacy').textContent = T[lang].privacy;
+    document.getElementById('ft-terms').textContent   = T[lang].terms;
+    document.getElementById('ft-copy').textContent    = T[lang].copy;
+    document.getElementById('ft-made').textContent    = T[lang].made;
   };
 
   const savedLang = localStorage.getItem('iblocky-lang') || 'sk';
