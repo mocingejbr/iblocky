@@ -420,74 +420,6 @@ nav.scrolled {
 .req-label { font-size: 12px; color: var(--text-subtle); margin-bottom: 1px; }
 .req-value { font-size: 14px; font-weight: 600; color: var(--text); }
 
-/* ─── SIGNPATH SECTION ─── */
-#codesigning {
-  background: var(--bg-alt);
-  padding: 64px 0;
-}
-.codesigning-inner {
-  max-width: 760px;
-  margin: 0 auto;
-}
-.signpath-card {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius);
-  padding: 32px 36px;
-  display: flex;
-  gap: 24px;
-  align-items: flex-start;
-}
-.signpath-shield {
-  flex-shrink: 0;
-  width: 52px; height: 52px;
-  border-radius: 14px;
-  background: rgba(var(--success-rgb),0.1);
-  border: 1px solid rgba(var(--success-rgb),0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--success);
-}
-.signpath-content { flex: 1; }
-.signpath-title {
-  font-size: 17px;
-  font-weight: 700;
-  margin-bottom: 8px;
-  color: var(--text);
-}
-.signpath-desc {
-  font-size: 14px;
-  color: var(--text-muted);
-  line-height: 1.65;
-  margin-bottom: 14px;
-}
-.signpath-desc-en {
-  font-size: 13px;
-  color: var(--text-subtle);
-  line-height: 1.6;
-  padding-top: 12px;
-  border-top: 1px solid var(--border);
-  font-style: italic;
-}
-.signpath-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--success);
-  padding: 5px 12px;
-  border-radius: var(--radius-xs);
-  border: 1px solid rgba(var(--success-rgb),0.25);
-  background: rgba(var(--success-rgb),0.07);
-  transition: background 0.2s, color 0.2s;
-  margin-top: 14px;
-}
-.signpath-link:hover {
-  background: rgba(var(--success-rgb),0.14);
-}
-
 /* ─── FOOTER ─── */
 footer {
   background: var(--bg);
@@ -720,7 +652,6 @@ footer {
   }
   .dl-button-row { flex-direction: column; align-items: flex-start; }
   .btn-download { width: 100%; justify-content: center; }
-  .signpath-card { flex-direction: column; gap: 16px; }
   section { padding: 72px 0; }
   #hero-mini { padding-top: 120px; }
   #download { padding-top: 48px; padding-bottom: 72px; }
@@ -730,7 +661,6 @@ footer {
   .dl-app-header { flex-direction: column; align-items: flex-start; gap: 14px; }
   .dl-card { padding: 24px; }
   .req-card { padding: 20px; }
-  .signpath-card { padding: 24px; }
   .hero-mini-ctas .btn-download, .hero-mini-ctas .btn-appstore { width: 100%; justify-content: center; }
 }
 @media(max-width:540px){
@@ -1014,7 +944,7 @@ a:focus-visible, button:focus-visible,
 
         <div class="dl-publisher">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-          Vydavateľ: <strong>Ereska Apps</strong> · digitálne podpísané cez SignPath Foundation
+          Vydavateľ: <strong>Ereska Apps</strong>
         </div>
 
         <div class="dl-smartscreen">
@@ -1170,7 +1100,7 @@ a:focus-visible, button:focus-visible,
           <span class="ib-faq-icon" style="flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text2)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
         </summary>
         <div class="ib-faq-body" style="padding:2px 22px 20px">
-          <p style="font-size:13.5px;color:var(--text2);line-height:1.65;margin:0">Áno. Inštalátor je digitálne podpísaný cez <strong>SignPath Foundation</strong>. SmartScreen zobrazuje upozornenie pri každej novšej aplikácii, kým si nevybuduje reputáciu u Microsoftu. Kliknite na <strong>„Ďalšie informácie“</strong> a potom <strong>„Spustiť aj tak“</strong>.</p>
+          <p style=”font-size:13.5px;color:var(--text2);line-height:1.65;margin:0”>Áno. Inštalátor je digitálne podpísaný. SmartScreen zobrazuje upozornenie pri každej novšej aplikácii, kým si nevybuduje reputáciu u Microsoftu. Kliknite na <strong>„Ďalšie informácie”</strong> a potom <strong>„Spustiť aj tak”</strong>.</p>
         </div>
       </details>
       <details class="ib-faq" style="background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden">
@@ -1213,32 +1143,6 @@ a:focus-visible, button:focus-visible,
   </div>
 </section>
 
-<!-- CODE SIGNING / SIGNPATH -->
-<section id="codesigning">
-  <div class="container">
-    <div class="codesigning-inner">
-      <div class="signpath-card fade-up">
-        <div class="signpath-shield">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-        </div>
-        <div class="signpath-content">
-          <div class="signpath-title">Digitálne podpisovanie kódu</div>
-          <p class="signpath-desc">
-            Digitálny podpis tohto softvéru je zabezpečený prostredníctvom <strong>SignPath Foundation</strong> — neziskovej organizácie, ktorá poskytuje bezplatnú infraštruktúru na podpisovanie kódu pre open-source projekty. Podpísaný kód zaisťuje, že inštalátor nebol po zverejnení pozmenený.
-          </p>
-          <p class="signpath-desc-en">
-            Code signing for this software is provided by <strong>SignPath Foundation</strong>, a non-profit organization providing free code signing infrastructure for open-source projects.
-          </p>
-          <a href="https://signpath.org" target="_blank" rel="noopener noreferrer" class="signpath-link">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            signpath.org
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- CHANGELOG -->
 <section id="changelog">
   <div class="container">
@@ -1270,7 +1174,7 @@ a:focus-visible, button:focus-visible,
           <li>Prvé verejné vydanie iBločky Windows Companion.</li>
           <li>Automatický import naskenovaných dokladov priamo do Pohody každých 30 sekúnd.</li>
           <li>Automatické mapovanie IČO na správnu databázu Pohody pri práci s viacerými firmami.</li>
-          <li>Digitálne podpísaný inštalátor cez SignPath Foundation s priloženým .NET 8.0.</li>
+          <li>Digitálne podpísaný inštalátor s priloženým .NET 8.0.</li>
         </ul>
       </div>
     </div>
@@ -1457,7 +1361,7 @@ a:focus-visible, button:focus-visible,
 
         <div class="dl-publisher">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-          Publisher: <strong>Ereska Apps</strong> · digitally signed via SignPath Foundation
+          Publisher: <strong>Ereska Apps</strong>
         </div>
 
         <div class="dl-smartscreen">
@@ -1612,7 +1516,7 @@ a:focus-visible, button:focus-visible,
           <span class="ib-faq-icon" style="flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text2)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
         </summary>
         <div class="ib-faq-body" style="padding:2px 22px 20px">
-          <p style="font-size:13.5px;color:var(--text2);line-height:1.65;margin:0">Yes. The installer is digitally signed via <strong>SignPath Foundation</strong>. SmartScreen warns about every newer app until it builds reputation with Microsoft. Click <strong>“More info”</strong> and then <strong>“Run anyway”</strong>.</p>
+          <p style=”font-size:13.5px;color:var(--text2);line-height:1.65;margin:0”>Yes. The installer is digitally signed. SmartScreen warns about every newer app until it builds reputation with Microsoft. Click <strong>”More info”</strong> and then <strong>”Run anyway”</strong>.</p>
         </div>
       </details>
       <details class="ib-faq" style="background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden">
@@ -1655,29 +1559,6 @@ a:focus-visible, button:focus-visible,
   </div>
 </section>
 
-<!-- CODE SIGNING / SIGNPATH -->
-<section id="codesigning">
-  <div class="container">
-    <div class="codesigning-inner">
-      <div class="signpath-card fade-up">
-        <div class="signpath-shield">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-        </div>
-        <div class="signpath-content">
-          <div class="signpath-title">Digital code signing</div>
-          <p class="signpath-desc">
-            Code signing for this software is provided by <strong>SignPath Foundation</strong> — a non-profit that offers free code-signing infrastructure for open-source projects. A signed installer guarantees the file hasn't been altered since release.
-          </p>
-          <a href="https://signpath.org" target="_blank" rel="noopener noreferrer" class="signpath-link">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            signpath.org
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- CHANGELOG -->
 <section id="changelog">
   <div class="container">
@@ -1709,7 +1590,7 @@ a:focus-visible, button:focus-visible,
           <li>First public release of iBločky Windows Companion.</li>
           <li>Automatic import of scanned documents straight into Pohoda every 30 seconds.</li>
           <li>Automatic IČO mapping to the right Pohoda database when working with multiple companies.</li>
-          <li>Digitally signed installer via SignPath Foundation with .NET 8.0 bundled.</li>
+          <li>Digitally signed installer with .NET 8.0 bundled.</li>
         </ul>
       </div>
     </div>
