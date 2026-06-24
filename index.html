@@ -38,7 +38,7 @@ body{margin:0}
   --bg:#08090A;--bg2:#0C0D10;--bg3:#101216;
   --surface:rgba(255,255,255,0.024);--surface2:rgba(255,255,255,0.05);
   --border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.14);
-  --text:#F7F8F8;--text2:#888D96;--text3:#5A5E66;
+  --text:#F7F8F8;--text2:#888D96;--text3:#797D84;
   --accent:#92ADD6;--accent2:#637A9F;--accentSoft:rgba(146,173,214,0.13);--accentBorder:rgba(146,173,214,0.30);
   --onAccent:#fff;--green:#46C98B;--nav:rgba(8,9,10,0.70);--glow:rgba(146,173,214,0.16);
 }
@@ -46,7 +46,7 @@ html[data-theme="light"]{
   --bg:#FBFBF9;--bg2:#F4F2EC;--bg3:#EEEBE2;
   --surface:rgba(28,24,14,0.022);--surface2:rgba(28,24,14,0.045);
   --border:rgba(28,24,14,0.10);--border2:rgba(28,24,14,0.16);
-  --text:#17181B;--text2:#5F636C;--text3:#9A9EA8;
+  --text:#17181B;--text2:#5F636C;--text3:#686C75;
   --accent:#A07D24;--accent2:#C0A040;--accentSoft:rgba(201,168,76,0.15);--accentBorder:rgba(201,168,76,0.42);
   --onAccent:#1a1509;--green:#16A34A;--nav:rgba(251,251,249,0.80);--glow:rgba(201,168,76,0.18);
 }
@@ -102,19 +102,43 @@ html:not([data-theme="light"]) .ib-shot-dark{display:block}
   .ib-features-grid{grid-template-columns:1fr!important}
   .ib-nav-links{display:none!important}
 }
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    animation-delay:0ms!important;
+    transition-duration:.01ms!important;
+  }
+}
+.ib-skip{position:fixed;top:8px;left:8px;z-index:200;transform:translateY(-160%);background:var(--accent2);color:var(--onAccent);font-size:13px;font-weight:600;padding:9px 16px;border-radius:8px;text-decoration:none;transition:transform .15s}
+.ib-skip:focus{transform:translateY(0)}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.ib-burger{display:none}
+#ib-mobile-menu{display:none}
+@media(min-width:601px){#ib-mobile-menu{display:none!important}}
+@media(max-width:600px){
+  .ib-burger{display:flex!important}
+  #ib-mobile-menu.open{display:block}
+}
+@media(pointer:coarse){
+  #ib-burger,#ib-theme-btn{width:42px!important;height:42px!important}
+}
 </style>
 </head>
 <body>
+
+<a href="#top" data-i18n="nav.skip" class="ib-skip">Preskočiť na obsah</a>
 
 <!-- NAV -->
 <nav style="position:fixed;top:0;left:0;right:0;z-index:100;background:var(--nav);backdrop-filter:blur(18px) saturate(180%);-webkit-backdrop-filter:blur(18px) saturate(180%);border-bottom:1px solid var(--border)">
   <div style="display:flex;align-items:center;justify-content:space-between;height:58px;max-width:1140px;margin:0 auto;padding:0 24px">
     <a href="#top" class="ib-nav-link" style="display:inline-flex;align-items:baseline;font-size:18px;font-weight:700;letter-spacing:-0.03em;color:var(--text);text-decoration:none;border-radius:8px;padding:4px 8px;margin-left:-8px"><span>i</span><span style="color:var(--accent)">Bločky</span></a>
     <div class="ib-nav-links" style="display:flex;align-items:center;gap:4px">
-      <a href="#ako" data-i18n="nav.how" class="ib-nav-link" style="font-size:13.5px;font-weight:500;color:var(--text2);padding:7px 11px;border-radius:7px;text-decoration:none">Ako to funguje</a>
-      <a href="#features" data-i18n="nav.features" class="ib-nav-link" style="font-size:13.5px;font-weight:500;color:var(--text2);padding:7px 11px;border-radius:7px;text-decoration:none">Funkcie</a>
-      <a href="#pricing" data-i18n="nav.pricing" class="ib-nav-link" style="font-size:13.5px;font-weight:500;color:var(--text2);padding:7px 11px;border-radius:7px;text-decoration:none">Ceny</a>
-      <a href="#windows" class="ib-nav-link" style="font-size:13.5px;font-weight:500;color:var(--text2);padding:7px 11px;border-radius:7px;text-decoration:none">Windows</a>
+      <a href="#ako" data-i18n="nav.how" class="ib-nav-link" style="font-size:13.5px;font-weight:500;color:var(--text2);padding:7px 11px;border-radius:8px;text-decoration:none">Ako to funguje</a>
+      <a href="#features" data-i18n="nav.features" class="ib-nav-link" style="font-size:13.5px;font-weight:500;color:var(--text2);padding:7px 11px;border-radius:8px;text-decoration:none">Funkcie</a>
+      <a href="#pricing" data-i18n="nav.pricing" class="ib-nav-link" style="font-size:13.5px;font-weight:500;color:var(--text2);padding:7px 11px;border-radius:8px;text-decoration:none">Ceny</a>
+      <a href="#windows" class="ib-nav-link" style="font-size:13.5px;font-weight:500;color:var(--text2);padding:7px 11px;border-radius:8px;text-decoration:none">Windows</a>
     </div>
     <div style="display:flex;align-items:center;gap:4px">
       <div style="display:flex;background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:2px;gap:2px;margin-right:4px">
@@ -126,9 +150,22 @@ html:not([data-theme="light"]) .ib-shot-dark{display:block}
         <svg id="ib-icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M18.66 5.34l-1.41 1.41"/></svg>
       </button>
       <a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" data-i18n="nav.getApp" class="ib-btn-primary" style="display:inline-flex;align-items:center;gap:7px;padding:8px 15px;background:var(--accent2);color:var(--onAccent);font-size:13.5px;font-weight:600;border-radius:8px;text-decoration:none;letter-spacing:-0.01em;margin-left:6px;box-shadow:0 2px 10px var(--glow)">Stiahnuť</a>
+      <button id="ib-burger" class="ib-burger" onclick="app.toggleMenu()" aria-label="Menu" aria-expanded="false" aria-controls="ib-mobile-menu" style="align-items:center;justify-content:center;width:34px;height:34px;border-radius:999px;background:var(--surface);border:1px solid var(--border);cursor:pointer;color:var(--text2);margin-left:6px">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
     </div>
   </div>
 </nav>
+
+<!-- MOBILE MENU -->
+<div id="ib-mobile-menu" style="position:fixed;top:58px;left:0;right:0;z-index:99;background:var(--nav);backdrop-filter:blur(18px) saturate(180%);-webkit-backdrop-filter:blur(18px) saturate(180%);border-bottom:1px solid var(--border)">
+  <div style="max-width:1140px;margin:0 auto;padding:8px 16px 12px;display:flex;flex-direction:column;gap:2px">
+    <a href="#ako" data-i18n="nav.how" class="ib-nav-link" onclick="app.closeMenu()" style="font-size:15px;font-weight:500;color:var(--text2);padding:12px;border-radius:8px;text-decoration:none">Ako to funguje</a>
+    <a href="#features" data-i18n="nav.features" class="ib-nav-link" onclick="app.closeMenu()" style="font-size:15px;font-weight:500;color:var(--text2);padding:12px;border-radius:8px;text-decoration:none">Funkcie</a>
+    <a href="#pricing" data-i18n="nav.pricing" class="ib-nav-link" onclick="app.closeMenu()" style="font-size:15px;font-weight:500;color:var(--text2);padding:12px;border-radius:8px;text-decoration:none">Ceny</a>
+    <a href="#windows" class="ib-nav-link" onclick="app.closeMenu()" style="font-size:15px;font-weight:500;color:var(--text2);padding:12px;border-radius:8px;text-decoration:none">Windows</a>
+  </div>
+</div>
 
 <!-- HERO -->
 <section id="top" style="position:relative;z-index:1;padding:150px 24px 90px;overflow:hidden">
@@ -188,7 +225,6 @@ html:not([data-theme="light"]) .ib-shot-dark{display:block}
 <section id="ako" style="position:relative;z-index:1;padding:88px 24px;border-top:1px solid var(--border)">
   <div style="max-width:1140px;margin:0 auto">
     <div style="max-width:640px">
-      <div style="display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);padding:5px 11px;border:1px solid var(--accentBorder);border-radius:999px;background:var(--accentSoft)"><span data-i18n="ladder.label">Ako to funguje</span></div>
       <h2 data-i18n="ladder.title" style="font-size:clamp(28px,3.6vw,40px);font-weight:600;letter-spacing:-0.03em;line-height:1.12;margin:18px 0 0;color:var(--text);text-wrap:balance">Od skenu po Pohodu — vašim tempom</h2>
       <p data-i18n="ladder.sub" style="font-size:16.5px;line-height:1.6;color:var(--text2);margin:14px 0 0">iPhone aplikácia funguje samostatne. Export a automatizáciu pridáte, len ak ich potrebujete.</p>
     </div>
@@ -196,7 +232,7 @@ html:not([data-theme="light"]) .ib-shot-dark{display:block}
       <!-- Step 1: Free -->
       <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:26px;position:relative;overflow:hidden">
         <div style="display:flex;align-items:center;justify-content:space-between">
-          <div style="width:42px;height:42px;border-radius:11px;background:var(--accentSoft);border:1px solid var(--accentBorder);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:var(--accent)">1</div>
+          <div style="width:42px;height:42px;border-radius:12px;background:var(--accentSoft);border:1px solid var(--accentBorder);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:var(--accent)">1</div>
           <span data-i18n="ladder.free" style="font-size:10.5px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;padding:3px 9px;border-radius:999px;background:var(--surface2);color:var(--text2);border:1px solid var(--border)">Zadarmo</span>
         </div>
         <div data-i18n="ladder.c1t" style="font-size:16px;font-weight:600;color:var(--text);margin-top:18px;letter-spacing:-0.01em">Naskenujte v iPhone</div>
@@ -205,7 +241,7 @@ html:not([data-theme="light"]) .ib-shot-dark{display:block}
       <!-- Step 2: Pro -->
       <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:26px;position:relative;overflow:hidden">
         <div style="display:flex;align-items:center;justify-content:space-between">
-          <div style="width:42px;height:42px;border-radius:11px;background:var(--accentSoft);border:1px solid var(--accentBorder);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:var(--accent)">2</div>
+          <div style="width:42px;height:42px;border-radius:12px;background:var(--accentSoft);border:1px solid var(--accentBorder);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:var(--accent)">2</div>
           <span data-i18n="ladder.pro" style="font-size:10.5px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;padding:3px 9px;border-radius:999px;background:var(--accentSoft);color:var(--accent);border:1px solid var(--accentBorder)">Pro</span>
         </div>
         <div data-i18n="ladder.c2t" style="font-size:16px;font-weight:600;color:var(--text);margin-top:18px;letter-spacing:-0.01em">Exportujte do Pohody</div>
@@ -214,7 +250,7 @@ html:not([data-theme="light"]) .ib-shot-dark{display:block}
       <!-- Step 3: Pro Max -->
       <a href="#windows" class="ib-card-link" style="background:linear-gradient(160deg,var(--accentSoft),var(--surface));border:1px solid var(--accentBorder);border-radius:16px;padding:26px;position:relative;overflow:hidden;text-decoration:none;display:block">
         <div style="display:flex;align-items:center;justify-content:space-between">
-          <div style="width:42px;height:42px;border-radius:11px;background:var(--accent2);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:#fff">3</div>
+          <div style="width:42px;height:42px;border-radius:12px;background:var(--accent2);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:#fff">3</div>
           <span data-i18n="ladder.promax" style="font-size:10.5px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;padding:3px 9px;border-radius:999px;background:var(--accent2);color:#fff">Pro Max</span>
         </div>
         <div data-i18n="ladder.c3t" style="font-size:16px;font-weight:600;color:var(--text);margin-top:18px;letter-spacing:-0.01em">Alebo import automaticky</div>
@@ -229,7 +265,6 @@ html:not([data-theme="light"]) .ib-shot-dark{display:block}
 <section id="features" style="position:relative;z-index:1;padding:88px 24px;background:var(--bg2);border-top:1px solid var(--border)">
   <div style="max-width:1140px;margin:0 auto">
     <div style="text-align:center;max-width:600px;margin:0 auto">
-      <div style="display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);padding:5px 11px;border:1px solid var(--accentBorder);border-radius:999px;background:var(--accentSoft)"><span data-i18n="features.label">Funkcie iOS aplikácie</span></div>
       <h2 data-i18n="features.title" style="font-size:clamp(28px,3.6vw,40px);font-weight:600;letter-spacing:-0.03em;line-height:1.12;margin:18px 0 0;color:var(--text);text-wrap:balance">Všetko čo potrebujete na jednom mieste</h2>
       <p data-i18n="features.sub" style="font-size:16.5px;line-height:1.6;color:var(--text2);margin:14px auto 0;max-width:520px">Od skenovania po export — kompletná správa dokladov priamo v iPhone.</p>
     </div>
@@ -237,13 +272,13 @@ html:not([data-theme="light"]) .ib-shot-dark{display:block}
       <!-- QR scanning (free) -->
       <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px">
         <div style="width:42px;height:42px;border-radius:12px;background:var(--accentSoft);border:1px solid var(--accentBorder);display:flex;align-items:center;justify-content:center;color:var(--accent)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="15" rx="2"/><circle cx="12" cy="12" r="4"/><path d="M7 5V3m10 2V3"/></svg></div>
-        <div data-i18n="features.qrT" style="font-size:15.5px;font-weight:600;color:var(--text);margin-top:16px;letter-spacing:-0.01em">QR skenovanie</div>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:16px"><span data-i18n="features.qrT" style="font-size:15.5px;font-weight:600;color:var(--text);letter-spacing:-0.01em">QR skenovanie</span><span data-i18n="ladder.free" style="font-size:9.5px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;padding:2px 7px;border-radius:999px;background:var(--surface2);color:var(--text2);border:1px solid var(--border)">Zadarmo</span></div>
         <p data-i18n="features.qrD" style="font-size:13.5px;line-height:1.6;color:var(--text2);margin-top:7px">Nasmerujte fotoaparát na bloček. Dáta sa uložia okamžite priamo z daňového portálu eDane.</p>
       </div>
       <!-- Warranty (free) -->
       <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px">
         <div style="width:42px;height:42px;border-radius:12px;background:var(--accentSoft);border:1px solid var(--accentBorder);display:flex;align-items:center;justify-content:center;color:var(--accent)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <div data-i18n="features.warT" style="font-size:15.5px;font-weight:600;color:var(--text);margin-top:16px;letter-spacing:-0.01em">Záručné karty</div>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:16px"><span data-i18n="features.warT" style="font-size:15.5px;font-weight:600;color:var(--text);letter-spacing:-0.01em">Záručné karty</span><span data-i18n="ladder.free" style="font-size:9.5px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;padding:2px 7px;border-radius:999px;background:var(--surface2);color:var(--text2);border:1px solid var(--border)">Zadarmo</span></div>
         <p data-i18n="features.warD" style="font-size:13.5px;line-height:1.6;color:var(--text2);margin-top:7px">Automatické sledovanie záruky s upozorneniami pred vypršaním. Podpora 12/24 mesiacov alebo vlastnej doby.</p>
       </div>
       <!-- Folders (Pro) -->
@@ -278,7 +313,6 @@ html:not([data-theme="light"]) .ib-shot-dark{display:block}
 <section id="pricing" style="position:relative;z-index:1;padding:88px 24px;border-top:1px solid var(--border)">
   <div style="max-width:1140px;margin:0 auto">
     <div style="text-align:center;max-width:600px;margin:0 auto">
-      <div style="display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);padding:5px 11px;border:1px solid var(--accentBorder);border-radius:999px;background:var(--accentSoft)"><span data-i18n="pricing.label">Predplatné</span></div>
       <h2 data-i18n="pricing.title" style="font-size:clamp(28px,3.6vw,40px);font-weight:600;letter-spacing:-0.03em;line-height:1.12;margin:18px 0 0;color:var(--text);text-wrap:balance">Vyber si plán pre seba</h2>
       <p data-i18n="pricing.sub" style="font-size:16.5px;line-height:1.6;color:var(--text2);margin:14px auto 0;max-width:520px">Začnite zadarmo. Prejdite vyššie, keď ste pripravení automatizovať Pohodu.</p>
     </div>
@@ -311,8 +345,8 @@ html:not([data-theme="light"]) .ib-shot-dark{display:block}
         <!-- Cloud node -->
         <div style="display:flex;flex-direction:column;align-items:center;gap:15px;flex:none">
           <div style="position:relative;width:90px;height:90px">
-            <span style="position:absolute;inset:0;border-radius:26px;border:1px solid var(--accentBorder);animation:ibHalo 2.8s ease-out infinite"></span>
-            <span style="position:absolute;inset:0;border-radius:26px;border:1px solid var(--accentBorder);animation:ibHalo 2.8s ease-out infinite;animation-delay:1.4s"></span>
+            <span style="position:absolute;inset:0;border-radius:24px;border:1px solid var(--accentBorder);animation:ibHalo 2.8s ease-out infinite"></span>
+            <span style="position:absolute;inset:0;border-radius:24px;border:1px solid var(--accentBorder);animation:ibHalo 2.8s ease-out infinite;animation-delay:1.4s"></span>
             <div style="position:absolute;inset:0;border-radius:24px;background:linear-gradient(155deg,var(--accentSoft),var(--surface));border:1px solid var(--accentBorder);display:flex;align-items:center;justify-content:center;color:var(--accent);box-shadow:0 16px 38px var(--glow),inset 0 1px 0 rgba(255,255,255,0.06)"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a4.5 4.5 0 0 0 0-9 6 6 0 0 0-11.6 1.5A4 4 0 0 0 6.5 19z"/></svg></div>
             <div style="position:absolute;right:-7px;bottom:-7px;width:32px;height:32px;border-radius:50%;background:var(--accent2);display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 5px 14px var(--glow);border:2.5px solid var(--bg2)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="animation:ibSpin 4s linear infinite;transform-box:fill-box;transform-origin:center"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></svg></div>
           </div>
@@ -346,7 +380,10 @@ html:not([data-theme="light"]) .ib-shot-dark{display:block}
         </div>
         <h2 data-i18n="windows.title" style="font-size:clamp(28px,3.6vw,40px);font-weight:600;letter-spacing:-0.03em;line-height:1.12;margin:18px 0 0;color:var(--text);text-wrap:balance">Pohoda importuje sama od seba</h2>
         <p data-i18n="windows.sub" style="font-size:16.5px;line-height:1.6;color:var(--text2);margin:14px 0 0;max-width:480px">Windows Companion beží potichu na pozadí. Každých 30 sekúnd skontroluje nové doklady a importuje ich priamo do Pohody — bez akéhokoľvek zásahu.</p>
-        <p id="ib-prereq" style="font-size:14px;line-height:1.6;color:var(--text2);margin:20px 0 0;max-width:480px;padding:13px 16px;border-left:2px solid var(--accentBorder);background:var(--accentSoft);border-radius:0 8px 8px 0">Vyžaduje iBločky pre iPhone a predplatné <strong style="color:var(--text);font-weight:600">Pro Max</strong>. Stačí vám ručný import? Manuálny XML export funguje už v Pro.</p>
+        <div style="display:flex;gap:11px;align-items:flex-start;margin:20px 0 0;max-width:480px;padding:13px 15px;border:1px solid var(--accentBorder);background:var(--accentSoft);border-radius:12px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          <p id="ib-prereq" style="font-size:14px;line-height:1.6;color:var(--text2);margin:0">Vyžaduje iBločky pre iPhone a predplatné <strong style="color:var(--text);font-weight:600">Pro Max</strong>. Stačí vám ručný import? Manuálny XML export funguje už v Pro.</p>
+        </div>
         <!-- Steps -->
         <div style="position:relative;margin-top:34px">
           <div style="position:absolute;left:22px;top:24px;bottom:24px;width:2px;background:linear-gradient(var(--accent),var(--accentSoft))"></div>
@@ -382,7 +419,7 @@ html:not([data-theme="light"]) .ib-shot-dark{display:block}
               <div style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--text3);margin-top:2px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg><span data-i18n="windows.cardTrust">Podpísaný inštalátor</span></div>
             </div>
           </div>
-          <a href="download.html" data-i18n="windows.cardCta" class="ib-btn-primary" style="display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:var(--accent2);color:var(--onAccent);font-size:13.5px;font-weight:600;border-radius:9px;text-decoration:none;box-shadow:0 4px 14px var(--glow)">Stiahnuť pre Windows</a>
+          <a href="download.html" data-i18n="windows.cardCta" class="ib-btn-primary" style="display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:var(--accent2);color:var(--onAccent);font-size:13.5px;font-weight:600;border-radius:10px;text-decoration:none;box-shadow:0 4px 14px var(--glow)">Stiahnuť pre Windows</a>
         </div>
       </div>
     </div>
@@ -393,7 +430,6 @@ html:not([data-theme="light"]) .ib-shot-dark{display:block}
 <section id="setup" style="position:relative;z-index:1;padding:88px 24px;border-top:1px solid var(--border)">
   <div style="max-width:760px;margin:0 auto">
     <div style="text-align:center;max-width:600px;margin:0 auto 48px">
-      <div style="display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);padding:5px 11px;border:1px solid var(--accentBorder);border-radius:999px;background:var(--accentSoft)"><span data-i18n="setup.label">Sprievodca nastavením</span></div>
       <h2 data-i18n="setup.title" style="font-size:clamp(28px,3.6vw,40px);font-weight:600;letter-spacing:-0.03em;line-height:1.12;margin:18px 0 0;color:var(--text);text-wrap:balance">Nastavenie za 5 krokov</h2>
       <p data-i18n="setup.sub" style="font-size:16.5px;line-height:1.6;color:var(--text2);margin:14px auto 0">Od stiahnutia po prvý automatický import — kompletné nastavenie za pár minút.</p>
     </div>
@@ -411,7 +447,6 @@ html:not([data-theme="light"]) .ib-shot-dark{display:block}
 <section id="faq" style="position:relative;z-index:1;padding:88px 24px;background:var(--bg2);border-top:1px solid var(--border)">
   <div style="max-width:760px;margin:0 auto">
     <div style="text-align:center;max-width:600px;margin:0 auto 44px">
-      <div style="display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);padding:5px 11px;border:1px solid var(--accentBorder);border-radius:999px;background:var(--accentSoft)"><span data-i18n="faq.label">Časté otázky</span></div>
       <h2 data-i18n="faq.title" style="font-size:clamp(28px,3.6vw,40px);font-weight:600;letter-spacing:-0.03em;line-height:1.12;margin:18px 0 0;color:var(--text);text-wrap:balance">Otázky a návody</h2>
       <p data-i18n="faq.sub" style="font-size:16.5px;line-height:1.6;color:var(--text2);margin:14px auto 0">Všetko o exporte a importe do Pohody.</p>
     </div>
@@ -428,15 +463,15 @@ html:not([data-theme="light"]) .ib-shot-dark{display:block}
         <div data-i18n="footer.tagline" style="font-size:13.5px;color:var(--text2);margin-top:3px">Vaše doklady. Vždy po ruke.</div>
       </div>
       <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
-        <a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" data-i18n="footer.appstore" class="ib-footer-link" style="font-size:13.5px;color:var(--text2);padding:6px 10px;border-radius:7px;text-decoration:none">App Store</a>
+        <a href="https://apps.apple.com/app/apple-store/id6501989580?pt=117865370&amp;ct=iblocky-site&amp;mt=8" target="_blank" rel="noopener" data-i18n="footer.appstore" class="ib-footer-link" style="font-size:13.5px;color:var(--text2);padding:6px 10px;border-radius:8px;text-decoration:none">App Store</a>
         <span style="color:var(--text3);opacity:.5">·</span>
-        <a href="download.html" data-i18n="footer.windows" class="ib-footer-link" style="font-size:13.5px;color:var(--text2);padding:6px 10px;border-radius:7px;text-decoration:none">Windows Companion</a>
+        <a href="download.html" data-i18n="footer.windows" class="ib-footer-link" style="font-size:13.5px;color:var(--text2);padding:6px 10px;border-radius:8px;text-decoration:none">Windows Companion</a>
         <span style="color:var(--text3);opacity:.5">·</span>
-        <a href="privacy.html" data-i18n="footer.privacy" class="ib-footer-link" style="font-size:13.5px;color:var(--text2);padding:6px 10px;border-radius:7px;text-decoration:none">Ochrana súkromia</a>
+        <a href="privacy.html" data-i18n="footer.privacy" class="ib-footer-link" style="font-size:13.5px;color:var(--text2);padding:6px 10px;border-radius:8px;text-decoration:none">Ochrana súkromia</a>
         <span style="color:var(--text3);opacity:.5">·</span>
-        <a href="terms.html" data-i18n="footer.terms" class="ib-footer-link" style="font-size:13.5px;color:var(--text2);padding:6px 10px;border-radius:7px;text-decoration:none">Podmienky použitia</a>
+        <a href="terms.html" data-i18n="footer.terms" class="ib-footer-link" style="font-size:13.5px;color:var(--text2);padding:6px 10px;border-radius:8px;text-decoration:none">Podmienky použitia</a>
         <span style="color:var(--text3);opacity:.5">·</span>
-        <a href="mailto:ereskaapps@gmail.com" class="ib-footer-link" style="font-size:13.5px;color:var(--text2);padding:6px 10px;border-radius:7px;text-decoration:none">ereskaapps@gmail.com</a>
+        <a href="mailto:ereskaapps@gmail.com" class="ib-footer-link" style="font-size:13.5px;color:var(--text2);padding:6px 10px;border-radius:8px;text-decoration:none">ereskaapps@gmail.com</a>
       </div>
     </div>
     <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-top:22px;border-top:1px solid var(--border)">
@@ -458,6 +493,7 @@ class IBlocky {
       if (lg === 'sk' || lg === 'en') this.lang = lg;
     } catch(e) {}
     this.render();
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') this.closeMenu(); });
   }
 
   setLang(lang) {
@@ -470,6 +506,21 @@ class IBlocky {
     this.theme = this.theme === 'light' ? 'dark' : 'light';
     try { localStorage.setItem('iblocky-theme', this.theme); } catch(e) {}
     this.applyTheme();
+  }
+
+  toggleMenu() {
+    const m = document.getElementById('ib-mobile-menu');
+    const b = document.getElementById('ib-burger');
+    if (!m) return;
+    const open = m.classList.toggle('open');
+    if (b) b.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
+  closeMenu() {
+    const m = document.getElementById('ib-mobile-menu');
+    const b = document.getElementById('ib-burger');
+    if (m) m.classList.remove('open');
+    if (b) b.setAttribute('aria-expanded', 'false');
   }
 
   applyTheme() {
@@ -509,8 +560,8 @@ class IBlocky {
     if (!grid) return;
     grid.innerHTML = t.pricing.tiers.map(tr => {
       const card = tr.highlight
-        ? 'background:linear-gradient(170deg,var(--accentSoft),var(--surface));border:1px solid var(--accentBorder);border-radius:18px;padding:28px;display:flex;flex-direction:column;box-shadow:0 22px 60px var(--glow);position:relative'
-        : 'background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:28px;display:flex;flex-direction:column;position:relative';
+        ? 'background:linear-gradient(170deg,var(--accentSoft),var(--surface));border:1px solid var(--accentBorder);border-radius:16px;padding:28px;display:flex;flex-direction:column;box-shadow:0 22px 60px var(--glow);position:relative'
+        : 'background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px;display:flex;flex-direction:column;position:relative';
       const cta = tr.highlight
         ? 'display:block;text-align:center;margin-top:22px;padding:13px 18px;border-radius:10px;background:var(--accent2);color:var(--onAccent);font-size:14px;font-weight:600;text-decoration:none;letter-spacing:-0.01em;box-shadow:0 4px 18px var(--glow)'
         : 'display:block;text-align:center;margin-top:22px;padding:13px 18px;border-radius:10px;background:var(--surface2);color:var(--text);font-size:14px;font-weight:600;text-decoration:none;letter-spacing:-0.01em;border:1px solid var(--border2)';
@@ -549,13 +600,13 @@ class IBlocky {
     if (!container) return;
     container.innerHTML = t.faq.items.map(item => {
       const stepsHTML = item.steps.map((s, j) => `<div style="display:flex;gap:13px;align-items:flex-start"><div style="flex-shrink:0;width:26px;height:26px;border-radius:50%;background:var(--accentSoft);border:1px solid var(--accentBorder);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--accent)">${j+1}</div><div style="font-size:13.5px;color:var(--text2);line-height:1.6;padding-top:3px">${s}</div></div>`).join('');
-      return `<details class="ib-faq" style="background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden"><summary style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:19px 22px;color:var(--text);font-size:15.5px;font-weight:600;letter-spacing:-0.01em"><span>${item.q}</span><span class="ib-faq-icon" style="flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text2)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary><div class="ib-faq-body" style="padding:2px 22px 22px;display:flex;flex-direction:column;gap:11px">${stepsHTML}</div></details>`;
+      return `<details class="ib-faq" style="background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden"><summary style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:19px 22px;color:var(--text);font-size:15.5px;font-weight:600;letter-spacing:-0.01em"><span>${item.q}</span><span class="ib-faq-icon" style="flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text2)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary><div class="ib-faq-body" style="padding:2px 22px 22px;display:flex;flex-direction:column;gap:11px">${stepsHTML}</div></details>`;
     }).join('');
   }
 
   T = {
     sk: {
-      nav: { how:'Ako to funguje', features:'Funkcie', pricing:'Ceny', getApp:'Stiahnuť' },
+      nav: { how:'Ako to funguje', features:'Funkcie', pricing:'Ceny', getApp:'Stiahnuť', skip:'Preskočiť na obsah' },
       hero: {
         eyebrow:'Pre iPhone · Pohoda automatizácia voliteľná',
         tagline:'Vaše doklady. Vždy po ruke.',
@@ -634,7 +685,7 @@ class IBlocky {
       footer:{tagline:'Vaše doklady. Vždy po ruke.',made:'Vyrobené na Slovensku 🇸🇰',copy:'© 2026 iBločky. Všetky práva vyhradené.',appstore:'App Store',windows:'Windows Companion',privacy:'Ochrana súkromia',terms:'Podmienky použitia'}
     },
     en: {
-      nav:{how:'How it works',features:'Features',pricing:'Pricing',getApp:'Get the app'},
+      nav:{how:'How it works',features:'Features',pricing:'Pricing',getApp:'Get the app',skip:'Skip to content'},
       hero:{
         eyebrow:'For iPhone · Pohoda automation optional',
         tagline:'Your documents. Always at hand.',
