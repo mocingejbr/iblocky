@@ -3,26 +3,46 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>iBločky — Vaše doklady. Vždy po ruke.</title>
+<title>iBločky — Skenovanie bločkov a export do Pohody</title>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
 <link rel="icon" type="image/jpeg" href="favicon.jpg">
-<link rel="apple-touch-icon" href="favicon.jpg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 <meta name="description" content="Skenujte bločky, sledujte záruky, exportujte do Pohody — všetko z jednej aplikácie pre iPhone. Windows Companion automaticky importuje doklady do Pohody.">
+<meta name="author" content="Ereska Apps">
 <link rel="canonical" href="https://iblocky.sk/">
+<link rel="alternate" hreflang="sk" href="https://iblocky.sk/">
+<link rel="alternate" hreflang="en" href="https://iblocky.sk/">
+<link rel="alternate" hreflang="x-default" href="https://iblocky.sk/">
+<link rel="preload" as="image" href="assets/app-light.webp" media="(prefers-color-scheme: light)">
+<link rel="preload" as="image" href="assets/app-dark.webp" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#08090A" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#FBFBF9" media="(prefers-color-scheme: light)">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="iBločky">
 <meta property="og:locale" content="sk_SK">
-<meta property="og:title" content="iBločky — Vaše doklady. Vždy po ruke.">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:title" content="iBločky — Skenovanie bločkov a export do Pohody">
 <meta property="og:description" content="Naskenujte bloček v iPhone — Windows Companion ho automaticky naimportuje do Pohody. Pre účtovníkov, firmy a používateľov Pohody.">
 <meta property="og:url" content="https://iblocky.sk/">
-<meta property="og:image" content="https://iblocky.sk/favicon.jpg">
+<meta property="og:image" content="https://iblocky.sk/assets/og-card.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="iBločky — Vaše doklady. Vždy po ruke.">
+<meta name="twitter:title" content="iBločky — Skenovanie bločkov a export do Pohody">
 <meta name="twitter:description" content="Naskenujte bloček v iPhone — Windows Companion ho automaticky naimportuje do Pohody.">
-<meta name="twitter:image" content="https://iblocky.sk/favicon.jpg">
+<meta name="twitter:image" content="https://iblocky.sk/assets/og-card.jpg">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"iBločky Windows Companion","operatingSystem":"Windows 10, Windows 11","applicationCategory":"BusinessApplication","description":"Windows Companion aplikácia pre iBločky, ktorá automaticky importuje naskenované doklady do účtovného softvéru Pohoda.","downloadUrl":"https://iblocky.sk/download.html","softwareVersion":"1.0.1","publisher":{"@type":"Organization","name":"Ereska Apps"},"offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"iBločky","operatingSystem":"iOS","applicationCategory":"BusinessApplication","description":"Aplikácia pre iPhone na skenovanie a archiváciu bločkov s exportom do Pohody. Skenujte QR kódy bločkov, sledujte záruky a exportujte XML priamo do účtovného softvéru Pohoda.","url":"https://iblocky.sk/","downloadUrl":"https://apps.apple.com/app/apple-store/id6501989580","inLanguage":["sk","en"],"publisher":{"@type":"Organization","name":"Ereska Apps","url":"https://iblocky.sk/"},"offers":[{"@type":"Offer","name":"Zadarmo","price":"0","priceCurrency":"EUR"},{"@type":"Offer","name":"Pro","price":"2.99","priceCurrency":"EUR"},{"@type":"Offer","name":"Pro Max","price":"14.99","priceCurrency":"EUR"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"Ereska Apps","url":"https://iblocky.sk/","email":"ereskaapps@gmail.com","foundingLocation":{"@type":"Place","address":{"@type":"PostalAddress","addressCountry":"SK"}}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","url":"https://iblocky.sk/","name":"iBločky","description":"Aplikácia pre skenovanie bločkov a export do Pohody","inLanguage":["sk","en"],"publisher":{"@type":"Organization","name":"Ereska Apps"}}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Ako exportovať XML doklady do Pohody?","acceptedAnswer":{"@type":"Answer","text":"Vytvorte v iBločky priečinok s názvom a IČO firmy, naskenujte bločky, v priečinku ich označte na export a odošlite. Windows Companion ich automaticky naimportuje do Pohody."}},{"@type":"Question","name":"Kde nájde Windows Companion súbor Pohoda.exe?","acceptedAnswer":{"@type":"Answer","text":"Windows Companion automaticky deteguje cestu k Pohoda.exe pri prvom spustení. Pri zlyhaní detekcie ju vyberiete ručne cez Browse, štandardne v C:\\Program Files\\STORMWARE\\POHODA\\."}},{"@type":"Question","name":"Funguje Windows Companion s viacerými firmami?","acceptedAnswer":{"@type":"Answer","text":"Áno. Windows Companion automaticky mapuje IČO z každého bločku na správnu databázu Pohody. Každý priečinok v iBločky musí mať v názve správne IČO firmy."}}]}
@@ -209,8 +229,8 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
 
         <!-- Screen with real screenshot -->
         <div style="position:absolute;inset:4px;border-radius:52px;overflow:hidden;border:2px solid #0a0a0c;box-shadow:inset 0 0 0 1px rgba(0,0,0,0.8);background:#000">
-          <img class="ib-shot-light" src="assets/app-light.webp" alt="iBločky aplikácia" loading="eager">
-          <img class="ib-shot-dark" src="assets/app-dark.webp" alt="iBločky aplikácia" loading="eager">
+          <img class="ib-shot-light" src="assets/app-light.webp" alt="iBločky aplikácia pre iPhone — zoznam naskenovaných bločkov" width="1320" height="2868" loading="eager">
+          <img class="ib-shot-dark" src="assets/app-dark.webp" alt="iBločky aplikácia pre iPhone — zoznam naskenovaných bločkov" width="1320" height="2868" loading="eager">
           <!-- Dynamic Island overlay -->
           <div style="position:absolute;top:8px;left:50%;transform:translateX(-50%);width:88px;height:24px;background:#000;border-radius:99px;z-index:6;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;box-shadow:0 1px 3px rgba(0,0,0,0.55)">
             <div style="width:8px;height:8px;border-radius:50%;background:#0a1726;box-shadow:inset 0 0 0 1.5px #05080d,0 0 2px rgba(120,160,220,0.45)"></div>
@@ -316,7 +336,14 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
       <h2 data-i18n="pricing.title" style="font-size:clamp(28px,3.6vw,40px);font-weight:600;letter-spacing:-0.03em;line-height:1.12;margin:18px 0 0;color:var(--text);text-wrap:balance">Vyber si plán pre seba</h2>
       <p data-i18n="pricing.sub" style="font-size:16.5px;line-height:1.6;color:var(--text2);margin:14px auto 0;max-width:520px">Začnite zadarmo. Prejdite vyššie, keď ste pripravení automatizovať Pohodu.</p>
     </div>
-    <div id="ib-pricing-grid" class="ib-pricing-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:48px;align-items:start"></div>
+    <div id="ib-pricing-grid" class="ib-pricing-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:48px;align-items:start"><noscript>
+      <h3>Zadarmo — €0 (navždy bezplatné)</h3>
+      <p>QR skenovanie bločkov, ukladanie a organizácia, záručné karty, grafy výdavkov.</p>
+      <h3>Pro — €2,99 mesačne</h3>
+      <p>Všetko zo Zadarmo plus správa priečinkov, PDF export a zdieľanie, hromadné skenovanie a manuálny XML export do Pohody.</p>
+      <h3>Pro Max — €14,99 mesačne (pre účtovníkov)</h3>
+      <p>Všetko z Pro plus automatická synchronizácia s Pohodou, Windows Companion v cene, import každých 30 sekúnd, live stav „Windows pripojený" a podpora viacerých firiem (IČO).</p>
+    </noscript></div>
     <div style="display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;margin-top:30px;font-size:13px;color:var(--text2)">
       <span style="display:inline-flex;align-items:center;gap:7px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg><span data-i18n="pricing.trust1">Zruš kedykoľvek</span></span>
       <span style="color:var(--text3);opacity:.5">·</span>
@@ -435,7 +462,15 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
     </div>
     <div style="position:relative">
       <div style="position:absolute;left:22px;top:36px;bottom:36px;width:2px;background:linear-gradient(var(--accent),var(--accentSoft))"></div>
-      <div id="ib-setup-steps"></div>
+      <div id="ib-setup-steps"><noscript>
+        <ol>
+          <li><strong>Nastavenie synchronizácie</strong> — aktivujte synchronizáciu v nastaveniach iBločky na iPhone.</li>
+          <li><strong>Stiahnite Windows aplikáciu</strong> — beží na pozadí a importuje doklady do Pohody automaticky (Windows 10+, .NET 8.0 zahrnuté).</li>
+          <li><strong>Váš API kľúč</strong> — skopírujte kľúč z iBločky → Nastavenia → Synchronizácia a vložte ho do Windows Companion.</li>
+          <li><strong>Overenie spojenia</strong> — v iBločky uvidíte živý stav „Windows pripojený".</li>
+          <li><strong>Hotovo</strong> — Pohoda automaticky importuje doklady hneď ako ich odošlete z iPhonu.</li>
+        </ol>
+      </noscript></div>
     </div>
     <div style="display:flex;justify-content:center;margin-top:36px">
       <a href="download.html" data-i18n="setup.guideCta" class="ib-btn-secondary" style="display:inline-flex;align-items:center;gap:8px;padding:12px 22px;background:var(--surface2);color:var(--text);font-size:14.5px;font-weight:600;border-radius:10px;border:1px solid var(--border2);text-decoration:none">Detailný sprievodca krok za krokom →</a>
@@ -450,7 +485,14 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
       <h2 data-i18n="faq.title" style="font-size:clamp(28px,3.6vw,40px);font-weight:600;letter-spacing:-0.03em;line-height:1.12;margin:18px 0 0;color:var(--text);text-wrap:balance">Otázky a návody</h2>
       <p data-i18n="faq.sub" style="font-size:16.5px;line-height:1.6;color:var(--text2);margin:14px auto 0">Všetko o exporte a importe do Pohody.</p>
     </div>
-    <div id="ib-faq-list" style="display:flex;flex-direction:column;gap:12px"></div>
+    <div id="ib-faq-list" style="display:flex;flex-direction:column;gap:12px"><noscript>
+      <h3>Postup exportu XML do Pohody</h3>
+      <p>Vytvorte priečinok s názvom a IČO firmy, naskenujte bločky cez QR, označte ich na export a odošlite (mail, správa, AirDrop). Windows Companion ich naimportuje do Pohody.</p>
+      <h3>Kde nájdem Pohoda.exe pre Windows Companion?</h3>
+      <p>Windows Companion automaticky deteguje cestu k Pohoda.exe pri prvom spustení. Pri zlyhaní detekcie ju vyberiete ručne cez Browse, štandardne v C:\Program Files\STORMWARE\POHODA\.</p>
+      <h3>Funguje Windows Companion s viacerými firmami?</h3>
+      <p>Áno. Automaticky mapuje IČO z každého bločku na správnu databázu Pohody. Každý priečinok v iBločky musí mať v názve správne IČO firmy.</p>
+    </noscript></div>
   </div>
 </section>
 

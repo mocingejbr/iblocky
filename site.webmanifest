@@ -1,0 +1,14 @@
+{
+  "name": "iBločky",
+  "short_name": "iBločky",
+  "description": "Skenovanie bločkov a export do Pohody",
+  "lang": "sk",
+  "icons": [
+    { "src": "/favicon.png", "sizes": "32x32", "type": "image/png" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ],
+  "theme_color": "#FBFBF9",
+  "background_color": "#FBFBF9",
+  "display": "browser",
+  "start_url": "/"
+}

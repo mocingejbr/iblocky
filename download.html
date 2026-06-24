@@ -4,25 +4,34 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>iBločky — Stiahnuť iBločky Windows Companion</title>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
 <link rel="icon" type="image/jpeg" href="favicon.jpg">
-<link rel="apple-touch-icon" href="favicon.jpg">
-<meta name="description" content="Stiahnite iBločky Windows Companion — oficiálnu Windows aplikáciu pre synchronizáciu iBločky s účtovným softvérom Pohoda. Windows 10/11, .NET zahrnutý, digitálne podpísané.">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="description" content="Stiahnite iBločky Windows Companion — automatický import bločkov do Pohody. Digitálne podpísaný inštalátor, Windows 10/11, .NET v balíku. Zadarmo.">
+<meta name="author" content="Ereska Apps">
 <link rel="canonical" href="https://iblocky.sk/download.html">
+<link rel="alternate" hreflang="sk" href="https://iblocky.sk/download.html">
+<link rel="alternate" hreflang="en" href="https://iblocky.sk/download.html">
+<link rel="alternate" hreflang="x-default" href="https://iblocky.sk/download.html">
 <meta name="theme-color" content="#08090A" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#FBFBF9" media="(prefers-color-scheme: light)">
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="iBločky">
 <meta property="og:locale" content="sk_SK">
+<meta property="og:locale:alternate" content="en_US">
 <meta property="og:title" content="Stiahnuť iBločky Windows Companion">
 <meta property="og:description" content="Oficiálna desktopová aplikácia pre synchronizáciu iBločky s Pohodou. Beží na pozadí, automaticky importuje doklady. Digitálne podpísaný inštalátor.">
 <meta property="og:url" content="https://iblocky.sk/download.html">
-<meta property="og:image" content="https://iblocky.sk/favicon.jpg">
+<meta property="og:image" content="https://iblocky.sk/assets/og-card.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Stiahnuť iBločky Windows Companion">
 <meta name="twitter:description" content="Oficiálna Windows aplikácia pre synchronizáciu iBločky s Pohodou. Digitálne podpísaný inštalátor.">
-<meta name="twitter:image" content="https://iblocky.sk/favicon.jpg">
+<meta name="twitter:image" content="https://iblocky.sk/assets/og-card.jpg">
 <!-- Structured data -->
 <script type="application/ld+json">
 {
@@ -40,6 +49,12 @@
   "publisher": { "@type": "Organization", "name": "Ereska Apps" },
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
 }
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"iBločky","operatingSystem":"iOS","applicationCategory":"BusinessApplication","description":"iPhone aplikácia iBločky na skenovanie bločkov. V páre s Windows Companion automaticky importuje doklady do Pohody.","downloadUrl":"https://apps.apple.com/app/apple-store/id6501989580","publisher":{"@type":"Organization","name":"Ereska Apps"},"offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Aké sú systémové požiadavky Windows Companion?","acceptedAnswer":{"@type":"Answer","text":"Windows 10 alebo Windows 11. Inštalátor obsahuje potrebný .NET runtime, nemusíte nič doinštalovať. Veľkosť inštalátora je približne 6 MB."}},{"@type":"Question","name":"Je inštalátor digitálne podpísaný?","acceptedAnswer":{"@type":"Answer","text":"Áno, inštalátor iBločky Windows Companion je digitálne podpísaný, takže Windows ho rozpozná ako dôveryhodný."}},{"@type":"Question","name":"Je Windows Companion zadarmo?","acceptedAnswer":{"@type":"Answer","text":"Áno. Windows Companion je zadarmo. Stiahnete ho, nainštalujete a spárujete s iPhone aplikáciou iBločky."}}]}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1249,7 +1264,7 @@ a:focus-visible, button:focus-visible,
         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M2 2h9v9H2zm11 0h9v9h-9zm-11 11h9v9H2zm11 0h9v9h-9z"/></svg>
         Pohoda Sync
       </div>
-      <h1 class="section-title">Download iBločky Windows Companion</h1>
+      <h2 class="section-title">Download iBločky Windows Companion</h2>
       <p class="section-subtitle">The official desktop app that syncs iBločky with the Pohoda accounting software. Runs in the background and imports documents automatically.</p>
       <div class="hero-mini-ctas">
         <a href="#download" class="btn-download">
